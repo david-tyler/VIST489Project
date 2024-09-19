@@ -396,6 +396,8 @@ MonoBehaviour:
   enterPkWorldButton: {fileID: 994956754}
   ImageTargetCharSitting: {fileID: 1386398224}
   ImageTargetPKAudio: {fileID: 665597108}
+  ParaLenses: {fileID: 720782750}
+  PkWorldBttnText: {fileID: 1489198489}
 --- !u!114 &535425576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,7 +410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f41084cca0b43f7978f8d07ac60c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pkWorldBttn: {fileID: 994956754}
 --- !u!114 &535425577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,8 +422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de6c88c5416024b31b08a9774b7f0347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GM: {fileID: 535425572}
-  myDevice: {fileID: 0}
 --- !u!114 &535425578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,7 +456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &665597111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,7 +549,7 @@ Transform:
   m_GameObject: {fileID: 665597108}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.061, y: 0, z: 0}
+  m_LocalPosition: {x: 3.268, y: 0.142, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -571,8 +570,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mObserverBehaviour: {fileID: 665597112}
   mHiddenRoot: {fileID: 0}
-  mTargetName: Destiny
-  mDatasetName: Vuforia/ImageTargetsExampleClass.xml
+  mTargetName: charizard
+  mDatasetName: Vuforia/VIST489ProjectImageTargets.xml
   mCastedBehaviour: {fileID: 665597112}
   mMeshFilter: {fileID: 0}
   mMeshRenderer: {fileID: 0}
@@ -831,11 +830,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!1 &818377092 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5715350394665784987, guid: f8cbda24b4d6d4a23bc27f08442b7b93, type: 3}
-  m_PrefabInstance: {fileID: 1313211861}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &818377093 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3217493193239366653, guid: f8cbda24b4d6d4a23bc27f08442b7b93, type: 3}
@@ -846,25 +840,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -8473963399266218998, guid: f8cbda24b4d6d4a23bc27f08442b7b93, type: 3}
   m_PrefabInstance: {fileID: 1313211861}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 818377092}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de6c88c5416024b31b08a9774b7f0347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &818377096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 818377092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f41084cca0b43f7978f8d07ac60c12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pkWorldBttn: {fileID: 994956754}
 --- !u!1 &994956754
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,7 +970,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 994956759}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 535425575}
+        m_TargetAssemblyTypeName: ParaLensesButtonBehavior, Assembly-CSharp
+        m_MethodName: EnterPKWorldButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &994956759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,7 +1118,6 @@ RectTransform:
   - {fileID: 1421167568}
   - {fileID: 994956755}
   - {fileID: 1359018334}
-  - {fileID: 1758377171}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1204,10 +1196,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5715350394665784987, guid: f8cbda24b4d6d4a23bc27f08442b7b93, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 818377096}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8cbda24b4d6d4a23bc27f08442b7b93, type: 3}
 --- !u!1 &1359018333
 GameObject:
@@ -1280,7 +1269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1386398225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1385,7 +1374,7 @@ Transform:
   m_GameObject: {fileID: 1386398224}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.057, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1419,7 +1408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mObserverBehaviour: {fileID: 1386398226}
   mHiddenRoot: {fileID: 0}
-  mTargetName: img_5213
+  mTargetName: Destiny
   mDatasetName: Vuforia/VIST489ProjectImageTargets.xml
   mCastedBehaviour: {fileID: 1386398226}
   mMeshFilter: {fileID: 0}
@@ -1760,41 +1749,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489198486}
   m_CullTransparentMesh: 1
---- !u!1 &1758377170
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1758377171}
-  m_Layer: 5
-  m_Name: Hangman Game
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1758377171
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1758377170}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 999165100}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2039407606
 GameObject:
   m_ObjectHideFlags: 0

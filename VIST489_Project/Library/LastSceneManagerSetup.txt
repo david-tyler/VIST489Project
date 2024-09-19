@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/Scenes/Interactions.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "packages": {
+    "com.ptc.vuforia.engine": {
+      "tarball": {
+        "hash": "b724a8714d15",
+        "mtime": 1726713586108,
+        "size": 139148898,
+        "localPath": "/Users/david-tylerighedosa/Desktop/VIST489_REPO/VIST489Project/VIST489_Project/Packages/com.ptc.vuforia.engine-10.25.4.tgz"
+      }
+    }
+  }
+}
