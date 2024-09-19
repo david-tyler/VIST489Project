@@ -54,6 +54,6 @@ public class ITPokemonSoundController : MonoBehaviour
         
             
             pkAudio.Play();
-        }
-    }
+     }
+    
 }

@@ -17,16 +17,13 @@ public class ParaLensesButtonBehavior : MonoBehaviour
     public GameObject ImageTargetPKAudio;
     public TMPro.TextMeshProUGUI ParaLenses;
     public TMPro.TextMeshProUGUI PkWorldBttnText;
-    private void Start()
-    {
-        ImageTargetCharSitting.SetActive(false);
-        ImageTargetPKAudio.SetActive(false);
-    }
 
 
     public void Start()
     {
         isParaLensesOn = false;
+        ImageTargetCharSitting.SetActive(false);
+        ImageTargetPKAudio.SetActive(false);
     }
 
     public void ShowEnterPkWorldButton()

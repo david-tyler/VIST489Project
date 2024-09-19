@@ -5,14 +5,14 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ITPokemonSoundController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ParaLensesButtonBehavior.cs">
     <Files>
-      <File FileName="Assets/Scripts/CharacterSittingInteraction.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PopUpSystem.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/ParaLensesButtonBehavior.cs" Line="23" Column="45" />
-      <File FileName="Assets/Scripts/GameSystemBehavior.cs" Line="13" Column="9" />
-      <File FileName="Assets/Scripts/ITPokemonSoundController.cs" Line="16" Column="9" />
-      <File FileName="Assets/Scripts/VolumeSettings.cs" Line="32" Column="39" />
+      <File FileName="Assets/Scripts/CharacterSittingInteraction.cs" />
+      <File FileName="Assets/Scripts/PopUpSystem.cs" />
+      <File FileName="Assets/Scripts/ParaLensesButtonBehavior.cs" Line="19" Column="50" />
+      <File FileName="Assets/Scripts/GameSystemBehavior.cs" />
+      <File FileName="Assets/Scripts/ITPokemonSoundController.cs" Line="59" Column="2" />
+      <File FileName="Assets/Scripts/VolumeSettings.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
