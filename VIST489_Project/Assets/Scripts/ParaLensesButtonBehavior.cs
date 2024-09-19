@@ -27,7 +27,7 @@ public class ParaLensesButtonBehavior : MonoBehaviour
             isParaLensesOn = false;
         }
 
-        enterPkWorldButton.SetActive(isParaLensesOn);
+        //enterPkWorldButton.SetActive(isParaLensesOn);
         ImageTargetCharSitting.SetActive(isParaLensesOn);
         ImageTargetPKAudio.SetActive(isParaLensesOn);
     }
