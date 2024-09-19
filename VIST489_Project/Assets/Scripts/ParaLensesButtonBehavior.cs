@@ -23,6 +23,12 @@ public class ParaLensesButtonBehavior : MonoBehaviour
         ImageTargetPKAudio.SetActive(false);
     }
 
+
+    public void Start()
+    {
+        isParaLensesOn = false;
+    }
+
     public void ShowEnterPkWorldButton()
     {
         isParaLensesOn = !isParaLensesOn;
