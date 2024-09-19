@@ -2,13 +2,13 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
-~/VIST489_Project/Library/
-~/VIST489_Project/[Tt]emp/
-~/VIST489_Project/[Oo]bj/
-~/VIST489_Project/[Bb]uild/
-~/VIST489_Project/[Bb]uilds/
-~/VIST489_Project/[Ll]ogs/
-~/VIST489_Project/[Uu]ser[Ss]ettings/
+/VIST489_Project/Library/
+/VIST489_Project/[Tt]emp/
+/VIST489_Project/[Oo]bj/
+/VIST489_Project/[Bb]uild/
+/VIST489_Project/[Bb]uilds/
+/VIST489_Project/[Ll]ogs/
+/VIST489_Project/[Uu]ser[Ss]ettings/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
