@@ -10,10 +10,22 @@ public class ParaLensesButtonBehavior : MonoBehaviour
     public GameObject ImageTargetCharSitting;
     public GameObject ImageTargetPKAudio;
 
+
+    public void Start()
+    {
+        isParaLensesOn = false;
+    }
+
     public void ShowEnterPkWorldButton()
     {
-        isParaLensesOn = !isParaLensesOn;
-
+        if(isParaLensesOn == false)
+        {
+            isParaLensesOn = true;
+        }
+        else
+        {
+            isParaLensesOn = false;
+        }
 
         enterPkWorldButton.SetActive(isParaLensesOn);
         ImageTargetCharSitting.SetActive(isParaLensesOn);

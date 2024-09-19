@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 665597111}
   - component: {fileID: 665597114}
   m_Layer: 0
-  m_Name: ITPokemonSound
+  m_Name: ITBookCover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2026,8 +2026,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 437364110}
-  - {fileID: 1386398227}
   - {fileID: 999165100}
   - {fileID: 2039407609}
   - {fileID: 535425574}
   - {fileID: 665597113}
+  - {fileID: 1386398227}
