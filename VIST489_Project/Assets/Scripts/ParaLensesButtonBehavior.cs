@@ -6,9 +6,15 @@ public class ParaLensesButtonBehavior : MonoBehaviour
 {
     private bool isParaLensesOn = false;
 
-    public GameObject enterPkWorldButton;
-    public GameObject ImageTargetCharSitting;
+    
+    public GameObject ImageTargetEnterPkWorld;
     public GameObject ImageTargetPKAudio;
+    public TMPro.TextMeshProUGUI ParaLensesText;
+
+
+
+    private string text_EnableParaLenses = "Enable Paranormal Lenses";
+    private string text_DisableParaLenses = "Disable Paranormal Lenses";
 
 
     public void Start()
@@ -16,19 +22,20 @@ public class ParaLensesButtonBehavior : MonoBehaviour
         isParaLensesOn = false;
     }
 
-    public void ShowEnterPkWorldButton()
+    public void ToggleParanormalLenses()
     {
-        if(isParaLensesOn == false)
+        // Functionality to toggle the paralenses on/off
+        isParaLensesOn = !isParaLensesOn;
+        if (isParaLensesOn == true)
         {
-            isParaLensesOn = true;
+            ParaLensesText.text = text_DisableParaLenses;
         }
-        else
+        else if (isParaLensesOn == false)
         {
-            isParaLensesOn = false;
+            ParaLensesText.text = text_EnableParaLenses;
         }
 
-        //enterPkWorldButton.SetActive(isParaLensesOn);
-        ImageTargetCharSitting.SetActive(isParaLensesOn);
+        
         ImageTargetPKAudio.SetActive(isParaLensesOn);
     }
 

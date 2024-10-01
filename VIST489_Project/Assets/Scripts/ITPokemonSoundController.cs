@@ -44,18 +44,5 @@ public class ITPokemonSoundController : MonoBehaviour
         // Smoothly change the volume to the target volume.
         pkAudio.volume = Mathf.Lerp(pkAudio.volume, targetVolume, Time.deltaTime * volumeChangeSpeed);
     }
-    public void StopAudio()
-    {
-        pkAudio.Stop();
-    }
-
-    public void PlayPokemonAudio()
-    {
-        
-        if (paraLenses.getIsParaLensesOn())
-        {
-            
-            pkAudio.Play();
-        }
-    }
+    
 }
