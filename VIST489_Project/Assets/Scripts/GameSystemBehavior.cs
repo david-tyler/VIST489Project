@@ -101,6 +101,7 @@ public class GameSystemBehavior : MonoBehaviour
             ParaNormalLensesButton.interactable = false;
             return;
         } // Audios for the introduction setting up the game
+
         else if (introAudio.isPlaying == false)
         {
             ParaNormalLensesButton.interactable = true;
