@@ -1721,7 +1721,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 782628378}
+    m_TransformParent: {fileID: 2147023146}
     m_Modifications:
     - target: {fileID: -9035186351768465975, guid: a7399c7a6b0f7d84fafb2c1c1164fb7a, type: 3}
       propertyPath: m_Name
@@ -1733,19 +1733,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7399c7a6b0f7d84fafb2c1c1164fb7a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.47
+      value: -3.5479965
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7399c7a6b0f7d84fafb2c1c1164fb7a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.53
+      value: -1.104
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7399c7a6b0f7d84fafb2c1c1164fb7a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.18
+      value: -1.8410006
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7399c7a6b0f7d84fafb2c1c1164fb7a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.68912524
+      value: -0.6891252
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7399c7a6b0f7d84fafb2c1c1164fb7a, type: 3}
       propertyPath: m_LocalRotation.x
@@ -6165,6 +6165,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 899465661}
+        m_TargetAssemblyTypeName: SpawnMaze, Assembly-CSharp
+        m_MethodName: MoveEnvironmentToMatch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnTargetLost:
     m_PersistentCalls:
       m_Calls: []
@@ -6219,6 +6231,8 @@ MonoBehaviour:
   - {fileID: 118216609}
   - {fileID: 53075247}
   - {fileID: 782628375}
+  environmentPivot: {fileID: 2147023146}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!114 &899465662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9312,7 +9326,7 @@ PrefabInstance:
       addedObject: {fileID: 1638373497}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: f9c776f90a46c47b88aca4c19629315d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 575147177}
+      addedObject: {fileID: 2147023146}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9c776f90a46c47b88aca4c19629315d, type: 3}
 --- !u!23 &1792090700 stripped
@@ -10768,6 +10782,38 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2147023145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2147023146}
+  m_Layer: 0
+  m_Name: Hallway Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2147023146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147023145}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.922, y: 0.574, z: -0.339}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 575147177}
+  m_Father: {fileID: 782628378}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4561090202759699138
 PrefabInstance:
   m_ObjectHideFlags: 0
