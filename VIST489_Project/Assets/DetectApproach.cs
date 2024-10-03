@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DetectApproach : MonoBehaviour
 {
-    PopUpSystem pop;
+    PopUpSystem popUp;
 
     public GameObject YouNeedToFindTheDoorPopUp;
     public TMPro.TextMeshProUGUI text_YouNeedToFindTheDoorPopUp;
@@ -12,6 +12,10 @@ public class DetectApproach : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        
+        popUp = PopUpSystem.instance;
+        popUp.popUpBox = YouNeedToFindTheDoorPopUp;
+        popUp.popUpText = text_YouNeedToFindTheDoorPopUp;
+        popUp.animator = YouNeedToFindTheDoorPopUpAnimator;
+        popUp.PopUp(text_YouNeedToFindTheDoorPopUp.text);
     }
 }
