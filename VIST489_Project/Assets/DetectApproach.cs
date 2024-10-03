@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class DetectApproach : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    PopUpSystem pop;
 
-    // Update is called once per frame
-    void Update()
+    public GameObject YouNeedToFindTheDoorPopUp;
+    public TMPro.TextMeshProUGUI text_YouNeedToFindTheDoorPopUp;
+    public Animator YouNeedToFindTheDoorPopUpAnimator;
+
+    void OnTriggerEnter(Collider other)
     {
         
     }

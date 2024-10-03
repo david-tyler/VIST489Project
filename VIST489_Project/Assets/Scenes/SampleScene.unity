@@ -430,8 +430,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8130067943752055159, guid: 39868262e399a4c48bf3739708613d2b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 16205468}
   m_SourcePrefab: {fileID: 100100000, guid: 39868262e399a4c48bf3739708613d2b, type: 3}
+--- !u!1 &16205467 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8130067943752055159, guid: 39868262e399a4c48bf3739708613d2b, type: 3}
+  m_PrefabInstance: {fileID: 16205466}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &16205468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16205467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8243aec371a4d484dadb08991df8bead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  YouNeedToFindTheDoorPopUp: {fileID: 671627325}
+  text_YouNeedToFindTheDoorPopUp: {fileID: 671627324}
+  YouNeedToFindTheDoorPopUpAnimator: {fileID: 671627323}
 --- !u!224 &20061580 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5551066961514420604, guid: d9644cfe0eef54d8b8f33aa938458c40, type: 3}
@@ -3025,6 +3048,326 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1555094016756663663, guid: c221cda8750f8094cb880682a8945dab, type: 3}
   m_PrefabInstance: {fileID: 380987579}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &386802535
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 999165100}
+    m_Modifications:
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 300.72998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.341266
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.5936024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.7518318
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 15.334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2314107385325813665, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_Name
+      value: Enter Pokemon World Pop Up
+      objectReference: {fileID: 0}
+    - target: {fileID: 2314107385325813665, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529785498706735000, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_Name
+      value: Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621787116213553726, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621787116213553726, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621787116213553726, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 82.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621787116213553726, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -30.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914900999643036615, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_Name
+      value: Enter Pokemon World Pop Up Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318221161873699287, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_text
+      value: 'Oh over there! Is that Ash? There''s something wrong with him. Where''s
+        Charizard? '
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318221161873699287, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318221161873699287, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318221161873699287, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 386802537}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 142142624}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 535425581}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: MazeStarted
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SetCountForPopUpKey
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Animator, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: MazeBehavior, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: PokemonWorld, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: close
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961398787548372551, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_text
+      value: Continue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181838077295470256, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181838077295470256, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181838077295470256, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 240.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181838077295470256, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181838077295470256, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -120.255
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239268471000459345, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239268471000459345, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239268471000459345, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239268471000459345, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4355957
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239268471000459345, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.72580576
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239268471000459345, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.087048
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239268471000459345, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239268471000459345, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -317.59158
+      objectReference: {fileID: 0}
+    - target: {fileID: 8762690948993853001, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+      propertyPath: m_Name
+      value: Enter Pokemon World Pop Up Button
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+--- !u!224 &386802536 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1800775239304927363, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+  m_PrefabInstance: {fileID: 386802535}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &386802537 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4964281739004651369, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+  m_PrefabInstance: {fileID: 386802535}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &386802538 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5318221161873699287, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+  m_PrefabInstance: {fileID: 386802535}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &386802539 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2314107385325813665, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+  m_PrefabInstance: {fileID: 386802535}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &413150311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3800,6 +4143,9 @@ MonoBehaviour:
   ThatBook: {fileID: 285712493}
   PopUpToggleLenses: {fileID: 1823385334}
   PopUpToggleLensesAnimator: {fileID: 1823385336}
+  EnteredPokemonWorldPopUp: {fileID: 386802539}
+  text_EnteredPokemonWorldPopUp: {fileID: 386802538}
+  EnteredPokemonWorldPopUpAnimator: {fileID: 386802537}
   ImageTargetEnterPokemonWorld: {fileID: 1386398224}
   ImageTargetEnterMarioWorld: {fileID: 1104013405}
   ImageTargetEnterZeldaWorld: {fileID: 113477148}
@@ -4551,7 +4897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4914900999643036615, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
       propertyPath: m_Name
-      value: NeedToCompleteMazePopUpText
+      value: You Need to Find the Key PopUpText
       objectReference: {fileID: 0}
     - target: {fileID: 5318221161873699287, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
       propertyPath: m_text
@@ -4708,7 +5054,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8762690948993853001, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
       propertyPath: m_Name
-      value: NeedToCompleteMazePopUpButton
+      value: You Need to Find the Key PopUpButton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4723,6 +5069,22 @@ RectTransform:
 --- !u!95 &671627323 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 4964281739004651369, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+  m_PrefabInstance: {fileID: 671627321}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &671627324 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5318221161873699287, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+  m_PrefabInstance: {fileID: 671627321}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &671627325 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2314107385325813665, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
   m_PrefabInstance: {fileID: 671627321}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &672841311 stripped
@@ -5588,6 +5950,9 @@ MonoBehaviour:
   ThatBook: {fileID: 0}
   PopUpToggleLenses: {fileID: 0}
   PopUpToggleLensesAnimator: {fileID: 0}
+  EnteredPokemonWorldPopUp: {fileID: 0}
+  text_EnteredPokemonWorldPopUp: {fileID: 0}
+  EnteredPokemonWorldPopUpAnimator: {fileID: 0}
   ImageTargetEnterPokemonWorld: {fileID: 1386398224}
   ImageTargetEnterMarioWorld: {fileID: 1104013405}
   ImageTargetEnterZeldaWorld: {fileID: 113477148}
@@ -6443,6 +6808,7 @@ RectTransform:
   - {fileID: 74201602}
   - {fileID: 413150312}
   - {fileID: 671627322}
+  - {fileID: 386802536}
   - {fileID: 1640518127}
   - {fileID: 2100602116}
   - {fileID: 1946150897}

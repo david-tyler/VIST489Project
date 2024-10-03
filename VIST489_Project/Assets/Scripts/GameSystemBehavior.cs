@@ -28,6 +28,10 @@ public class GameSystemBehavior : MonoBehaviour
 
     public GameObject PopUpToggleLenses;
     public Animator PopUpToggleLensesAnimator;
+
+    public GameObject EnteredPokemonWorldPopUp;
+    public TMPro.TextMeshProUGUI text_EnteredPokemonWorldPopUp;
+    public Animator EnteredPokemonWorldPopUpAnimator;
     // --------------------------------------
 
 
@@ -421,6 +425,12 @@ public class GameSystemBehavior : MonoBehaviour
         PokemonWorldButtonGameObject.SetActive(false);
 
         text_LeavePokemonWorldButtonGameObject.text = display_LeavePokemonWorld;
+
+        popUp = PopUpSystem.instance;
+        popUp.popUpBox = EnteredPokemonWorldPopUp;
+        popUp.popUpText = text_EnteredPokemonWorldPopUp;
+        popUp.animator = EnteredPokemonWorldPopUpAnimator;
+        popUp.PopUp(text_EnteredPokemonWorldPopUp.text);
     }
 
     // will have conditoins for this that once we have completed the world we can now leave probably will need to make another button
