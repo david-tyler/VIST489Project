@@ -10,7 +10,7 @@ public class DetectApproach : MonoBehaviour
     public TMPro.TextMeshProUGUI text_YouNeedToFindTheDoorPopUp;
     public Animator YouNeedToFindTheDoorPopUpAnimator;
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
         popUp = PopUpSystem.instance;
         popUp.popUpBox = YouNeedToFindTheDoorPopUp;
@@ -18,4 +18,5 @@ public class DetectApproach : MonoBehaviour
         popUp.animator = YouNeedToFindTheDoorPopUpAnimator;
         popUp.PopUp(text_YouNeedToFindTheDoorPopUp.text);
     }
+    
 }

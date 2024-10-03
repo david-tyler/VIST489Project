@@ -375,6 +375,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8088301706529518669, guid: 39868262e399a4c48bf3739708613d2b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8130921515360841392, guid: 39868262e399a4c48bf3739708613d2b, type: 3}
       propertyPath: m_Name
       value: Aparment_Door
@@ -430,31 +434,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8130067943752055159, guid: 39868262e399a4c48bf3739708613d2b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 16205468}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39868262e399a4c48bf3739708613d2b, type: 3}
---- !u!1 &16205467 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8130067943752055159, guid: 39868262e399a4c48bf3739708613d2b, type: 3}
-  m_PrefabInstance: {fileID: 16205466}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &16205468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16205467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8243aec371a4d484dadb08991df8bead, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  YouNeedToFindTheDoorPopUp: {fileID: 671627325}
-  text_YouNeedToFindTheDoorPopUp: {fileID: 671627324}
-  YouNeedToFindTheDoorPopUpAnimator: {fileID: 671627323}
 --- !u!224 &20061580 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5551066961514420604, guid: d9644cfe0eef54d8b8f33aa938458c40, type: 3}
@@ -5071,22 +5052,6 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 4964281739004651369, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
   m_PrefabInstance: {fileID: 671627321}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &671627324 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5318221161873699287, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
-  m_PrefabInstance: {fileID: 671627321}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &671627325 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2314107385325813665, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
-  m_PrefabInstance: {fileID: 671627321}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &672841311 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8168174698487365527, guid: c221cda8750f8094cb880682a8945dab, type: 3}
@@ -6219,6 +6184,8 @@ MonoBehaviour:
   - {fileID: 118216609}
   - {fileID: 53075247}
   - {fileID: 782628375}
+  environmentPivot: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!114 &899465662
 MonoBehaviour:
   m_ObjectHideFlags: 0
