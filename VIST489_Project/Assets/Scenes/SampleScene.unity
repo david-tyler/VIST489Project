@@ -264,14 +264,14 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: Ghost
+  mTrackableName: Klefki
   mInitializedInEditor: 1
   mDataSetPath: 
-  mAspectRatio: 1.25
+  mAspectRatio: 0.6479724
   mImageTargetType: 3
-  mWidth: 0.16
-  mHeight: 0.19999999
-  mRuntimeTexture: {fileID: 2800000, guid: 2eae58d532ba4874b83133676cb499b8, type: 3}
+  mWidth: 0.19999999
+  mHeight: 0.12959448
+  mRuntimeTexture: {fileID: 2800000, guid: 0b24b31445d4355478773026473f6a91, type: 3}
   mMotionHint: 1
   mTrackingOptimization: 0
   mTrackingOptimizationNeedsUpgrade: 0
@@ -434,7 +434,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8130067943752055159, guid: 39868262e399a4c48bf3739708613d2b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1751325314}
   m_SourcePrefab: {fileID: 100100000, guid: 39868262e399a4c48bf3739708613d2b, type: 3}
 --- !u!224 &20061580 stripped
 RectTransform:
@@ -1944,6 +1947,7 @@ GameObject:
   - component: {fileID: 142142621}
   - component: {fileID: 142142620}
   - component: {fileID: 142142624}
+  - component: {fileID: 142142625}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1966,7 +1970,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2067,6 +2071,33 @@ MonoBehaviour:
   WonPopUp: {fileID: 74201604}
   WonPopUpAnimator: {fileID: 74201605}
   text_WonPopUp: {fileID: 74201603}
+--- !u!54 &142142625
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142142619}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &147632367
 GameObject:
   m_ObjectHideFlags: 0
@@ -5622,6 +5653,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746196348}
   m_CullTransparentMesh: 1
+--- !u!114 &751290272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5318221161873699287, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+  m_PrefabInstance: {fileID: 671627321}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &774076247
 GameObject:
   m_ObjectHideFlags: 0
@@ -9207,6 +9249,32 @@ Material:
     m_Colors:
     - _Color: {r: 0.82089555, g: 0.82089555, b: 0.82089555, a: 1}
   m_BuildTextureStacks: []
+--- !u!1 &1739429719 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2314107385325813665, guid: 326e42de7c8a74b09b45468c3f729a40, type: 3}
+  m_PrefabInstance: {fileID: 671627321}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1751325310 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8130067943752055159, guid: 39868262e399a4c48bf3739708613d2b, type: 3}
+  m_PrefabInstance: {fileID: 16205466}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1751325314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751325310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8243aec371a4d484dadb08991df8bead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fired: 0
+  YouNeedToFindTheDoorPopUp: {fileID: 1739429719}
+  text_YouNeedToFindTheDoorPopUp: {fileID: 751290272}
+  YouNeedToFindTheDoorPopUpAnimator: {fileID: 671627323}
 --- !u!1001 &1792090699
 PrefabInstance:
   m_ObjectHideFlags: 0
