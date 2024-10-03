@@ -113,6 +113,7 @@
     <Compile Include="Assets\Scripts\Inventory\InventoryBehaviorUI.cs" />
     <Compile Include="Assets\OpenNarration.cs" />
     <Compile Include="Assets\DebugViewer.cs" />
+    <Compile Include="Assets\SpawnMaze.cs" />
     <Compile Include="Assets\Scripts\CharacterSittingInteraction.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
   </ItemGroup>
