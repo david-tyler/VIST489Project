@@ -4,8 +4,22 @@ using UnityEngine;
 
 public class ParaLensesButtonBehavior : MonoBehaviour
 {
-    private bool isParaLensesOn = false;
 
+    #region Singleton
+    public static ParaLensesButtonBehavior instance;
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one reference of GameSystemBehavior!");
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion
+    private bool isParaLensesOn = false;
+    private List<Collider> platforms = new List<Collider>();
     
     public GameObject ImageTargetEnterPkWorld;
     public GameObject ImageTargetPKAudio;
@@ -16,6 +30,7 @@ public class ParaLensesButtonBehavior : MonoBehaviour
     private string text_EnableParaLenses = "Enable Paranormal Lenses";
     private string text_DisableParaLenses = "Disable Paranormal Lenses";
 
+    public List<GameObject> ActiveGameObjects = new List<GameObject>();
 
     public void Start()
     {
@@ -29,10 +44,18 @@ public class ParaLensesButtonBehavior : MonoBehaviour
         if (isParaLensesOn == true)
         {
             ParaLensesText.text = text_DisableParaLenses;
+            foreach (GameObject currentGameObject in ActiveGameObjects)
+            {
+                currentGameObject.SetActive(true);
+            }
         }
         else if (isParaLensesOn == false)
         {
             ParaLensesText.text = text_EnableParaLenses;
+            foreach (GameObject currentGameObject in ActiveGameObjects)
+            {
+                currentGameObject.SetActive(false);
+            }
         }
 
         

@@ -6,6 +6,21 @@ using UnityEngine.UI;
 
 public class GameSystemBehavior : MonoBehaviour
 {
+
+    #region Singleton
+    public static GameSystemBehavior instance;
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one reference of GameSystemBehavior!");
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion
+
     // Keep track of what interactable we have focused
     private Interactable focus;
   
@@ -25,13 +40,9 @@ public class GameSystemBehavior : MonoBehaviour
     // ******* PopUp Boxes
     // --------------------------------------
     PopUpSystem popUp;
-
-    public GameObject PopUpToggleLenses;
-    public Animator PopUpToggleLensesAnimator;
-
-    public GameObject EnteredPokemonWorldPopUp;
-    public TMPro.TextMeshProUGUI text_EnteredPokemonWorldPopUp;
-    public Animator EnteredPokemonWorldPopUpAnimator;
+    public GameObject PopUpBox; // Our dialogue box
+    public Animator PopUpBoxAnimator;
+    public TMPro.TextMeshProUGUI PopUpBoxText;
     // --------------------------------------
 
 
@@ -42,7 +53,7 @@ public class GameSystemBehavior : MonoBehaviour
     public GameObject ImageTargetEnterZeldaWorld;
     // --------------------------------------
 
-
+    
 
     // ******* Specific objects related to the Pokemon World
     // --------------------------------------
@@ -51,9 +62,11 @@ public class GameSystemBehavior : MonoBehaviour
     public GameObject PokemonWorldButtonGameObject;
     public GameObject LeavePokemonWorldButtonGameObject;
     public GameObject InventoryButtonGameObject; // the title button for the inventory to toggle it on/off.
+    public GameObject MessageNotification;
 
     public Button PokemonWorldButton;
     public Button LeavePokemonWorldButton;
+    public GameObject MessageButton;
     // --------------------------------------
 
 
@@ -61,6 +74,8 @@ public class GameSystemBehavior : MonoBehaviour
     // --------------------------------------
     private string display_EnterPokemonWorld = "Enter Pokemon World";
     private string display_LeavePokemonWorld = "Leave Pokemon World";
+    private string CurrentWorld = "";
+    private string MessageText = "";
     // --------------------------------------
 
 
@@ -69,19 +84,19 @@ public class GameSystemBehavior : MonoBehaviour
     private bool gameStarted = false;
     // boolean to track if we have entered a world or not at least once for the introduction audio behavior
     private bool EnteredPokemonWorld = false;
-    private bool isParaLensesOn = false;
+
     private bool AreWeInAWorld = false;
-    
+    private bool haveMessage = false;
     // --------------------------------------
 
-    private string CurrentWorld = "";
+
 
 
     // ******* Text
     // --------------------------------------
     public TMPro.TextMeshProUGUI text_LeavePokemonWorldButtonGameObject;
     public TMPro.TextMeshProUGUI text_PokemonWorldButtonGameObject;
-    public TMPro.TextMeshProUGUI text_PopUpToggleLenses;
+    
     // --------------------------------------
 
     /* Variable for functionality to enable or disable certain worlds only if previous worlds have been completed
@@ -91,7 +106,21 @@ public class GameSystemBehavior : MonoBehaviour
     */
     private int PreviousWorldsCompleted = 0;
 
-    
+
+    ParaLensesButtonBehavior paraLensesScript;
+    void Start()
+    {
+        paraLensesScript = ParaLensesButtonBehavior.instance;
+
+        // if our lenses are on turn on the image targets for certain worlds so we can start tracking
+        paraLensesScript.ActiveGameObjects.Add(ImageTargetEnterPokemonWorld);
+        paraLensesScript.ActiveGameObjects.Add(ImageTargetEnterMarioWorld);
+        paraLensesScript.ActiveGameObjects.Add(ImageTargetEnterZeldaWorld);
+        paraLensesScript.ActiveGameObjects.Add(ImageTargetEnterZeldaWorld);
+        paraLensesScript.ActiveGameObjects.Add(InventoryButtonGameObject);
+        
+    }
+
     void Update()
     {
         
@@ -260,6 +289,15 @@ public class GameSystemBehavior : MonoBehaviour
         }
         // --------------------------------------
 
+        if (haveMessage == true)
+        {
+            MessageNotification.SetActive(true);
+        }
+        else
+        {
+            MessageNotification.SetActive(false);
+        }
+
 
 
         
@@ -297,6 +335,8 @@ public class GameSystemBehavior : MonoBehaviour
 
     public void PlayAudios()
     {
+        paraLensesScript = ParaLensesButtonBehavior.instance;
+        bool isParaLensesOn = paraLensesScript.getIsParaLensesOn();
         // With this functionality the Find A Gateway voice line only plays if we enable the paranormal lenses
         if (isParaLensesOn == true)
         {
@@ -370,43 +410,15 @@ public class GameSystemBehavior : MonoBehaviour
 
         // Follow this as a guide to modify pop up boxes where you want
         popUp = PopUpSystem.instance;
-        popUp.popUpBox = PopUpToggleLenses;
-        popUp.popUpText = text_PopUpToggleLenses;
-        popUp.animator = PopUpToggleLensesAnimator;
-        popUp.PopUp(text_PopUpToggleLenses.text);
-    }
-
-
-    // Function intended to set the behavior toggling the different world buttons
-    public void WorldButtonsBehavior()
-    {
-        isParaLensesOn = paraLenses.getIsParaLensesOn();
-        // if our lenses are on turn on the image targets for certain worlds so we can start tracking
-        if (isParaLensesOn == true)
-        {
-            ImageTargetEnterPokemonWorld.SetActive(true);
-            ImageTargetEnterMarioWorld.SetActive(true);
-            ImageTargetEnterZeldaWorld.SetActive(true);
-            InventoryButtonGameObject.SetActive(true);
-            
-        }
-        else if (isParaLensesOn == false)
-        {
-            ImageTargetEnterPokemonWorld.SetActive(false);
-            ImageTargetEnterMarioWorld.SetActive(false);
-            ImageTargetEnterZeldaWorld.SetActive(false);
-            InventoryButtonGameObject.SetActive(false);
-            PokemonWorld.SetActive(false);
-        }
+        popUp.popUpBox = PopUpBox;
+        popUp.popUpText = PopUpBoxText;
+        popUp.animator = PopUpBoxAnimator;
+        string ToggleLensesText = "Click the button below to toggle your Paranormal Lenses on or off.";
+        MessageText = ToggleLensesText;
+        haveMessage = true;
     }
 
     
-    public void PokemonWorldButtonBehavior()
-    {
-        
-        PokemonWorldButtonGameObject.SetActive(true);
-
-    }
 
     // Function to determine if we entered a world just setting it to true if we have so we set the behavior for the intro audio.
     public void SetEnteredPokemonWorld()
@@ -419,7 +431,12 @@ public class GameSystemBehavior : MonoBehaviour
 
         // turn the enter pokemon world button off as we are now in the world and don't need to see it.
         // can add a brief pop up box or text saying welcome to the world of pokemon or soemthing later
-        
+
+
+        paraLensesScript.ActiveGameObjects.Add(PokemonWorld);
+        paraLensesScript.ActiveGameObjects.Add(PokemonWorldButtonGameObject);
+        paraLensesScript.ActiveGameObjects.Add(LeavePokemonWorldButtonGameObject);
+
         PokemonWorld.SetActive(true);
         
         PokemonWorldButtonGameObject.SetActive(false);
@@ -427,10 +444,10 @@ public class GameSystemBehavior : MonoBehaviour
         text_LeavePokemonWorldButtonGameObject.text = display_LeavePokemonWorld;
 
         popUp = PopUpSystem.instance;
-        popUp.popUpBox = EnteredPokemonWorldPopUp;
-        popUp.popUpText = text_EnteredPokemonWorldPopUp;
-        popUp.animator = EnteredPokemonWorldPopUpAnimator;
-        popUp.PopUp(text_EnteredPokemonWorldPopUp.text);
+        
+        string AshOverThereText = "Oh over there! Is that Ash? There's something wrong with him. Where's Charizard?";
+        MessageText = AshOverThereText;
+        haveMessage = true;
     }
 
     // will have conditoins for this that once we have completed the world we can now leave probably will need to make another button
@@ -453,5 +470,26 @@ public class GameSystemBehavior : MonoBehaviour
     {
         return CurrentWorld;
     }
-    
+
+    public void DisplayMessage()
+    {
+        if (haveMessage == true)
+        {
+
+            popUp = PopUpSystem.instance;
+            popUp.PopUp(MessageText);
+
+        }
+        haveMessage = false;
+        MessageText = "";
+    }
+    public void SetHaveMessage(bool messageExists)
+    {
+        haveMessage = messageExists;
+    }
+    public void SetMessageText(string text)
+    {
+        MessageText = text;
+    }
+
 }

@@ -19,18 +19,15 @@ public class MazeBehavior : MonoBehaviour
 
     // ******* PopUp Boxes
     // --------------------------------------
-    public GameObject FailedPopUp;
-    public Animator FailedPopUpAnimator;
-    public TMPro.TextMeshProUGUI text_FailedPopUp;
+    PopUpSystem popUp;
+    public GameObject PopUpBox; // Our dialogue box
+    public Animator PopUpBoxAnimator;
+    public TMPro.TextMeshProUGUI PopUpBoxText;
+    
     public string WrongSquareMessage = "Oh no! Looks like you stepped on the wrong platform. " +
         "You have to scan the key and start over again.";
     public string RanOutOfTimeMessage = "You ran out of time. Try scanning the key again to start over.";
-
-    public GameObject WonPopUp;
-    public Animator WonPopUpAnimator;
-    public TMPro.TextMeshProUGUI text_WonPopUp;
-
-    PopUpSystem popUp;
+    public string YouWonMessage = "Congrats! Looks like you solved the maze. Try scanning the key again, we should be able to pick it up now.";
     // --------------------------------------
 
     private List<Collider> platforms = new List<Collider>();
@@ -39,6 +36,10 @@ public class MazeBehavior : MonoBehaviour
     private float originaltime;
     private bool failed = false;
     private bool won = false;
+
+
+    GameSystemBehavior GameSystem;
+    ParaLensesButtonBehavior paraLenses;
 
     void Start()
     {
@@ -82,6 +83,7 @@ public class MazeBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
         // if you havent failed yet can keep trying. Used so that if you hit a bad square you wont be able to keep colliding with other squares.
         if (failed == false && won == false)
         {
@@ -97,12 +99,14 @@ public class MazeBehavior : MonoBehaviour
                         won = true;
                         // You win can play a sound and now can spawn the key and get it
                         StartCoroutine(SolvedPuzzle());
-                        WonMaze(text_WonPopUp.text);
+                        WonMaze(YouWonMessage);
+                        ResetMaze();
                     }
                     else if (goodSquaresLanedCurrent < landGoodSquaresBeforeGoal)
                     {
                         startTimer = false;
                         FailedMaze("Nice Try.");
+                        ResetMaze();
                     }
 
                     return;
@@ -143,7 +147,7 @@ public class MazeBehavior : MonoBehaviour
             platforms[i].transform.parent.gameObject.GetComponent<Renderer>().material = PlatformOriginalMat;
         }
         platforms.Clear();
-        entireMaze.SetActive(false);
+        entireMaze.SetActive(true);
         
         startTimer = false;
         remainingTime = originaltime;
@@ -162,27 +166,37 @@ public class MazeBehavior : MonoBehaviour
 
     public void WonMaze(string text)
     {
+        GameSystem = GameSystemBehavior.instance;
+        paraLenses = ParaLensesButtonBehavior.instance;
         
+
+        GameSystem.SetHaveMessage(true);
+        GameSystem.SetMessageText(text);
+
         startTimer = false;
-
-        popUp = PopUpSystem.instance;
-
-        popUp.popUpBox = WonPopUp;
-        popUp.popUpText = text_WonPopUp;
-        popUp.animator = WonPopUpAnimator;
-        popUp.PopUp(text);
+        // popUp = PopUpSystem.instance;
+        
+        // popUp.PopUp(text);
+        PokemonWorld pokeWorld = gameObject.GetComponent<PokemonWorld>();
+        pokeWorld.SolvedMaze();
+        
     }
 
 
     public void FailedMaze(string text)
     {
-        failed = true;
-        popUp = PopUpSystem.instance;
+        GameSystem = GameSystemBehavior.instance;
 
-        popUp.popUpBox = FailedPopUp;
-        popUp.popUpText = text_FailedPopUp;
-        popUp.animator = FailedPopUpAnimator;
-        popUp.PopUp(text);
+
+        GameSystem.SetHaveMessage(true);
+        GameSystem.SetMessageText(text);
+
+        failed = true;
+
+        // popUp = PopUpSystem.instance;
+        
+        // popUp.PopUp(text);
+
     }
 
 }

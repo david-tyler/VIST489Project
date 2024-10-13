@@ -25,8 +25,16 @@ public class ItemPickup : Interactable
 
         if (completedPickUp == true)
         {
-            Destroy(parentObject);
-            //Destroy(gameObject.GetComponentInParent<GameObject>());
+            // if we have a model as a parent to the 3d object destroy that if not destroy just the 3d object
+            if (parentObject != null)
+            {
+                Destroy(parentObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+            
         }
         
     }
