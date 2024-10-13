@@ -6,12 +6,23 @@ public class DetectApproach : MonoBehaviour
 {
     PopUpSystem popUp;
 
-    public string YouNeedToFindTheDoorText = "This door seems to be locked in the pokemon world. The key should be somewhere on this floor! Perhaps the book has more clues?";
+    public bool fired = false;
+    public GameObject YouNeedToFindTheDoorPopUp;
+    public TMPro.TextMeshProUGUI text_YouNeedToFindTheDoorPopUp;
+    public Animator YouNeedToFindTheDoorPopUpAnimator;
+
     void OnCollisionEnter(Collision collision)
     {
-        popUp = PopUpSystem.instance;
-        
-        popUp.PopUp(YouNeedToFindTheDoorText);
+        Debug.Log("collided");
+        if(!fired)
+        {
+            popUp = PopUpSystem.instance;
+            popUp.popUpBox = YouNeedToFindTheDoorPopUp;
+            popUp.popUpText = text_YouNeedToFindTheDoorPopUp;
+            popUp.animator = YouNeedToFindTheDoorPopUpAnimator;
+            popUp.PopUp(text_YouNeedToFindTheDoorPopUp.text);
+        }
+
+        fired = true;
     }
-    
 }
