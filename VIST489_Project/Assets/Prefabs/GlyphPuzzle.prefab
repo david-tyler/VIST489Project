@@ -497,7 +497,9 @@ MonoBehaviour:
   - {fileID: 9205957800540375367}
   currentOrder: []
   placedBalls: []
-  coloredPokeball: {fileID: 0}
+  coloredPokeball: {fileID: 1207297651442762291}
+  baseColor: {fileID: 2100000, guid: 0833bdcf98cc842db93f80aac3168021, type: 2}
+  gate: {fileID: 0}
 --- !u!1 &9205957800540375367
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,6 +630,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8885455702248310703}
     m_Modifications:
+    - target: {fileID: 2180468948175872143, guid: c207a33700e88cb4dbb958e63758b9bd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2314922263852279072, guid: c207a33700e88cb4dbb958e63758b9bd, type: 3}
       propertyPath: m_Name
       value: pokeballsSF
@@ -680,11 +686,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5073310323618159808, guid: c207a33700e88cb4dbb958e63758b9bd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c207a33700e88cb4dbb958e63758b9bd, type: 3}
+--- !u!23 &1207297651442762291 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6898793466919132163, guid: c207a33700e88cb4dbb958e63758b9bd, type: 3}
+  m_PrefabInstance: {fileID: 5727557048102084144}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7212461950370210218 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3128753950635769754, guid: c207a33700e88cb4dbb958e63758b9bd, type: 3}
