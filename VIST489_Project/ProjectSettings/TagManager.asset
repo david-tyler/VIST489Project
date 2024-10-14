@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - GameManager
+  - Ash Trigger Zone
+  - Maze Platform
   layers:
   - Default
   - TransparentFX

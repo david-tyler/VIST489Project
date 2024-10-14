@@ -184,10 +184,6 @@ public class GameSystemBehavior : MonoBehaviour
                 // Perform the raycast.
                 if (Physics.Raycast(ray, out hit))
                 {
-                    // Debug.Log("Ray Begin");
-
-                    
-                    
                     // Call a function on the object hit.
                     // Debug.Log("Tapped on " + hit.collider.gameObject.name);
                     hit.collider.gameObject.SendMessage("OnTap", SendMessageOptions.DontRequireReceiver);
@@ -197,25 +193,43 @@ public class GameSystemBehavior : MonoBehaviour
                     {
                         ItemPickup currentItem = hit.collider.GetComponent<ItemPickup>();
 
+                        
                         // uncomment once you figure out how you enter the pokemon world
                         if (EnteredPokemonWorld == true)
                         {
                             PokemonWorld pokeWorld = gameObject.GetComponent<PokemonWorld>();
-                            
-                            if (currentItem.item.name == "Key")
+                            string name = currentItem.item.name;
+
+                            switch (name)
                             {
+                                case "Key":
+                                    if (pokeWorld.CanPickUpKey() == true)
+                                    {
+                                        SetFocus(interactable);
+                                    }
+                                    else if (pokeWorld.CanPickUpKey() == false)
+                                    {
 
-                                if (pokeWorld.CanPickUpKey() == true)
-                                {
+                                        pokeWorld.CannotPickUpKey();
+
+                                    }
+                                    break;
+                                case "Red Pokeball":
                                     SetFocus(interactable);
-                                }
-                                else if (pokeWorld.CanPickUpKey() == false)
-                                {
-                                    pokeWorld.CannotPickUpKey();
-
-                                }
+                                    break;
+                                case "Yellow Pokeball":
+                                    SetFocus(interactable);
+                                    break;
+                                case "Green Pokeball":
+                                    SetFocus(interactable);
+                                    break;
+                                case "Blue Pokeball":
+                                    SetFocus(interactable);
+                                    break;
                             }
                         }
+
+                        
 
                     }
                     else
@@ -231,7 +245,6 @@ public class GameSystemBehavior : MonoBehaviour
         }
         else if (Input.GetMouseButtonDown(0)) // 0 is for left-click
         {
-            // Debug.Log("TOUCHING Begin");
 
             // Create a ray from the screen point where the touch occurred.
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -242,7 +255,6 @@ public class GameSystemBehavior : MonoBehaviour
             // Perform the raycast.
             if (Physics.Raycast(ray, out hit))
             {
-                // ebug.Log("Ray Begin");
 
                 // Check if the object hit has the tag "Interactable" (optional).
                 //if (hit.collider != null && hit.collider.CompareTag("Interactable"))
@@ -259,21 +271,37 @@ public class GameSystemBehavior : MonoBehaviour
                     if (EnteredPokemonWorld == true)
                     {
                         PokemonWorld pokeWorld = gameObject.GetComponent<PokemonWorld>();
-                        
-                        if (currentItem.item.name == "Key")
-                        {
-                            
-                            if (pokeWorld.CanPickUpKey() == true)
-                            {
-                                SetFocus(interactable);
-                            }
-                            else if (pokeWorld.CanPickUpKey() == false)
-                            {
-                                pokeWorld.CannotPickUpKey();
 
-                            }
+                        string name = currentItem.item.name;
+                        switch (name)
+                        {
+                            case "Key":
+                                if (pokeWorld.CanPickUpKey() == true)
+                                {
+                                    SetFocus(interactable);
+                                }
+                                else if (pokeWorld.CanPickUpKey() == false)
+                                {
+
+                                    pokeWorld.CannotPickUpKey();
+
+                                }
+                                break;
+                            case "Red Pokeball":
+                                SetFocus(interactable);
+                                break;
+                            case "Yellow Pokeball":
+                                SetFocus(interactable);
+                                break;
+                            case "Green Pokeball":
+                                SetFocus(interactable);
+                                break;
+                            case "Blue Pokeball":
+                                SetFocus(interactable);
+                                break;
                         }
                     }
+                    
 
                 }
                 else

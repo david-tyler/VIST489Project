@@ -20,9 +20,6 @@ public class MazeBehavior : MonoBehaviour
     // ******* PopUp Boxes
     // --------------------------------------
     PopUpSystem popUp;
-    public GameObject PopUpBox; // Our dialogue box
-    public Animator PopUpBoxAnimator;
-    public TMPro.TextMeshProUGUI PopUpBoxText;
     
     public string WrongSquareMessage = "Oh no! Looks like you stepped on the wrong platform. " +
         "You have to scan the key and start over again.";
@@ -83,51 +80,57 @@ public class MazeBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        // if you havent failed yet can keep trying. Used so that if you hit a bad square you wont be able to keep colliding with other squares.
-        if (failed == false && won == false)
+        string tag = other.gameObject.tag;
+        Debug.Log(tag);
+        if (tag == "Maze Platform")
         {
-            // change the current platform to green or red
-            if (other.gameObject.GetComponent<Platform>().isValidSquare == true)
+            // if you havent failed yet can keep trying. Used so that if you hit a bad square you wont be able to keep colliding with other squares.
+            if (failed == false && won == false)
             {
-                goodSquaresLanedCurrent += 1;
-                if (other.gameObject.GetComponent<Platform>().isGoal == true)
+                // change the current platform to green or red
+                if (other.gameObject.GetComponent<Platform>().isValidSquare == true)
                 {
-                    if (goodSquaresLanedCurrent >= landGoodSquaresBeforeGoal)
+                    goodSquaresLanedCurrent += 1;
+                    if (other.gameObject.GetComponent<Platform>().isGoal == true)
                     {
-                        goalReached = true;
-                        won = true;
-                        // You win can play a sound and now can spawn the key and get it
-                        StartCoroutine(SolvedPuzzle());
-                        WonMaze(YouWonMessage);
-                        ResetMaze();
+                        if (goodSquaresLanedCurrent >= landGoodSquaresBeforeGoal)
+                        {
+                            goalReached = true;
+                            won = true;
+                            // You win can play a sound and now can spawn the key and get it
+                            StartCoroutine(SolvedPuzzle());
+                            WonMaze(YouWonMessage);
+                            ResetMaze();
+                        }
+                        else if (goodSquaresLanedCurrent < landGoodSquaresBeforeGoal)
+                        {
+                            startTimer = false;
+                            FailedMaze("Nice Try.");
+                            ResetMaze();
+                        }
+
+                        return;
+
                     }
-                    else if (goodSquaresLanedCurrent < landGoodSquaresBeforeGoal)
+                    else if (other.gameObject.GetComponent<Platform>().isGoal == false)
                     {
-                        startTimer = false;
-                        FailedMaze("Nice Try.");
-                        ResetMaze();
+                        platforms.Add(other);
+                        other.transform.parent.gameObject.GetComponent<Renderer>().material = goodSquare;
                     }
 
-                    return;
 
                 }
-                else if (other.gameObject.GetComponent<Platform>().isGoal == false)
+                else if (other.gameObject.GetComponent<Platform>().isValidSquare == false)
                 {
                     platforms.Add(other);
-                    other.transform.parent.gameObject.GetComponent<Renderer>().material = goodSquare;
+                    other.transform.parent.gameObject.GetComponent<Renderer>().material = badSquare;
+                    startTimer = false;
+                    FailedMaze(WrongSquareMessage);
                 }
-
-
-            }
-            else if (other.gameObject.GetComponent<Platform>().isValidSquare == false)
-            {
-                platforms.Add(other);
-                other.transform.parent.gameObject.GetComponent<Renderer>().material = badSquare;
-                startTimer = false;
-                FailedMaze(WrongSquareMessage);
             }
         }
+        
+        
 
         
     }
