@@ -227,6 +227,18 @@ public class GameSystemBehavior : MonoBehaviour
                 {
                     RemoveFocus();
                 }
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    // Try to find the IRaycastHitHandler interface on the hit object
+                    IRaycastHitHandler hitHandler = hit.collider.GetComponent<IRaycastHitHandler>();
+
+                    // If the object has the interface, fire the event
+                    if (hitHandler != null)
+                    {
+                        hitHandler.OnRaycastHit();
+                    }
+                }
             }
         }
         else if (Input.GetMouseButtonDown(0)) // 0 is for left-click
