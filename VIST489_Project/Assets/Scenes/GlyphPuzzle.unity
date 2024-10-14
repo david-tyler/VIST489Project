@@ -130,6 +130,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1207297651442762291, guid: e95f0add6b6f76c4eb123ce8fc4d30af, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 961c5dc7664084853b5ab31cf02e1a39, type: 2}
+    - target: {fileID: 5854338936371035839, guid: e95f0add6b6f76c4eb123ce8fc4d30af, type: 3}
+      propertyPath: m_Name
+      value: Red Top
+      objectReference: {fileID: 0}
     - target: {fileID: 6764362338072448047, guid: e95f0add6b6f76c4eb123ce8fc4d30af, type: 3}
       propertyPath: m_Name
       value: GlyphPuzzle
@@ -177,31 +185,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6764362338072448047, guid: e95f0add6b6f76c4eb123ce8fc4d30af, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6388050501561846553}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e95f0add6b6f76c4eb123ce8fc4d30af, type: 3}
---- !u!1 &6388050501561846552 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6764362338072448047, guid: e95f0add6b6f76c4eb123ce8fc4d30af, type: 3}
-  m_PrefabInstance: {fileID: 6388050501561846551}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6388050501561846553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6388050501561846552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd7bfc216d447584ca02fbbfadf4ed77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correctOrder: []
-  currentOrder: []
-  placedBalls: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
