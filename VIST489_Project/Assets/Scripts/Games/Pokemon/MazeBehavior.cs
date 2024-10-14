@@ -83,7 +83,19 @@ public class MazeBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //if what you have hit is a maze component
+        if(other.gameObject.GetComponent<Platform>() != null)
+        {
+            HandleMazePlatform(other);
+        }
         
+
+
+        
+    }
+
+    public void HandleMazePlatform(Collider other)
+    {
         // if you havent failed yet can keep trying. Used so that if you hit a bad square you wont be able to keep colliding with other squares.
         if (failed == false && won == false)
         {
@@ -128,8 +140,6 @@ public class MazeBehavior : MonoBehaviour
                 FailedMaze(WrongSquareMessage);
             }
         }
-
-        
     }
 
     IEnumerator SolvedPuzzle()
