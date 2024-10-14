@@ -14,6 +14,8 @@ public class DoorController : MonoBehaviour
     private Animation doorAnim;
     private BoxCollider doorCollider;           //To enable the player to go through the door if door is opened else block him
 
+    public GameObject gate;
+
     enum DoorState
     {
         Closed,
@@ -43,13 +45,15 @@ public class DoorController : MonoBehaviour
         {
             //UnityEditor.EditorApplication.isPlaying = false;
             Debug.LogError("Assign Key GameObject");
+            
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        txtToDisplay.SetActive(true);
-        playerInZone = true;
+        //txtToDisplay.SetActive(true);
+        //playerInZone = true;
+        gate.SetActive(true);
     }
 
     private void OnTriggerExit(Collider other)
