@@ -8,6 +8,10 @@ public class GlyphPuzzleController : MonoBehaviour
     public List<GameObject> currentOrder = new List<GameObject>();
     public List<GameObject> placedBalls = new List<GameObject>();
 
+    public MeshRenderer coloredPokeball;
+    public Material baseColor;
+
+    public GameObject gate;
 
     public void Start()
     {
@@ -25,8 +29,9 @@ public class GlyphPuzzleController : MonoBehaviour
             }
         }
 
+        OpenGate();
         return true;
-
+        
     }
 
     public void IncorrectOrder()
@@ -43,9 +48,15 @@ public class GlyphPuzzleController : MonoBehaviour
         }
 
         placedBalls.Clear();
+        coloredPokeball.material = baseColor;
+    }
+
+    public void OpenGate()
+    {
+        gate.SetActive(false);
     }
 
 
 
-    
+
 }
