@@ -44,10 +44,9 @@ public class GlyphPuzzleController : MonoBehaviour
     {
         for(int i = 0; i< placedBalls.Count; i++)
         {
-            GameObject.Destroy(placedBalls[i]);
+            placedBalls[i].SetActive(false);
         }
 
-        placedBalls.Clear();
         coloredPokeball.material = baseColor;
     }
 
