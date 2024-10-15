@@ -279,40 +279,49 @@ public class GameSystemBehavior : MonoBehaviour
                 if (interactable != null)
                 {
                     ItemPickup currentItem = hit.collider.GetComponent<ItemPickup>();
-                    if (EnteredPokemonWorld == true)
+
+                    if(currentItem != null)
                     {
-                        PokemonWorld pokeWorld = gameObject.GetComponent<PokemonWorld>();
-
-                        string name = currentItem.item.name;
-                            
-                        switch (name)
+                        if (EnteredPokemonWorld == true)
                         {
-                            case "Key":
-                                if (pokeWorld.CanPickUpKey() == true)
-                                {
+                            PokemonWorld pokeWorld = gameObject.GetComponent<PokemonWorld>();
+
+                            string name = currentItem.item.name;
+
+                            switch (name)
+                            {
+                                case "Key":
+                                    if (pokeWorld.CanPickUpKey() == true)
+                                    {
+                                        SetFocus(interactable);
+                                    }
+                                    else if (pokeWorld.CanPickUpKey() == false)
+                                    {
+
+                                        pokeWorld.CannotPickUpKey();
+
+                                    }
+                                    break;
+                                case "Red Glyph Pokeball":
                                     SetFocus(interactable);
-                                }
-                                else if (pokeWorld.CanPickUpKey() == false)
-                                {
-
-                                    pokeWorld.CannotPickUpKey();
-
-                                }
-                                break;
-                            case "Red Glyph Pokeball":
-                                SetFocus(interactable);
-                                break;
-                            case "Yellow Glyph Pokeball":
-                                SetFocus(interactable);
-                                break;
-                            case "Green Glyph Pokeball":
-                                SetFocus(interactable);
-                                break;
-                            case "Blue Glyph Pokeball":
-                                SetFocus(interactable);
-                                break;
+                                    break;
+                                case "Yellow Glyph Pokeball":
+                                    SetFocus(interactable);
+                                    break;
+                                case "Green Glyph Pokeball":
+                                    SetFocus(interactable);
+                                    break;
+                                case "Blue Glyph Pokeball":
+                                    SetFocus(interactable);
+                                    break;
+                            }
                         }
                     }
+                    else
+                    {
+                        SetFocus(interactable);
+                    }
+                    
                     
 
                 }
