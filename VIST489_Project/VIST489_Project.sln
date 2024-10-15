@@ -51,11 +51,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.TestTools.CodeCoverag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.2D.Sprite.Editor", "Unity.2D.Sprite.Editor.csproj", "{B4E7C11E-3788-A5A7-47AE-6FA6C19690BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VuforiaEditorScripts", "VuforiaEditorScripts.csproj", "{48570018-C18E-7EC0-2384-E231EAEF268F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Settings.Editor", "Unity.Settings.Editor.csproj", "{A9EE9522-A757-9C1C-9026-D9C4AC397904}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VuforiaScripts", "VuforiaScripts.csproj", "{F141D60A-8331-498C-278D-F49487A93F5F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{0E14DFA1-6E90-9282-51C6-BCA257CC085C}"
 EndProject
@@ -171,18 +167,10 @@ Global
 		{B4E7C11E-3788-A5A7-47AE-6FA6C19690BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4E7C11E-3788-A5A7-47AE-6FA6C19690BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4E7C11E-3788-A5A7-47AE-6FA6C19690BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{48570018-C18E-7EC0-2384-E231EAEF268F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{48570018-C18E-7EC0-2384-E231EAEF268F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{48570018-C18E-7EC0-2384-E231EAEF268F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{48570018-C18E-7EC0-2384-E231EAEF268F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A9EE9522-A757-9C1C-9026-D9C4AC397904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A9EE9522-A757-9C1C-9026-D9C4AC397904}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9EE9522-A757-9C1C-9026-D9C4AC397904}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9EE9522-A757-9C1C-9026-D9C4AC397904}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F141D60A-8331-498C-278D-F49487A93F5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F141D60A-8331-498C-278D-F49487A93F5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F141D60A-8331-498C-278D-F49487A93F5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F141D60A-8331-498C-278D-F49487A93F5F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0E14DFA1-6E90-9282-51C6-BCA257CC085C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0E14DFA1-6E90-9282-51C6-BCA257CC085C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E14DFA1-6E90-9282-51C6-BCA257CC085C}.Release|Any CPU.ActiveCfg = Release|Any CPU

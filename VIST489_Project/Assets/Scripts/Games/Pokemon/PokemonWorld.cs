@@ -39,6 +39,7 @@ public class PokemonWorld : MonoBehaviour
     public GameObject charizard;
     public GameObject targetCharizardPlatform1;
     public Camera mainCamera;
+    public GameObject pit;
     
 
     // Script instances
@@ -85,9 +86,13 @@ public class PokemonWorld : MonoBehaviour
                    hit.collider.gameObject.SendMessage("OnTap", SendMessageOptions.DontRequireReceiver);
                    if (hit.collider.gameObject.tag == "Charizard")
                    {
+
                         if (canTapCharizard)
                         {
+
+                            pit.SetActive(true);
                             StartCoroutine(MoveCharizard());
+                            
                         }
                         
                    }
@@ -124,8 +129,10 @@ public class PokemonWorld : MonoBehaviour
 
                 if (hit.collider.gameObject.tag == "Charizard")
                 {
+                    pit.SetActive(true);
                     if (canTapCharizard)
                     {
+                        pit.SetActive(true);
                         StartCoroutine(MoveCharizard());
                     }
 
@@ -142,7 +149,8 @@ public class PokemonWorld : MonoBehaviour
 
         Vector3 startPosition = charizard.transform.position;
 
-        Debug.Log("falling");
+        Debug.Log("moving");
+        pit.SetActive(true);
 
         while (elapsedTime < duration)
         {

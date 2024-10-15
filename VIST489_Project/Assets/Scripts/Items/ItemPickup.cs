@@ -15,6 +15,7 @@ public class ItemPickup : Interactable
 
     GameSystemBehavior gameSystem;
     public AudioSource ItemPickupSound;
+    public PokeBallTower tower;
 
     public string TryOpeningDoor = "Great you got the key! You should be able to unlock that door now to free Ash.";
 
@@ -66,7 +67,8 @@ public class ItemPickup : Interactable
             
             
         }
-        
+
+        tower.foundBall = true;
     }
 
 }
