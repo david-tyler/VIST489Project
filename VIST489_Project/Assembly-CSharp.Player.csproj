@@ -60,6 +60,7 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.43f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/PitPlatform.cs" />
     <Compile Include="Assets/DetectApproach.cs" />
     <Compile Include="Assets/3rd Party/Apartment_Door/Scripts/PlayerMovement.cs" />
     <Compile Include="Assets/Scripts/Games/Pokemon/Platform.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/EnvMapAnimator.cs" />
     <Compile Include="Assets/Scripts/Trigger Zones.cs" />
     <Compile Include="Assets/3rd Party/Apartment_Door/Scripts/DoorController.cs" />
+    <Compile Include="Assets/GlyphRaycaster.cs" />
     <Compile Include="Assets/3rd Party/Apartment_Door/Scripts/KeyController.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextSelector_A.cs" />
     <Compile Include="Assets/Scripts/Inventory/Inventory.cs" />
@@ -109,10 +111,13 @@
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/WarpTextExample.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TextMeshProFloatingText.cs" />
     <Compile Include="Assets/Scripts/Interactables/Interactable.cs" />
+    <Compile Include="Assets/IRaycastHitHandler.cs" />
     <Compile Include="Assets/Scripts/Items/ItemPickup.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/ShaderPropAnimator.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/CameraController.cs" />
+    <Compile Include="Assets/Scripts/tes.cs" />
     <Compile Include="Assets/Scripts/GameSystemBehavior.cs" />
+    <Compile Include="Assets/FallingCheck.cs" />
     <Compile Include="Assets/Scripts/ITPokemonSoundController.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark03.cs" />
     <Compile Include="Assets/Scripts/Inventory/InventoryBehaviorUI.cs" />
@@ -149,6 +154,7 @@
     <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader" />
     <None Include="Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader" />
+    <None Include="Assets/HandPainted Lava Textures/Documentation/Documentation.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_Sprite.shader" />
     <None Include="Assets/TextMesh Pro/Examples &amp; Extras/Fonts/Bangers - OFL.txt" />
   </ItemGroup>

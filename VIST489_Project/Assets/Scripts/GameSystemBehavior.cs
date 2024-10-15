@@ -27,7 +27,6 @@ public class GameSystemBehavior : MonoBehaviour
     public GameObject ParaNormalLensesGameObject;
     public Button ParaNormalLensesButton;
     public Camera mainCamera;
-    public ParaLensesButtonBehavior paraLenses;
 
     // Narration Audio Sources
     // --------------------------------------
@@ -214,16 +213,16 @@ public class GameSystemBehavior : MonoBehaviour
 
                                     }
                                     break;
-                                case "Red Pokeball":
+                                case "Red Glyph Pokeball":
                                     SetFocus(interactable);
                                     break;
-                                case "Yellow Pokeball":
+                                case "Yellow Glyph Pokeball":
                                     SetFocus(interactable);
                                     break;
-                                case "Green Pokeball":
+                                case "Green Glyph Pokeball":
                                     SetFocus(interactable);
                                     break;
-                                case "Blue Pokeball":
+                                case "Blue Glyph Pokeball":
                                     SetFocus(interactable);
                                     break;
                             }
@@ -285,6 +284,7 @@ public class GameSystemBehavior : MonoBehaviour
                         PokemonWorld pokeWorld = gameObject.GetComponent<PokemonWorld>();
 
                         string name = currentItem.item.name;
+                            
                         switch (name)
                         {
                             case "Key":
@@ -299,16 +299,16 @@ public class GameSystemBehavior : MonoBehaviour
 
                                 }
                                 break;
-                            case "Red Pokeball":
+                            case "Red Glyph Pokeball":
                                 SetFocus(interactable);
                                 break;
-                            case "Yellow Pokeball":
+                            case "Yellow Glyph Pokeball":
                                 SetFocus(interactable);
                                 break;
-                            case "Green Pokeball":
+                            case "Green Glyph Pokeball":
                                 SetFocus(interactable);
                                 break;
-                            case "Blue Pokeball":
+                            case "Blue Glyph Pokeball":
                                 SetFocus(interactable);
                                 break;
                         }
@@ -485,7 +485,7 @@ public class GameSystemBehavior : MonoBehaviour
 
         popUp = PopUpSystem.instance;
         
-        string AshOverThereText = "Oh over there! Is that Ash? There's something wrong with him. Where's Charizard?";
+        string AshOverThereText = "Over there! Is that Ash? There's something wrong with him.";
         MessageText = AshOverThereText;
         haveMessage = true;
     }

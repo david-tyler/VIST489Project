@@ -1,8 +1,24 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class DoorController : MonoBehaviour
 {
+    #region Singleton
+    public static DoorController instance;
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one reference of DoorController!");
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion
     public bool keyNeeded = false;              //Is key needed for the door
     public bool gotKey;                  //Has the player acquired key
     public GameObject keyGameObject;            //If player has Key,  assign it here
@@ -13,6 +29,15 @@ public class DoorController : MonoBehaviour
 
     private Animation doorAnim;
     private BoxCollider doorCollider;           //To enable the player to go through the door if door is opened else block him
+
+
+    // Instance references to scripts
+    PopUpSystem popUp;
+    PokemonWorld pokeWorld;
+    GameSystemBehavior gameSystem;
+    ParaLensesButtonBehavior paraLensesScript;
+    public string FindKeyTextForDoor = "He's right the door is locked, we need to find the key. Look inside your book you should have a map of the building. Use that to guide you";
+    public string UseKeyTextForDoor = "Great we have the key now. Try tapping the key in your inventory to unlock or lock the door.";
 
     enum DoorState
     {
@@ -50,6 +75,31 @@ public class DoorController : MonoBehaviour
     {
         txtToDisplay.SetActive(true);
         playerInZone = true;
+
+        popUp = PopUpSystem.instance;
+        gameSystem = GameSystemBehavior.instance;
+        paraLensesScript = ParaLensesButtonBehavior.instance;
+        pokeWorld = PokemonWorld.instance;
+
+        if(pokeWorld.GetPickedUpKey() == false)
+        {
+            if (gameSystem.GetEnteredPokemonWorld() == true && paraLensesScript.getIsParaLensesOn() && pokeWorld.GetUnlockedDoor() == false)
+            {
+                gameSystem.SetHaveMessage(true);
+                gameSystem.SetMessageText(FindKeyTextForDoor);
+                
+                    
+            }
+        }
+        else if(pokeWorld.GetPickedUpKey() == true)
+        {
+            if (gameSystem.GetEnteredPokemonWorld() == true && paraLensesScript.getIsParaLensesOn() && pokeWorld.GetUnlockedDoor() == false)
+            {
+                gameSystem.SetHaveMessage(true);
+                gameSystem.SetMessageText(FindKeyTextForDoor);
+                    
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -65,22 +115,71 @@ public class DoorController : MonoBehaviour
         {
             if (doorState == DoorState.Opened)
             {
-                txtToDisplay.GetComponent<Text>().text = "Press 'E' to Close";
+                txtToDisplay.GetComponent<TextMeshProUGUI>().text = "Press 'E' to Close";
                 doorCollider.enabled = false;
             }
             else if (doorState == DoorState.Closed || gotKey)
             {
-                txtToDisplay.GetComponent<Text>().text = "Press 'E' to Open";
+                txtToDisplay.GetComponent<TextMeshProUGUI>().text = "Press 'E' to Open";
                 doorCollider.enabled = true;
             }
             else if (doorState == DoorState.Jammed)
             {
-                txtToDisplay.GetComponent<Text>().text = "Needs Key";
+                txtToDisplay.GetComponent<TextMeshProUGUI>().text = "Needs Key";
                 doorCollider.enabled = true;
             }
         }
-
         if (Input.GetKeyDown(KeyCode.E) && playerInZone)
+        {
+            doorOpened = !doorOpened;           //The toggle function of door to open/close
+
+            if (doorState == DoorState.Closed && !doorAnim.isPlaying)
+            {
+                if (!keyNeeded)
+                {
+                    doorAnim.Play("Door_Open");
+                    doorState = DoorState.Opened;
+                }
+                else if (keyNeeded && !gotKey)
+                {
+                    if (doorAnim.GetClip("Door_Jam") != null)
+                        doorAnim.Play("Door_Jam");
+                    doorState = DoorState.Jammed;
+                }
+            }
+
+            if (doorState == DoorState.Closed && gotKey && !doorAnim.isPlaying)
+            {
+                doorAnim.Play("Door_Open");
+                doorState = DoorState.Opened;
+            }
+
+            if (doorState == DoorState.Opened && !doorAnim.isPlaying)
+            {
+                doorAnim.Play("Door_Close");
+                doorState = DoorState.Closed;
+            }
+
+            if (doorState == DoorState.Jammed && !gotKey)
+            {
+                if (doorAnim.GetClip("Door_Jam") != null)
+                    doorAnim.Play("Door_Jam");
+                doorState = DoorState.Jammed;
+            }
+            else if (doorState == DoorState.Jammed && gotKey && !doorAnim.isPlaying)
+            {
+                doorAnim.Play("Door_Open");
+                doorState = DoorState.Opened;
+            }
+        }
+
+        
+    }
+
+    public void ToggleDoor()
+    {
+        Debug.Log("Here " + gotKey + " " + keyNeeded + " " + playerInZone);
+        if (playerInZone)
         {
             doorOpened = !doorOpened;           //The toggle function of door to open/close
 

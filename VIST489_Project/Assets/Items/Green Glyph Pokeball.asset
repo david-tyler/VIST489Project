@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78e1309e8094b47a584af73302e29f94, type: 3}
-  m_Name: Cylinder Item
+  m_Script: {fileID: 11500000, guid: 72baaafba16614ac3b9a2695139f2657, type: 3}
+  m_Name: Green Glyph Pokeball
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 014aff0191173492b81e067dce704c7b, type: 3}
-  name: Cylinder Item
+  image: {fileID: 21300000, guid: a49fad98e94a54084b7607d1ae22520e, type: 3}
+  name: Green Glyph Pokeball

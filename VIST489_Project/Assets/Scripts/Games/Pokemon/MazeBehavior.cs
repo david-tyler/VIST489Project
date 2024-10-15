@@ -1,9 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MazeBehavior : MonoBehaviour
 {
+    #region Singleton
+    public static MazeBehavior instance;
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one reference of MazeBehavior!");
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion
     public Material goodSquare;
     public Material badSquare;
     public Material PlatformOriginalMat;
@@ -20,7 +34,8 @@ public class MazeBehavior : MonoBehaviour
     // ******* PopUp Boxes
     // --------------------------------------
     PopUpSystem popUp;
-    
+    PokemonWorld pokeWorld;
+
     public string WrongSquareMessage = "Oh no! Looks like you stepped on the wrong platform. " +
         "You have to scan the key and start over again.";
     public string RanOutOfTimeMessage = "You ran out of time. Try scanning the key again to start over.";
@@ -38,6 +53,9 @@ public class MazeBehavior : MonoBehaviour
     GameSystemBehavior GameSystem;
     ParaLensesButtonBehavior paraLenses;
 
+    public AudioSource goodSquareSound;
+    public AudioSource badSquareSound;
+
     void Start()
     {
         originaltime = remainingTime;
@@ -45,7 +63,7 @@ public class MazeBehavior : MonoBehaviour
 
     void Update()
     {
-        if (startTimer == true)
+        if (startTimer == true && failed == false && won == false)
         {
             if (remainingTime > 0)
             {
@@ -81,7 +99,6 @@ public class MazeBehavior : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         string tag = other.gameObject.tag;
-        Debug.Log(tag);
         if (tag == "Maze Platform")
         {
             // if you havent failed yet can keep trying. Used so that if you hit a bad square you wont be able to keep colliding with other squares.
@@ -106,7 +123,7 @@ public class MazeBehavior : MonoBehaviour
                         {
                             startTimer = false;
                             FailedMaze("Nice Try.");
-                            ResetMaze();
+                            
                         }
 
                         return;
@@ -114,6 +131,7 @@ public class MazeBehavior : MonoBehaviour
                     }
                     else if (other.gameObject.GetComponent<Platform>().isGoal == false)
                     {
+                        goodSquareSound.Play();
                         platforms.Add(other);
                         other.transform.parent.gameObject.GetComponent<Renderer>().material = goodSquare;
                     }
@@ -122,10 +140,13 @@ public class MazeBehavior : MonoBehaviour
                 }
                 else if (other.gameObject.GetComponent<Platform>().isValidSquare == false)
                 {
+                    badSquareSound.Play();
                     platforms.Add(other);
                     other.transform.parent.gameObject.GetComponent<Renderer>().material = badSquare;
                     startTimer = false;
+                    
                     FailedMaze(WrongSquareMessage);
+                    
                 }
             }
         }
@@ -156,15 +177,20 @@ public class MazeBehavior : MonoBehaviour
         remainingTime = originaltime;
         Timer.SetActive(false);
         goodSquaresLanedCurrent = 0;
-        failed = false;
+        
 
     }
 
     public void MazeStarted()
     {
+        if (failed == true)
+        {
+            ResetMaze();
+        }
         Timer.SetActive(true);
         timerText.color = Color.black;
         startTimer = true;
+        failed = false;
     }
 
     public void WonMaze(string text)
@@ -178,11 +204,12 @@ public class MazeBehavior : MonoBehaviour
 
         startTimer = false;
         // popUp = PopUpSystem.instance;
-        
+
         // popUp.PopUp(text);
-        PokemonWorld pokeWorld = gameObject.GetComponent<PokemonWorld>();
+        pokeWorld = PokemonWorld.instance;
+
         pokeWorld.SolvedMaze();
-        
+        StartCoroutine(WaitToSetTimerFalse());
     }
 
 
@@ -195,11 +222,19 @@ public class MazeBehavior : MonoBehaviour
         GameSystem.SetMessageText(text);
 
         failed = true;
-
-        // popUp = PopUpSystem.instance;
-        
-        // popUp.PopUp(text);
+        StartCoroutine(WaitToSetTimerFalse());
 
     }
 
+    // personal preference think would be nice to have the timer still show if you fail before resetting it
+    IEnumerator WaitToSetTimerFalse()
+    {
+        yield return new WaitForSeconds(2.0f);
+        Timer.SetActive(false);
+    }
+    public bool getFailed()
+    {
+        return failed;
+
+    }
 }

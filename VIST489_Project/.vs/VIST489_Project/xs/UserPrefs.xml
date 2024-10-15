@@ -1,30 +1,20 @@
 ﻿<Properties StartupConfiguration="{477800F3-A468-B5E3-B06B-3FD3A2A0C21E}|">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="b65cad4b-9fb5-487f-9216-f5740e29bb56" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameSystemBehavior.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/tes.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameSystemBehavior.cs" Line="479" Column="13" />
-      <File FileName="Assets/Scripts/ParaLensesButtonBehavior.cs" Line="45" Column="10" />
+      <File FileName="Assets/Scripts/Trigger Zones.cs" />
+      <File FileName="Assets/Scripts/tes.cs" Line="10" Column="9" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="VIST489_Project" expanded="True">
+          <Node name="VIST489_Project">
             <Node name="Assets" expanded="True">
-              <Node name="3rd Party" expanded="True">
-                <Node name="Apartment_Door" expanded="True">
-                  <Node name="Scripts" expanded="True" />
-                </Node>
-              </Node>
               <Node name="Scripts" expanded="True">
                 <Node name="Games" expanded="True">
                   <Node name="Pokemon" expanded="True" />
                 </Node>
-                <Node name="Interactables" expanded="True" />
-                <Node name="Inventory" expanded="True" />
                 <Node name="Items" expanded="True" />
+                <Node name="tes.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -32,7 +22,12 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-Editor PreferredExecutionTarget="cdcdcc49-3912-44e6-b471-2c7822a07b07" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="9f305b39-e8a1-4516-859a-e80a17e29782" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

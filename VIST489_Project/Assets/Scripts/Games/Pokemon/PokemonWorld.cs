@@ -7,9 +7,26 @@ using static System.Net.Mime.MediaTypeNames;
 
 public class PokemonWorld : MonoBehaviour
 {
-    public GameObject key;
+    #region Singleton
+    public static PokemonWorld instance;
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one reference of PokemonWorld!");
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion
+
     public GameObject entireMaze;
     private bool canGetKey = false;
+    private bool unlockedDoor = false;
+    private bool pickedUpKey = false;
+
+
 
     // ******* PopUp Boxes
     // --------------------------------------
@@ -23,6 +40,8 @@ public class PokemonWorld : MonoBehaviour
     GameSystemBehavior GameSystem;
     ParaLensesButtonBehavior paraLenses;
     PopUpSystem popUp;
+    MazeBehavior mazeScript;
+
     // --------------------------------------
 
     private int count = 0; // Used to limit in update how many times the pop up is called if we tap on an object that has a pop up box appear after
@@ -35,7 +54,6 @@ public class PokemonWorld : MonoBehaviour
     
     public void SolvedMaze()
     {
-        key.SetActive(true);
         canGetKey = true;
 
     }
@@ -47,15 +65,15 @@ public class PokemonWorld : MonoBehaviour
 
     public void CannotPickUpKey()
     {
-        if (count == 1)
+        GameSystem = GameSystemBehavior.instance;
+        paraLenses = ParaLensesButtonBehavior.instance;
+        mazeScript = MazeBehavior.instance;
+
+        
+        if (count == 0 || mazeScript.getFailed() == true)
         {
-            PopUpBoxButton.onClick.RemoveListener(SetCountForPopUpKey);
-            return;
-        }
-        else if (count == 0)
-        {
-            GameSystem = GameSystemBehavior.instance;
-            paraLenses = ParaLensesButtonBehavior.instance;
+            count = 0;
+            
 
             GameSystem.SetHaveMessage(true);
             GameSystem.SetMessageText(NeedToCompleteMazeText);
@@ -64,17 +82,32 @@ public class PokemonWorld : MonoBehaviour
             // popUp.PopUp(NeedToCompleteMazeText);
             
             entireMaze.SetActive(true);
+            mazeScript.MazeStarted();
             count += 1;
-            PopUpBoxButton.onClick.AddListener(SetCountForPopUpKey);
+            //PopUpBoxButton.onClick.AddListener(SetCountForPopUpKey);
         }
         
     }
     
 
-    // so you dont spam the popup if you keep clicking buttons on top of the key
-    public void  SetCountForPopUpKey()
+    public void SetUnlockedDoor(bool status)
     {
-        count = 0;
+        unlockedDoor = status;
     }
 
+    public bool GetUnlockedDoor()
+    {
+        return unlockedDoor;
+    }
+
+    public void SetPickedUpKey(bool status)
+    {
+        pickedUpKey = status;
+    }
+
+    // Check if we have the key or not
+    public bool GetPickedUpKey()
+    {
+        return pickedUpKey;
+    }
 }
