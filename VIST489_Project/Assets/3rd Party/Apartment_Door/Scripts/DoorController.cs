@@ -27,6 +27,8 @@ public class DoorController : MonoBehaviour
     private bool playerInZone;                  //Check if the player is in the zone
     private bool doorOpened;                    //Check if door is currently opened or not
 
+    private bool firstTimeEnteringDoor = true;
+
     private Animation doorAnim;
     private BoxCollider doorCollider;           //To enable the player to go through the door if door is opened else block him
 
@@ -36,6 +38,8 @@ public class DoorController : MonoBehaviour
     PokemonWorld pokeWorld;
     GameSystemBehavior gameSystem;
     ParaLensesButtonBehavior paraLensesScript;
+    public GameObject gate;
+
     public string FindKeyTextForDoor = "He's right the door is locked, we need to find the key. Look inside your book you should have a map of the building. Use that to guide you";
     public string UseKeyTextForDoor = "Great we have the key now. Try tapping the key in your inventory to unlock or lock the door.";
 
@@ -87,7 +91,11 @@ public class DoorController : MonoBehaviour
             {
                 gameSystem.SetHaveMessage(true);
                 gameSystem.SetMessageText(FindKeyTextForDoor);
-                
+                if(firstTimeEnteringDoor == true)
+                {
+                    firstTimeEnteringDoor = false;
+                    gate.SetActive(true);
+                }
                     
             }
         }
@@ -96,7 +104,7 @@ public class DoorController : MonoBehaviour
             if (gameSystem.GetEnteredPokemonWorld() == true && paraLensesScript.getIsParaLensesOn() && pokeWorld.GetUnlockedDoor() == false)
             {
                 gameSystem.SetHaveMessage(true);
-                gameSystem.SetMessageText(FindKeyTextForDoor);
+                gameSystem.SetMessageText(UseKeyTextForDoor);
                     
             }
         }
@@ -115,12 +123,12 @@ public class DoorController : MonoBehaviour
         {
             if (doorState == DoorState.Opened)
             {
-                txtToDisplay.GetComponent<TextMeshProUGUI>().text = "Press 'E' to Close";
+                //txtToDisplay.GetComponent<TextMeshProUGUI>().text = "Press 'E' to Close";
                 doorCollider.enabled = false;
             }
             else if (doorState == DoorState.Closed || gotKey)
             {
-                txtToDisplay.GetComponent<TextMeshProUGUI>().text = "Press 'E' to Open";
+                //txtToDisplay.GetComponent<TextMeshProUGUI>().text = "Press 'E' to Open";
                 doorCollider.enabled = true;
             }
             else if (doorState == DoorState.Jammed)
@@ -178,7 +186,7 @@ public class DoorController : MonoBehaviour
 
     public void ToggleDoor()
     {
-        Debug.Log("Here " + gotKey + " " + keyNeeded + " " + playerInZone);
+        
         if (playerInZone)
         {
             doorOpened = !doorOpened;           //The toggle function of door to open/close

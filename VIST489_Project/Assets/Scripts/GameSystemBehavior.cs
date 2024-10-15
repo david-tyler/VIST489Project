@@ -105,6 +105,8 @@ public class GameSystemBehavior : MonoBehaviour
     */
     private int PreviousWorldsCompleted = 0;
 
+    // All of the game objects we want to not be active once we start the game so like puzzles etc.
+    public List<GameObject> gameObjectsNotActive = new List<GameObject>();
 
     ParaLensesButtonBehavior paraLensesScript;
     void Start()
@@ -117,6 +119,11 @@ public class GameSystemBehavior : MonoBehaviour
         paraLensesScript.ActiveGameObjects.Add(ImageTargetEnterZeldaWorld);
         paraLensesScript.ActiveGameObjects.Add(ImageTargetEnterZeldaWorld);
         paraLensesScript.ActiveGameObjects.Add(InventoryButtonGameObject);
+
+        foreach (GameObject item in gameObjectsNotActive)
+        {
+            item.SetActive(false);
+        }
         
     }
 
@@ -474,8 +481,6 @@ public class GameSystemBehavior : MonoBehaviour
 
 
         paraLensesScript.ActiveGameObjects.Add(PokemonWorld);
-        paraLensesScript.ActiveGameObjects.Add(PokemonWorldButtonGameObject);
-        paraLensesScript.ActiveGameObjects.Add(LeavePokemonWorldButtonGameObject);
 
         PokemonWorld.SetActive(true);
         

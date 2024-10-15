@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
+using Vuforia;
 using static System.Net.Mime.MediaTypeNames;
 
 
@@ -25,33 +28,143 @@ public class PokemonWorld : MonoBehaviour
     private bool canGetKey = false;
     private bool unlockedDoor = false;
     private bool pickedUpKey = false;
+    private bool firstTimeUnlockingDoor = true;
 
 
-
-    // ******* PopUp Boxes
-    // --------------------------------------
-    public GameObject PopUpBox;
-    public Animator PopUpBoxAnimator;
-    public TMPro.TextMeshProUGUI PopUpBoxText;
-    public Button PopUpBoxButton;
     public string NeedToCompleteMazeText = "It seems we can't get the key, but look there! On the ground to your left, there seems to be a maze. Maybe you need to complete it to obtain the key.";
     public string YouNeedToFindTheKeyText = "This door seems to be locked in the pokemon world. The key should be somewhere on this floor! Perhaps the book has more clues?";
+    public string MoveLikeCharizardLine = "We can't fly like Charizard, better jump to those platforms";
 
-    GameSystemBehavior GameSystem;
+    public List<GameObject> objectsToSetActiveAfterDoor = new List<GameObject>();
+    public GameObject charizard;
+    public GameObject targetCharizardPlatform1;
+    public Camera mainCamera;
+    
+
+    // Script instances
+    GameSystemBehavior gameSystem;
     ParaLensesButtonBehavior paraLenses;
     PopUpSystem popUp;
     MazeBehavior mazeScript;
 
-    // --------------------------------------
-
     private int count = 0; // Used to limit in update how many times the pop up is called if we tap on an object that has a pop up box appear after
     // Start is called before the first frame update
-    void Start()
+
+    public float duration = 5.0f;
+    public Animator CharizardAnim;
+
+    // Make sure the player is across the pit and in range to tap charizard
+    private bool canTapCharizard = false;
+
+
+    private void Update()
     {
         
+        // *******Touch Interactions
+        // --------------------------------------
+        // Check if there is at least one touch.
+        if (Input.touchCount > 0)
+        {
+            // Debug.Log("TOUCHING SCREEN");
+            Touch touch = Input.GetTouch(0);
+
+            // Check if the touch is just beginning.
+            if (touch.phase == TouchPhase.Began)
+            {
+                // Debug.Log("TOUCHING Begin");
+
+                // Create a ray from the screen point where the touch occurred.
+                Ray ray = mainCamera.ScreenPointToRay(touch.position);
+
+                // Variable to store the hit information.
+                RaycastHit hit;
+
+                // Perform the raycast.
+                if (Physics.Raycast(ray, out hit))
+                {
+                   hit.collider.gameObject.SendMessage("OnTap", SendMessageOptions.DontRequireReceiver);
+                   if (hit.collider.gameObject.tag == "Charizard")
+                   {
+                        if (canTapCharizard)
+                        {
+                            StartCoroutine(MoveCharizard());
+                        }
+                        
+                   }
+
+                }
+                
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    // Try to find the IRaycastHitHandler interface on the hit object
+                    IRaycastHitHandler hitHandler = hit.collider.GetComponent<IRaycastHitHandler>();
+
+                    // If the object has the interface, fire the event
+                    if (hitHandler != null)
+                    {
+                        hitHandler.OnRaycastHit();
+                    }
+                }
+            }
+        }
+        else if (Input.GetMouseButtonDown(0)) // 0 is for left-click
+        {
+
+            // Create a ray from the screen point where the touch occurred.
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+            // Variable to store the hit information.
+            RaycastHit hit;
+
+            // Perform the raycast.
+            if (Physics.Raycast(ray, out hit))
+            {
+                hit.collider.gameObject.SendMessage("OnTap", SendMessageOptions.DontRequireReceiver);
+
+                if (hit.collider.gameObject.tag == "Charizard")
+                {
+                    if (canTapCharizard)
+                    {
+                        StartCoroutine(MoveCharizard());
+                    }
+
+                }
+            }
+
+        }
+
     }
 
-    
+    public IEnumerator MoveCharizard()
+    {
+        float elapsedTime = 0f;
+
+        Vector3 startPosition = charizard.transform.position;
+
+        Debug.Log("falling");
+
+        while (elapsedTime < duration)
+        {
+            // Calculate how far along the duration we are
+            elapsedTime += Time.deltaTime;
+
+            // Interpolate between start and target positions
+            charizard.transform.position = Vector3.Lerp(startPosition, targetCharizardPlatform1.transform.position, elapsedTime / duration);
+            Debug.Log(Vector3.Lerp(startPosition, targetCharizardPlatform1.transform.position, elapsedTime / duration));
+            // Wait for the next frame before continuing
+            yield return new WaitForEndOfFrame();
+        }
+
+        // Ensure the object is exactly at the target position at the end
+        transform.position = targetCharizardPlatform1.transform.position;
+        yield return new WaitForSeconds(1.0f);
+
+        gameSystem = GameSystemBehavior.instance;
+        gameSystem.SetHaveMessage(true);
+        gameSystem.SetMessageText(MoveLikeCharizardLine);
+    }
+
     public void SolvedMaze()
     {
         canGetKey = true;
@@ -65,7 +178,7 @@ public class PokemonWorld : MonoBehaviour
 
     public void CannotPickUpKey()
     {
-        GameSystem = GameSystemBehavior.instance;
+        gameSystem = GameSystemBehavior.instance;
         paraLenses = ParaLensesButtonBehavior.instance;
         mazeScript = MazeBehavior.instance;
 
@@ -75,8 +188,8 @@ public class PokemonWorld : MonoBehaviour
             count = 0;
             
 
-            GameSystem.SetHaveMessage(true);
-            GameSystem.SetMessageText(NeedToCompleteMazeText);
+            gameSystem.SetHaveMessage(true);
+            gameSystem.SetMessageText(NeedToCompleteMazeText);
             // popUp = PopUpSystem.instance;
 
             // popUp.PopUp(NeedToCompleteMazeText);
@@ -93,6 +206,15 @@ public class PokemonWorld : MonoBehaviour
     public void SetUnlockedDoor(bool status)
     {
         unlockedDoor = status;
+        if (status == true && firstTimeUnlockingDoor == true)
+        {
+            firstTimeUnlockingDoor = false;
+
+            foreach (GameObject item in objectsToSetActiveAfterDoor)
+            {
+                item.SetActive(true);
+            }
+        }
     }
 
     public bool GetUnlockedDoor()
@@ -109,5 +231,15 @@ public class PokemonWorld : MonoBehaviour
     public bool GetPickedUpKey()
     {
         return pickedUpKey;
+    }
+
+    public void SetCanTapCharizard(bool status)
+    {
+        canTapCharizard = status;
+    }
+
+    public bool GetCanTapCharizard()
+    {
+        return canTapCharizard;
     }
 }

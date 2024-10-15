@@ -8,12 +8,17 @@ public class SpawnMaze : MonoBehaviour
     public Transform environmentPivot;
     public Vector3 offset;
 
+    GameSystemBehavior gameSystem;
+    public string klefkiEndHallway = "If you go back out to the hallway, a Klefki randomly spawned there. Maybe that's a clue, try looking in your book.";
     public void SpawnObjects()
     {
         for(int i = 0; i < objectsToSpawn.Count; i++)
         {
             objectsToSpawn[i].SetActive(true);
         }
+
+        gameSystem.SetHaveMessage(true);
+        gameSystem.SetMessageText(klefkiEndHallway);
     }
 
     public void MoveEnvironmentToMatch()

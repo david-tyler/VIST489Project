@@ -12,7 +12,11 @@ public class ItemPickup : Interactable
 
     PokemonWorld pokeWorld;
     DoorController doorScript;
+
+    GameSystemBehavior gameSystem;
     public AudioSource ItemPickupSound;
+
+    public string TryOpeningDoor = "Great you got the key! You should be able to unlock that door now to free Ash.";
 
     public override void Interact()
     {
@@ -26,7 +30,8 @@ public class ItemPickup : Interactable
     {
 
         pokeWorld = PokemonWorld.instance;
-        
+        gameSystem = GameSystemBehavior.instance;
+
         Debug.Log("Picking Up " + item.name);
 
         bool completedPickUp = Inventory.instance.Add(item);
@@ -40,6 +45,9 @@ public class ItemPickup : Interactable
                 pokeWorld.SetPickedUpKey(true);
                 doorScript = DoorController.instance;
                 doorScript.gotKey = true;
+
+                gameSystem.SetHaveMessage(true);
+                gameSystem.SetMessageText(TryOpeningDoor);
             }
 
             // store the model for later if we want to spawn it again;

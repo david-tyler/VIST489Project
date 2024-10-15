@@ -7,6 +7,10 @@ TagManager:
   - GameManager
   - Ash Trigger Zone
   - Maze Platform
+  - Gate Trigger Zone
+  - Glyph Trigger Zone
+  - Charizard
+  - Charizard Zone
   layers:
   - Default
   - TransparentFX

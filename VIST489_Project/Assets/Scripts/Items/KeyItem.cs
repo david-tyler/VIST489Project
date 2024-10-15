@@ -6,11 +6,20 @@ using UnityEngine;
 public class KeyItem : Item
 {
     DoorController doorScript;
+    PokemonWorld pokeWorld;
+
     public override void Use()
     {
         base.Use();
+
         doorScript = DoorController.instance;
+        pokeWorld = PokemonWorld.instance;
+
         doorScript.ToggleDoor();
+
+        pokeWorld.SetUnlockedDoor(true);
+
+
 
 
     }
