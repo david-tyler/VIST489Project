@@ -264,14 +264,14 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: Ghost
+  mTrackableName: Klefki
   mInitializedInEditor: 1
   mDataSetPath: 
-  mAspectRatio: 1.25
+  mAspectRatio: 0.6479724
   mImageTargetType: 3
-  mWidth: 0.16
-  mHeight: 0.19999999
-  mRuntimeTexture: {fileID: 2800000, guid: 2eae58d532ba4874b83133676cb499b8, type: 3}
+  mWidth: 0.19999999
+  mHeight: 0.12959448
+  mRuntimeTexture: {fileID: 2800000, guid: 0b24b31445d4355478773026473f6a91, type: 3}
   mMotionHint: 1
   mTrackingOptimization: 0
   mTrackingOptimizationNeedsUpgrade: 0
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mObserverBehaviour: {fileID: 6925849}
   mHiddenRoot: {fileID: 0}
-  mTargetName: Ghost
+  mTargetName: Klefki
   mDatasetName: 
   mCastedBehaviour: {fileID: 6925849}
   mMeshFilter: {fileID: 0}
@@ -5704,6 +5704,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 899465661}
+        m_TargetAssemblyTypeName: SpawnMaze, Assembly-CSharp
+        m_MethodName: MoveEnvironmentToMatch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnTargetLost:
     m_PersistentCalls:
       m_Calls: []
@@ -5722,14 +5734,14 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: Exit
+  mTrackableName: SmallExit
   mInitializedInEditor: 1
   mDataSetPath: 
-  mAspectRatio: 0.75
+  mAspectRatio: 0.62744135
   mImageTargetType: 3
-  mWidth: 0.2
-  mHeight: 0.15
-  mRuntimeTexture: {fileID: 2800000, guid: 484334eed6f0e9c45bc76d6c83c5eeb4, type: 3}
+  mWidth: 0.19999999
+  mHeight: 0.12548827
+  mRuntimeTexture: {fileID: 2800000, guid: b2ec00a47224cb34389c4f70cabd7723, type: 3}
   mMotionHint: 1
   mTrackingOptimization: 0
   mTrackingOptimizationNeedsUpgrade: 0
@@ -5776,7 +5788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mObserverBehaviour: {fileID: 899465660}
   mHiddenRoot: {fileID: 0}
-  mTargetName: Exit
+  mTargetName: SmallExit
   mDatasetName: 
   mCastedBehaviour: {fileID: 899465660}
   mMeshFilter: {fileID: 0}

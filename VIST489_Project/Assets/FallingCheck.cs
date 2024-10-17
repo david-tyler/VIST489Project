@@ -8,25 +8,34 @@ public class FallingCheck : MonoBehaviour
     public GameObject pit;
     public Transform fallPosition;
     public float duration = 2.0f;
+    public bool onStep = false;
+    public float stepTimer = 2.0f;
+    public float resetValue = 2.0f;
+    public bool touchingPit = false;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Update()
     {
-        
+        if(touchingPit)
+        {
+            stepTimer -= Time.deltaTime;
+
+            if(stepTimer <= 0)
+            {
+                StartCoroutine(FallIntoPit());
+                stepTimer = 10000f;
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         Debug.Log("pit triggered");
         Debug.Log(other.gameObject.name);
         if(other.gameObject.name == "Player")
         {
+            touchingPit = true;
+            
+            /*
             Debug.Log("Player Detected");
             if (stepHit == false)
             {
@@ -38,7 +47,13 @@ public class FallingCheck : MonoBehaviour
             {
                 //Do Nothing
             }
+            */
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        touchingPit = false;
     }
 
     public IEnumerator FallIntoPit()
