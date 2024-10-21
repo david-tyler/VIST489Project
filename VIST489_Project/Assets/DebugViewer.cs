@@ -47,16 +47,13 @@ public class DebugViewer : MonoBehaviour
                 UIToToggle[i].SetActive(false);
             }
 
-            debugOn = false;
         }
         else
         {
-            for (int i = 0; i < modelsToToggle.Count; i++)
+            for (int i = 0; i < UIToToggle.Count; i++)
             {
                 UIToToggle[i].SetActive(true);
             }
-
-            debugOn = true;
         }
     }
 }

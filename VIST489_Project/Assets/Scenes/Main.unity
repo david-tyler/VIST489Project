@@ -1438,9 +1438,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DebugViewer, Assembly-CSharp
-        m_MethodName: ToggleModels
+      - m_Target: {fileID: 132246940}
+        m_TargetAssemblyTypeName: DebugCameraMove, Assembly-CSharp
+        m_MethodName: DebugMove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9635,6 +9635,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1640518128}
         m_TargetAssemblyTypeName: DebugViewer, Assembly-CSharp
+        m_MethodName: ToggleUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1640518128}
+        m_TargetAssemblyTypeName: DebugViewer, Assembly-CSharp
         m_MethodName: ToggleModels
         m_Mode: 1
         m_Arguments:
@@ -10773,9 +10785,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DebugViewer, Assembly-CSharp
-        m_MethodName: ToggleModels
+      - m_Target: {fileID: 1765791654}
+        m_TargetAssemblyTypeName: DebugCameraMove, Assembly-CSharp
+        m_MethodName: DebugMove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11011,9 +11023,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DebugViewer, Assembly-CSharp
-        m_MethodName: ToggleModels
+      - m_Target: {fileID: 1789316932}
+        m_TargetAssemblyTypeName: DebugCameraMove, Assembly-CSharp
+        m_MethodName: DebugMove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
