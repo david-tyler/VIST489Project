@@ -38,6 +38,7 @@ public class PokemonWorld : MonoBehaviour
     public List<GameObject> objectsToSetActiveAfterDoor = new List<GameObject>();
     public GameObject charizard;
     public GameObject targetCharizardPlatform1;
+    public GameObject targetCharizardPlatform2;
     public Camera mainCamera;
     public GameObject pit;
     
@@ -91,7 +92,7 @@ public class PokemonWorld : MonoBehaviour
                         {
 
                             pit.SetActive(true);
-                            StartCoroutine(MoveCharizard());
+                            StartCoroutine(MoveCharizard(targetCharizardPlatform1));
                             
                         }
                         
@@ -133,7 +134,7 @@ public class PokemonWorld : MonoBehaviour
                     if (canTapCharizard)
                     {
                         pit.SetActive(true);
-                        StartCoroutine(MoveCharizard());
+                        StartCoroutine(MoveCharizard(targetCharizardPlatform1));
                     }
 
                 }
@@ -143,7 +144,7 @@ public class PokemonWorld : MonoBehaviour
 
     }
 
-    public IEnumerator MoveCharizard()
+    public IEnumerator MoveCharizard(GameObject targetPlatform)
     {
         float elapsedTime = 0f;
 
@@ -158,14 +159,14 @@ public class PokemonWorld : MonoBehaviour
             elapsedTime += Time.deltaTime;
 
             // Interpolate between start and target positions
-            charizard.transform.position = Vector3.Lerp(startPosition, targetCharizardPlatform1.transform.position, elapsedTime / duration);
-            Debug.Log(Vector3.Lerp(startPosition, targetCharizardPlatform1.transform.position, elapsedTime / duration));
+            charizard.transform.position = Vector3.Lerp(startPosition, targetPlatform.transform.position, elapsedTime / duration);
+            Debug.Log(Vector3.Lerp(startPosition, targetPlatform.transform.position, elapsedTime / duration));
             // Wait for the next frame before continuing
             yield return new WaitForEndOfFrame();
         }
 
         // Ensure the object is exactly at the target position at the end
-        transform.position = targetCharizardPlatform1.transform.position;
+        transform.position = targetPlatform.transform.position;
         yield return new WaitForSeconds(1.0f);
 
         gameSystem = GameSystemBehavior.instance;
