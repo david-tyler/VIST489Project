@@ -391,7 +391,7 @@ MonoBehaviour:
   RuntimeCollider: 0
   mTrackableName: 
   mInitializedInEditor: 0
-  mSelectedStageType: 0
+  mSelectedStageType: 1
   mPlaneReference: {fileID: 0}
   mMidAirReference: {fileID: 0}
   mPreview: {fileID: 457399483}
@@ -834,7 +834,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1188137708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1068,7 +1068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1915002494
 MonoBehaviour:
   m_ObjectHideFlags: 0
