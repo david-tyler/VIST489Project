@@ -23,15 +23,11 @@ public class SpawnMaze : MonoBehaviour
 
     public void MoveEnvironmentToMatch()
     {
-        StartCoroutine(Fade());
+        StartCoroutine(WaitToCalibrate());
     }
-
-
-    public IEnumerator Fade()
+    public IEnumerator WaitToCalibrate()
     {
         yield return new WaitForSeconds(1.0f);
         environmentPivot.position = this.transform.position;
-
-
     }
 }

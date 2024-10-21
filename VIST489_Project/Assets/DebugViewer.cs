@@ -5,6 +5,7 @@ using UnityEngine;
 public class DebugViewer : MonoBehaviour
 {
     public List<Renderer> modelsToToggle = new List<Renderer>();
+    public List<GameObject> UIToToggle = new List<GameObject>();
     public bool debugOn = false;
 
     private void Start()
@@ -34,6 +35,25 @@ public class DebugViewer : MonoBehaviour
             }
 
             debugOn = true;
+        }
+    }
+
+    public void ToggleUI()
+    {
+        if (debugOn == true)
+        {
+            for (int i = 0; i < UIToToggle.Count; i++)
+            {
+                UIToToggle[i].SetActive(false);
+            }
+
+        }
+        else
+        {
+            for (int i = 0; i < UIToToggle.Count; i++)
+            {
+                UIToToggle[i].SetActive(true);
+            }
         }
     }
 }
