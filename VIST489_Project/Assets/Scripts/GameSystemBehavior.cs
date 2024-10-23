@@ -38,7 +38,7 @@ public class GameSystemBehavior : MonoBehaviour
 
     // ******* PopUp Boxes
     // --------------------------------------
-    PopUpSystem popUp;
+    private PopUpSystem popUp;
     public GameObject PopUpBox; // Our dialogue box
     public Animator PopUpBoxAnimator;
     public TMPro.TextMeshProUGUI PopUpBoxText;
@@ -66,6 +66,8 @@ public class GameSystemBehavior : MonoBehaviour
     public Button PokemonWorldButton;
     public Button LeavePokemonWorldButton;
     public GameObject MessageButton;
+    public GameObject SkipButtonGameObject;
+    private Button SkipButton;
     // --------------------------------------
 
 
@@ -86,6 +88,8 @@ public class GameSystemBehavior : MonoBehaviour
 
     private bool AreWeInAWorld = false;
     private bool haveMessage = false;
+    private bool pressedSkip = false;
+    private bool foundGateway = false;
     // --------------------------------------
 
 
@@ -108,7 +112,7 @@ public class GameSystemBehavior : MonoBehaviour
     // All of the game objects we want to not be active once we start the game so like puzzles etc.
     public List<GameObject> gameObjectsNotActive = new List<GameObject>();
 
-    ParaLensesButtonBehavior paraLensesScript;
+    private ParaLensesButtonBehavior paraLensesScript;
     void Start()
     {
         paraLensesScript = ParaLensesButtonBehavior.instance;
@@ -124,7 +128,9 @@ public class GameSystemBehavior : MonoBehaviour
         {
             item.SetActive(false);
         }
+        SkipButton = SkipButtonGameObject.GetComponent<Button>();
         
+
     }
 
     void Update()
@@ -385,7 +391,6 @@ public class GameSystemBehavior : MonoBehaviour
 
         newFocus.OnFocused(mainCamera.transform);
     }
-
     void RemoveFocus ()
     {
         if (focus != null)
@@ -400,48 +405,65 @@ public class GameSystemBehavior : MonoBehaviour
     {
         paraLensesScript = ParaLensesButtonBehavior.instance;
         bool isParaLensesOn = paraLensesScript.getIsParaLensesOn();
+
         // With this functionality the Find A Gateway voice line only plays if we enable the paranormal lenses
-        if (isParaLensesOn == true)
+
+        AudioSource currentAudio = null;
+        if (isParaLensesOn == true && AreWeInAWorld == false)
         {
-            if (AreWeInAWorld == false)
+            
+            if ( FindAGatewayAudio.isPlaying == false && foundGateway == true )
             {
-                if (PreviousWorldsCompleted == 0)
-                {
-                    if (
-                        TapOnIt.isPlaying == false
-                        && ThatBook.isPlaying == false
-                        )
-                    {
-                        FindAGatewayAudio.Play();
-                    }
+                currentAudio = ThatBook;
+                ThatBook.Play();
+            }
+            else
+            {
+                currentAudio = FindAGatewayAudio;
+                FindAGatewayAudio.Play();
+            
+            }
+                
 
-
-                    if (
-                        FindAGatewayAudio.isPlaying == false
-                        && ThatBook.isPlaying == false
-                        )
-                    {
-                        TapOnIt.Play();
-                    }
-
-                    if (
-                        FindAGatewayAudio.isPlaying == false
-                        && TapOnIt.isPlaying == false
-                        )
-                    {
-                        ThatBook.Play();
-                    }
-                }
+            if(currentAudio != null)
+            {
+                StartCoroutine(PlayingAudio(currentAudio));
                 
             }
             
+            
         }
-
-        
         
     }
 
-   
+    // Handles playing an audio and enabling the skip button
+    IEnumerator PlayingAudio(AudioSource currentAudio)
+    {
+            currentAudio.Play();
+
+            SkipButtonGameObject.SetActive(true);
+            SkipButton.onClick.AddListener(SkipButtonListener);
+            
+            // Wait for the duration of the audio or until skipped
+            float elapsedTime = 0f;
+            float audioLength = currentAudio.clip.length;
+
+            // Instead of waiting the entire duration at once, check every frame if the skip button was pressed
+            while (elapsedTime < audioLength && pressedSkip == false)
+            {
+                yield return null;  // Wait for the next frame
+                elapsedTime += Time.deltaTime;
+            }
+            
+            if (pressedSkip == true)
+            {
+                SkipButtonInteraction(currentAudio);
+            }
+            pressedSkip = false;
+
+            SkipButton.onClick.RemoveListener(SkipButtonListener);
+            SkipButtonGameObject.SetActive(false);
+    }
 
 
     public void BeginGame()
@@ -457,18 +479,39 @@ public class GameSystemBehavior : MonoBehaviour
 
         }
 
-        
-
-        
     }
+
     IEnumerator SetUpIntroduction()
     {
-        // turn on the paranormal lenses
-        
-        
-        yield return new WaitForSeconds(2);
         introAudio.Play();
-        yield return new WaitForSeconds(introAudio.clip.length);
+
+        SkipButtonGameObject.SetActive(true);
+        SkipButton.onClick.AddListener(SkipButtonListener);
+        
+         // Wait for the duration of the audio or until skipped
+        float elapsedTime = 0f;
+        float audioLength = introAudio.clip.length;
+
+        // Instead of waiting the entire duration at once, check every frame if the skip button was pressed
+        while (elapsedTime < audioLength && pressedSkip == false)
+        {
+            yield return null;  // Wait for the next frame
+            elapsedTime += Time.deltaTime;
+        }
+        
+       
+        if (pressedSkip == true)
+        {
+            SkipButtonInteraction(introAudio);
+        }
+
+        SkipButton.onClick.RemoveListener(SkipButtonListener);
+        SkipButtonGameObject.SetActive(false);
+        
+
+        // reset pressedSkip for other uses with different audios
+        pressedSkip = false;
+
         ParaNormalLensesGameObject.SetActive(true);
 
         // Follow this as a guide to modify pop up boxes where you want
@@ -481,8 +524,25 @@ public class GameSystemBehavior : MonoBehaviour
         haveMessage = true;
     }
 
-    
+    public void SkipButtonInteraction(AudioSource currentAudio = null, bool inDialogueSequence = false)
+    {
+        
+        if (inDialogueSequence == true) // if we are in a dialogue sequence we want to skip the sequence
+        {
+            // skip the current dialogue sequence
+        }
+        else if (currentAudio != null) // if we are currently playing an audio we want to skip that
+        {
+            currentAudio.Stop();
+        }
+    }
 
+    public void SkipButtonListener()
+    {
+        Debug.Log("Skipped");
+        pressedSkip = true;
+       
+    }
     // Function to determine if we entered a world just setting it to true if we have so we set the behavior for the intro audio.
     public void SetEnteredPokemonWorld()
     {
@@ -551,6 +611,12 @@ public class GameSystemBehavior : MonoBehaviour
     public void SetMessageText(string text)
     {
         MessageText = text;
+    }
+
+    public void SetFoundGateway()
+    {
+        foundGateway = true;
+        PlayAudios();
     }
 
 }
