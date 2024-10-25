@@ -22,8 +22,6 @@ public class GameSystemBehavior : MonoBehaviour
     #endregion
 
     // Keep track of what interactable we have focused
-    private Interactable focus;
-  
     public GameObject ParaNormalLensesGameObject;
     public Button ParaNormalLensesButton;
     public Camera mainCamera;
@@ -38,7 +36,6 @@ public class GameSystemBehavior : MonoBehaviour
 
     // ******* PopUp Boxes
     // --------------------------------------
-    private PopUpSystem popUp;
     public GameObject PopUpBox; // Our dialogue box
     public Animator PopUpBoxAnimator;
     public TMPro.TextMeshProUGUI PopUpBoxText;
@@ -99,7 +96,6 @@ public class GameSystemBehavior : MonoBehaviour
     // --------------------------------------
     public TMPro.TextMeshProUGUI text_LeavePokemonWorldButtonGameObject;
     public TMPro.TextMeshProUGUI text_PokemonWorldButtonGameObject;
-    
     // --------------------------------------
 
     /* Variable for functionality to enable or disable certain worlds only if previous worlds have been completed
@@ -107,12 +103,14 @@ public class GameSystemBehavior : MonoBehaviour
      *  if PreviosWorldsCompleted == 1, we can only enter the Pokemon world and the Mario World
      *  if PreviosWorldsCompleted == 2, we can only enter the Pokemon world and the Mario World and the Zelda World
     */
-    private int PreviousWorldsCompleted = 0;
 
     // All of the game objects we want to not be active once we start the game so like puzzles etc.
     public List<GameObject> gameObjectsNotActive = new List<GameObject>();
 
     private ParaLensesButtonBehavior paraLensesScript;
+    private PopUpSystem popUp;
+    private Interactable focus;
+
     void Start()
     {
         paraLensesScript = ParaLensesButtonBehavior.instance;
@@ -128,6 +126,7 @@ public class GameSystemBehavior : MonoBehaviour
         {
             item.SetActive(false);
         }
+
         SkipButton = SkipButtonGameObject.GetComponent<Button>();
         
 
@@ -135,8 +134,6 @@ public class GameSystemBehavior : MonoBehaviour
 
     void Update()
     {
-        
-        
         // enabling and disabling interacting with the button while the audio is playing
         // Using return because i dont want the game to recognize player touch input on the screen before they have instructions
         // and accidentaly touch something they're not supposed to.
@@ -358,6 +355,7 @@ public class GameSystemBehavior : MonoBehaviour
         }
         // --------------------------------------
 
+        // handling when the message notification pops up in the game
         if (haveMessage == true)
         {
             MessageNotification.SetActive(true);
@@ -439,30 +437,27 @@ public class GameSystemBehavior : MonoBehaviour
     // Handles playing an audio and enabling the skip button
     IEnumerator PlayingAudio(AudioSource currentAudio)
     {
-            currentAudio.Play();
+        currentAudio.Play();
 
-            SkipButtonGameObject.SetActive(true);
-            SkipButton.onClick.AddListener(SkipButtonListener);
-            
-            // Wait for the duration of the audio or until skipped
-            float elapsedTime = 0f;
-            float audioLength = currentAudio.clip.length;
+        ToggleSkipButton(true);
+        
+        // Wait for the duration of the audio or until skipped
+        float elapsedTime = 0f;
+        float audioLength = currentAudio.clip.length;
 
-            // Instead of waiting the entire duration at once, check every frame if the skip button was pressed
-            while (elapsedTime < audioLength && pressedSkip == false)
-            {
-                yield return null;  // Wait for the next frame
-                elapsedTime += Time.deltaTime;
-            }
-            
-            if (pressedSkip == true)
-            {
-                SkipButtonInteraction(currentAudio);
-            }
-            pressedSkip = false;
+        // This while loop is to wait for the entire audio length to check if the player pressed skip
+        while (elapsedTime < audioLength && pressedSkip == false)
+        {
+            yield return null;  // Wait for the next frame
+            elapsedTime += Time.deltaTime;
+        }
+        
+        if (pressedSkip == true)
+        {
+            SkipButtonInteraction(currentAudio);
+        }
 
-            SkipButton.onClick.RemoveListener(SkipButtonListener);
-            SkipButtonGameObject.SetActive(false);
+        ToggleSkipButton(false);
     }
 
 
@@ -470,13 +465,10 @@ public class GameSystemBehavior : MonoBehaviour
     {
         // set this to true cause once we hit that intial ok button we have started the game
         gameStarted = true;
-        
         if (gameStarted == true)
         {
             // Fuctionality to play the intro Audio so now it doesn't constantly play
             StartCoroutine(SetUpIntroduction());
-            
-
         }
 
     }
@@ -485,8 +477,7 @@ public class GameSystemBehavior : MonoBehaviour
     {
         introAudio.Play();
 
-        SkipButtonGameObject.SetActive(true);
-        SkipButton.onClick.AddListener(SkipButtonListener);
+        ToggleSkipButton(true);
         
          // Wait for the duration of the audio or until skipped
         float elapsedTime = 0f;
@@ -505,8 +496,7 @@ public class GameSystemBehavior : MonoBehaviour
             SkipButtonInteraction(introAudio);
         }
 
-        SkipButton.onClick.RemoveListener(SkipButtonListener);
-        SkipButtonGameObject.SetActive(false);
+        ToggleSkipButton(false);
         
 
         // reset pressedSkip for other uses with different audios
@@ -530,19 +520,36 @@ public class GameSystemBehavior : MonoBehaviour
         if (inDialogueSequence == true) // if we are in a dialogue sequence we want to skip the sequence
         {
             // skip the current dialogue sequence
+            // haven't found use for this am only since the only dialogue sequence is in a coroutine
+            // and i can't call yield ... here in a void method if i call this method in a coroutine.
         }
         else if (currentAudio != null) // if we are currently playing an audio we want to skip that
         {
             currentAudio.Stop();
         }
+        pressedSkip = false;
+    }
+
+    public void ToggleSkipButton(bool activate)
+    {
+        if (activate == true)
+        {
+            SkipButtonGameObject.SetActive(true);
+            SkipButton.onClick.AddListener(SkipButtonListener);
+        }
+        else if(activate == false)
+        {
+            SkipButton.onClick.RemoveListener(SkipButtonListener);
+            SkipButtonGameObject.SetActive(false);
+            pressedSkip = false;
+        }
     }
 
     public void SkipButtonListener()
     {
-        Debug.Log("Skipped");
         pressedSkip = true;
-       
     }
+
     // Function to determine if we entered a world just setting it to true if we have so we set the behavior for the intro audio.
     public void SetEnteredPokemonWorld()
     {
@@ -590,6 +597,11 @@ public class GameSystemBehavior : MonoBehaviour
     public string GetCurrentWorld()
     {
         return CurrentWorld;
+    }
+
+    public bool getPressedSkip()
+    {
+        return pressedSkip;
     }
 
     public void DisplayMessage()

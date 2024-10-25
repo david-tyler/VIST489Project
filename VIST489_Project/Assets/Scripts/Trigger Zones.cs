@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore;
 using UnityEngine.UI;
 
 public class TriggerZones : MonoBehaviour
 {
-    public string AshTriggerZoneName = "Ash Trigger Zone";
+    private const string AshTriggerZoneName = "Ash Trigger Zone";
     public Button PopUpBoxButton;
 
     // Singleton References
@@ -48,73 +49,92 @@ public class TriggerZones : MonoBehaviour
 
         if (gameSystem.GetEnteredPokemonWorld() == true && paraLensesScript.getIsParaLensesOn())
         {
-            if ( pokeWorld.GetUnlockedDoor() == false)
+            if ( pokeWorld.GetUnlockedDoor() == false )
             {
-                Debug.Log(colliderTag);
-                if (colliderTag == AshTriggerZoneName)
+                switch (colliderTag)
                 {
-                    if (AshLinesIndex == 0)
-                    {
-                        PopUpBoxButton.onClick.AddListener(DisplayNextLines);
-                        popUp.PopUp(AshLines[AshLinesIndex]);
-                        AshLinesIndex += 1;
-                        
-                        
-                    }
-                    
-                }
-                else if (colliderTag == "Gate Trigger Zone")
-                {
-                    gameSystem.SetHaveMessage(true);
-                    gameSystem.SetMessageText(cantEnterGateLine);
-
+                    case "Ash Trigger Zone":
+                        if (AshLinesIndex == 0)
+                        {
+                            Debug.Log("Entered Ash Zone");
+                            PopUpBoxButton.onClick.AddListener(DisplayNextLines);
+                            popUp.PopUp(AshLines[AshLinesIndex]);
+                            gameSystem.ToggleSkipButton(true);
+                            
+                            AshLinesIndex += 1;
+                            StartCoroutine(WaitForPressedSkip());
+                            
+                            
+                        }
+                        break;
+                    case "Gate Trigger Zone":
+                        gameSystem.SetHaveMessage(true);
+                        gameSystem.SetMessageText(cantEnterGateLine);
+                        break;
                 }
             }
             else if ( pokeWorld.GetUnlockedDoor() == true )
             {
+                switch (colliderTag)
+                {
+                    case "Ash Trigger Zone":
+                         // New Lines for Ash once you unlock the door but haven't freed Charizard yet.
+                        AshLines.Clear();
+                        AshLinesIndex = 0;
+                        AshLine1 = "Wow! You actually managed to unlock the door! Thanks for your help.";
+                        AshLine2 = "But I can't leave without my Charizard and I have no idea where he is. Please help me find him.";
+                        AshLines.Add(AshLine1);
+                        AshLines.Add(AshLine2);
+
+                        if (AshLinesIndex == 0)
+                        {
+                            PopUpBoxButton.onClick.AddListener(DisplayNextLines);
+                            popUp.PopUp(AshLines[AshLinesIndex]);
+                            AshLinesIndex += 1;
+                        }
+                        break;
+                    case "Gate Trigger Zone":
+                        gameSystem.SetHaveMessage(true);
+                        gameSystem.SetMessageText(doTheGlyphLine);
+                        break;
+                    case "Glyph Trigger Zone":
+                        gameSystem.SetHaveMessage(true);
+                        gameSystem.SetMessageText(lookForGlyphPokeballs);
+                        break;
+                    case "Charizard Zone":
+                        pokeWorld.SetCanTapCharizard(true);
+                        break;
+                }
                 
-                if (colliderTag == AshTriggerZoneName)
-                {
-                    // New Lines for Ash once you unlock the door but haven't freed Charizard yet.
-                    AshLines.Clear();
-                    AshLinesIndex = 0;
-                    AshLine1 = "Wow! You actually managed to unlock the door! Thanks for your help.";
-                    AshLine2 = "But I can't leave without my Charizard and I have no idea where he is. Please help me find him.";
-                    AshLines.Add(AshLine1);
-                    AshLines.Add(AshLine2);
-
-                    if (AshLinesIndex == 0)
-                    {
-                        PopUpBoxButton.onClick.AddListener(DisplayNextLines);
-                        popUp.PopUp(AshLines[AshLinesIndex]);
-                        AshLinesIndex += 1;
-                        
-                        
-                    }
-                    
-                }
-                else if (colliderTag == "Gate Trigger Zone")
-                {
-                    gameSystem.SetHaveMessage(true);
-                    gameSystem.SetMessageText(doTheGlyphLine);
-
-                }
-                else if (colliderTag == "Glyph Trigger Zone")
-                {
-                    gameSystem.SetHaveMessage(true);
-                    gameSystem.SetMessageText(lookForGlyphPokeballs);
-
-                }
-                else if (colliderTag == "Charizard Zone")
-                {
-                    pokeWorld.SetCanTapCharizard(true);
-                    
-
-                }
             }
         }
         
 
+    }
+
+    IEnumerator WaitForPressedSkip()
+    {
+        gameSystem = GameSystemBehavior.instance;
+        while (AshLinesIndex <= AshLines.Count)
+        {
+            Debug.Log("Waiting To Press Skip");
+            if (gameSystem.getPressedSkip() == true)
+            {
+                PopUpBoxButton.onClick.RemoveAllListeners();
+                popUp.RemovePopUp();
+                gameSystem.ToggleSkipButton(false);
+                AshLinesIndex = 0;
+                
+
+                // skip the dialogue so break from the coroutine
+                // gameSystem.SkipButtonInteraction(null, true);
+                yield break;
+
+                
+            }
+            yield return null;
+        }
+        
     }
     private void OnTriggerExit(Collider other)
     {
@@ -129,9 +149,11 @@ public class TriggerZones : MonoBehaviour
         {
             if ( pokeWorld.GetUnlockedDoor() == true )
             {
-                if (colliderTag == "Charizard Zone")
+                switch (colliderTag)
                 {
-                    pokeWorld.SetCanTapCharizard(false);
+                    case "Charizard Zone":
+                        pokeWorld.SetCanTapCharizard(false);
+                        break;
                 }
             }
         }
@@ -143,6 +165,8 @@ public class TriggerZones : MonoBehaviour
         {
             
             PopUpBoxButton.onClick.RemoveAllListeners();
+            gameSystem.ToggleSkipButton(false);
+
             return;
         }
         else
@@ -155,7 +179,14 @@ public class TriggerZones : MonoBehaviour
 
     IEnumerator WaitBetweenLines()
     {
-        yield return new WaitForSeconds(1.5f);
+        
+        yield return new WaitForSeconds(1.0f);
+        if (AshLinesIndex == 0)
+        {
+            // if user presses skip before the next pop up appears then this ensures that next pop up won't appear
+            // bug I found when trying to press skip like this
+            yield break;
+        }
         popUp = PopUpSystem.instance;
         popUp.PopUp(AshLines[AshLinesIndex]);
         AshLinesIndex += 1;
