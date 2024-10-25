@@ -56,11 +56,9 @@ public class TriggerZones : MonoBehaviour
                     case "Ash Trigger Zone":
                         if (AshLinesIndex == 0)
                         {
-                            Debug.Log("Entered Ash Zone");
                             PopUpBoxButton.onClick.AddListener(DisplayNextLines);
                             popUp.PopUp(AshLines[AshLinesIndex]);
                             gameSystem.ToggleSkipButton(true);
-                            
                             AshLinesIndex += 1;
                             StartCoroutine(WaitForPressedSkip());
                             
@@ -91,7 +89,9 @@ public class TriggerZones : MonoBehaviour
                             PopUpBoxButton.onClick.AddListener(DisplayNextLines);
                             popUp.PopUp(AshLines[AshLinesIndex]);
                             AshLinesIndex += 1;
+                            StartCoroutine(WaitForPressedSkip());
                         }
+                       
                         break;
                     case "Gate Trigger Zone":
                         gameSystem.SetHaveMessage(true);
