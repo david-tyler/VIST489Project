@@ -20,6 +20,23 @@ public class GameSystemBehavior : MonoBehaviour
         instance = this;
     }
     #endregion
+    
+    // Enum for narrative events for readability
+    public enum NarrativeEvent
+    {
+        ParalensesOn,            // 0
+        InIntroductionStage,     // 1
+        EnteredPokemonWorld,     // 2
+        CompletedMazeGotKey,     // 3
+        FreedAsh,                // 4
+        SolvedGlyph,             // 5
+        SolvedPit,               // 6
+        ReunitedAshWithCharizard,// 7
+        AlternatePath            // 8
+    }
+
+    // Boolean array to track completion of narrative events
+    private bool[] narrativeState = new bool[9];
 
     // Keep track of what interactable we have focused
     public GameObject ParaNormalLensesGameObject;
@@ -89,9 +106,6 @@ public class GameSystemBehavior : MonoBehaviour
     private bool foundGateway = false;
     // --------------------------------------
 
-
-
-
     // ******* Text
     // --------------------------------------
     public TMPro.TextMeshProUGUI text_LeavePokemonWorldButtonGameObject;
@@ -113,6 +127,8 @@ public class GameSystemBehavior : MonoBehaviour
 
     void Start()
     {
+        ResetNarrativeState();
+
         paraLensesScript = ParaLensesButtonBehavior.instance;
 
         // if our lenses are on turn on the image targets for certain worlds so we can start tracking
@@ -122,15 +138,24 @@ public class GameSystemBehavior : MonoBehaviour
         paraLensesScript.ActiveGameObjects.Add(ImageTargetEnterZeldaWorld);
         paraLensesScript.ActiveGameObjects.Add(InventoryButtonGameObject);
 
+
+        // Remember to remove line below in for actual deployment using it for now just for testing
+        gameObjectsNotActive.Clear();
         foreach (GameObject item in gameObjectsNotActive)
         {
-            item.SetActive(false);
+            if(item != null)
+            {
+                item.SetActive(false);
+            }
+            
         }
 
         SkipButton = SkipButtonGameObject.GetComponent<Button>();
         
 
     }
+
+    
 
     void Update()
     {
@@ -204,9 +229,7 @@ public class GameSystemBehavior : MonoBehaviour
 
                         if (currentItem != null)
                         {
-                            // uncomment once you figure out how you enter the pokemon world
-
-                            if (EnteredPokemonWorld == true)
+                            if (IsNarrativeEventComplete(NarrativeEvent.EnteredPokemonWorld))
                             {
                                 PokemonWorld pokeWorld = gameObject.GetComponent<PokemonWorld>();
                                 string name = currentItem.item.name;
@@ -299,7 +322,7 @@ public class GameSystemBehavior : MonoBehaviour
 
                     if(currentItem != null)
                     {
-                        if (EnteredPokemonWorld == true)
+                        if (IsNarrativeEventComplete(NarrativeEvent.EnteredPokemonWorld))
                         {
                             PokemonWorld pokeWorld = gameObject.GetComponent<PokemonWorld>();
 
@@ -407,9 +430,15 @@ public class GameSystemBehavior : MonoBehaviour
         // With this functionality the Find A Gateway voice line only plays if we enable the paranormal lenses
 
         AudioSource currentAudio = null;
-        if (isParaLensesOn == true && AreWeInAWorld == false)
+        // if (isParaLensesOn == true && AreWeInAWorld == false)
+        List<NarrativeEvent> narrativeEvents = new List<NarrativeEvent>
         {
-            
+            NarrativeEvent.ParalensesOn,
+            NarrativeEvent.InIntroductionStage
+        };
+
+        if (AreNarrativeEventsComplete(narrativeEvents))
+        {
             if ( FindAGatewayAudio.isPlaying == false && foundGateway == true )
             {
                 currentAudio = ThatBook;
@@ -470,6 +499,7 @@ public class GameSystemBehavior : MonoBehaviour
             // Fuctionality to play the intro Audio so now it doesn't constantly play
             StartCoroutine(SetUpIntroduction());
         }
+        narrativeState[(int)NarrativeEvent.InIntroductionStage] = true;
 
     }
 
@@ -553,6 +583,8 @@ public class GameSystemBehavior : MonoBehaviour
     // Function to determine if we entered a world just setting it to true if we have so we set the behavior for the intro audio.
     public void SetEnteredPokemonWorld()
     {
+        SetNarrativeEvent(NarrativeEvent.EnteredPokemonWorld, true);
+        SetNarrativeEvent(NarrativeEvent.InIntroductionStage, false);
 
         EnteredPokemonWorld = true;
         AreWeInAWorld = EnteredPokemonWorld;
@@ -582,6 +614,8 @@ public class GameSystemBehavior : MonoBehaviour
     // to pop up instead listing to two setter methods for the same button onclick
     public void SetLeftPokemonWorld()
     {
+        SetNarrativeEvent(NarrativeEvent.EnteredPokemonWorld, false);
+
         EnteredPokemonWorld = false;
         CurrentWorld = "";
         AreWeInAWorld = EnteredPokemonWorld;
@@ -631,4 +665,57 @@ public class GameSystemBehavior : MonoBehaviour
         PlayAudios();
     }
 
+     public void SetNarrativeEvent(NarrativeEvent narrativeEvent, bool status)
+    {
+        int index = (int)narrativeEvent;
+        if (index >= 0 && index < narrativeState.Length)
+        {
+            narrativeState[index] = status;
+        }
+    }
+
+    // Check if an event is completed
+    public bool IsNarrativeEventComplete(NarrativeEvent narrativeEvent)
+    {
+        int index = (int)narrativeEvent;
+        if (index >= 0 && index < narrativeState.Length)
+        {
+            return narrativeState[index];
+        }
+        return false;
+    }
+
+
+    // rather than having multiple && in an if statement just create a list of each event we want to be true and call this function to check if they're all true
+    public bool AreNarrativeEventsComplete(List<NarrativeEvent> narrativeEvents)
+    {
+        int index;
+        foreach (NarrativeEvent narrativeEvent in narrativeEvents)
+        {
+            index = (int)narrativeEvent;
+
+            if (narrativeState[index] == false)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Example method to check if all events are completed
+    public bool IsNarrativeComplete()
+    {
+        foreach (bool state in narrativeState)
+        {
+            if (!state) return false;
+        }
+        return true;
+    }
+    public void ResetNarrativeState()
+    {
+        for (int i = 0; i < narrativeState.Length; i++)
+        {
+            narrativeState[i] = false;
+        }
+    }
 }

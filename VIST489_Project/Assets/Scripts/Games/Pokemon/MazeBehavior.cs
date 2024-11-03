@@ -21,7 +21,12 @@ public class MazeBehavior : MonoBehaviour
     public Material goodSquare;
     public Material badSquare;
     public Material PlatformOriginalMat;
-    public GameObject entireMaze;
+
+    public GameObject firstMaze;
+    public GameObject secondMaze;
+    private GameObject currentMaze;
+    private GameObject otherMaze;
+
     public AudioSource goalReachedAudio;
     public TMPro.TextMeshProUGUI timerText;
     public GameObject Timer;
@@ -33,8 +38,14 @@ public class MazeBehavior : MonoBehaviour
 
     // ******* PopUp Boxes
     // --------------------------------------
+
+    public Animator zoroarkStanding;
+
     PopUpSystem popUp;
     PokemonWorld pokeWorld;
+
+    MazeSelector firstMazeScript;
+    MazeSelector secondMazeScript;
 
     public string WrongSquareMessage = "Oh no! Looks like you stepped on the wrong platform. " +
         "You have to scan the key and start over again.";
@@ -59,6 +70,14 @@ public class MazeBehavior : MonoBehaviour
     void Start()
     {
         originaltime = remainingTime;
+        AssignRandomMaze();
+
+        // ***** Remember to delete
+        MazeStarted();
+        // this line will start the animation
+        
+        //zoroarkStanding.SetTrigger("StartCrouch");
+        
     }
 
     void Update()
@@ -99,6 +118,29 @@ public class MazeBehavior : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         string tag = other.gameObject.tag;
+        MazeSelector currentMazeScript = other.gameObject.GetComponentInParent<MazeSelector>();
+
+        // once we choose to step on a maze platform for the first time set the other one to false
+        if (currentMazeScript.GetMazeTag() == "First Maze")
+        {
+            
+            if (secondMaze.activeSelf == true)
+            {
+                secondMaze.SetActive(false);
+                currentMaze = firstMaze;
+                otherMaze = secondMaze;
+            }
+        }
+        else if (currentMazeScript.GetMazeTag() == "Second Maze")
+        {
+            if (firstMaze.activeSelf == true)
+            {
+                firstMaze.SetActive(false);
+                currentMaze = secondMaze;
+                otherMaze = firstMaze;
+            }
+        }
+
         if (tag == "Maze Platform")
         {
             // if you havent failed yet can keep trying. Used so that if you hit a bad square you wont be able to keep colliding with other squares.
@@ -171,13 +213,13 @@ public class MazeBehavior : MonoBehaviour
             platforms[i].transform.parent.gameObject.GetComponent<Renderer>().material = PlatformOriginalMat;
         }
         platforms.Clear();
-        entireMaze.SetActive(true);
-        
+        currentMaze.SetActive(true);
+        otherMaze.SetActive(true);
         startTimer = false;
         remainingTime = originaltime;
         Timer.SetActive(false);
         goodSquaresLanedCurrent = 0;
-        
+        AssignRandomMaze();
 
     }
 
@@ -197,19 +239,28 @@ public class MazeBehavior : MonoBehaviour
     {
         GameSystem = GameSystemBehavior.instance;
         paraLenses = ParaLensesButtonBehavior.instance;
+
+
+        // if the maze we completed is the right one continue normally
+        if (currentMaze.GetComponent<MazeSelector>().GetIsReal() == true)
+        {
+            GameSystem.SetHaveMessage(true);
+            GameSystem.SetMessageText(text);
+
+            startTimer = false;
+            // popUp = PopUpSystem.instance;
+
+            // popUp.PopUp(text);
+            pokeWorld = PokemonWorld.instance;
+
+            pokeWorld.SolvedMaze();
+            StartCoroutine(WaitToSetTimerFalse());
+        }
+        else if (currentMaze.GetComponent<MazeSelector>().GetIsReal() == false)
+        {
+            
+        }
         
-
-        GameSystem.SetHaveMessage(true);
-        GameSystem.SetMessageText(text);
-
-        startTimer = false;
-        // popUp = PopUpSystem.instance;
-
-        // popUp.PopUp(text);
-        pokeWorld = PokemonWorld.instance;
-
-        pokeWorld.SolvedMaze();
-        StartCoroutine(WaitToSetTimerFalse());
     }
 
 
@@ -231,10 +282,36 @@ public class MazeBehavior : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
         Timer.SetActive(false);
+
+        // ***** Remember to delete
+        MazeStarted();
     }
     public bool getFailed()
     {
         return failed;
+
+    }
+
+    private void AssignRandomMaze()
+    {
+
+        int randomNumber = Random.Range(0, 2);
+        firstMazeScript = firstMaze.GetComponent<MazeSelector>();
+        secondMazeScript = secondMaze.GetComponent<MazeSelector>();
+        if (randomNumber == 0)
+        {
+            firstMazeScript.SetIsReal(true);
+            secondMazeScript.SetIsReal(false);
+            
+
+        }
+        else
+        {
+            firstMazeScript.SetIsReal(false);
+            secondMazeScript.SetIsReal(true);
+        }
+        Debug.Log($"First Maze is: {firstMazeScript.GetIsReal()} and Second Maze is: {secondMazeScript.GetIsReal()} ");
+        
 
     }
 }

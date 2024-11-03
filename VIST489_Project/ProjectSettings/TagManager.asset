@@ -11,6 +11,8 @@ TagManager:
   - Glyph Trigger Zone
   - Charizard
   - Charizard Zone
+  - First Maze
+  - Second Maze
   layers:
   - Default
   - TransparentFX

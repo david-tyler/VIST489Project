@@ -19,12 +19,12 @@ public class ParaLensesButtonBehavior : MonoBehaviour
     }
     #endregion
     private bool isParaLensesOn = false;
-    private List<Collider> platforms = new List<Collider>();
     
     public GameObject ImageTargetEnterPkWorld;
     public GameObject ImageTargetPKAudio;
     public TMPro.TextMeshProUGUI ParaLensesText;
 
+    public GameSystemBehavior gameSystem;
 
 
     private string text_EnableParaLenses = "Enable Paranormal Lenses";
@@ -40,7 +40,12 @@ public class ParaLensesButtonBehavior : MonoBehaviour
     public void ToggleParanormalLenses()
     {
         // Functionality to toggle the paralenses on/off
+        gameSystem = GameSystemBehavior.instance;
+
         isParaLensesOn = !isParaLensesOn;
+
+        gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.ParalensesOn, isParaLensesOn); // potentially return and see if we can avoid using isParaLensesOn
+
         if (isParaLensesOn == true)
         {
             ParaLensesText.text = text_DisableParaLenses;

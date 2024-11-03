@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4151956693626080051}
   m_Layer: 0
   m_Name: PlatformCollider
-  m_TagString: Untagged
+  m_TagString: Maze Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -317,7 +317,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 68b0a9b8e07a945649feaf1195c246c9, type: 2}
+  - {fileID: 2100000, guid: 4738c4f688583439a91308686d0b4f18, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

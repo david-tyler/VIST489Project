@@ -47,7 +47,13 @@ public class TriggerZones : MonoBehaviour
 
         string colliderTag = other.gameObject.tag;
 
-        if (gameSystem.GetEnteredPokemonWorld() == true && paraLensesScript.getIsParaLensesOn())
+        List<GameSystemBehavior.NarrativeEvent> narrativeEvents = new List<GameSystemBehavior.NarrativeEvent>
+        {
+            GameSystemBehavior.NarrativeEvent.EnteredPokemonWorld,
+            GameSystemBehavior.NarrativeEvent.ParalensesOn
+        };
+        
+        if (gameSystem.AreNarrativeEventsComplete(narrativeEvents))
         {
             if ( pokeWorld.GetUnlockedDoor() == false )
             {
@@ -145,7 +151,14 @@ public class TriggerZones : MonoBehaviour
 
         string colliderTag = other.gameObject.tag;
 
-        if (gameSystem.GetEnteredPokemonWorld() == true && paraLensesScript.getIsParaLensesOn())
+      
+        List<GameSystemBehavior.NarrativeEvent> narrativeEvents = new List<GameSystemBehavior.NarrativeEvent>
+        {
+            GameSystemBehavior.NarrativeEvent.EnteredPokemonWorld,
+            GameSystemBehavior.NarrativeEvent.ParalensesOn
+        };
+        
+        if (gameSystem.AreNarrativeEventsComplete(narrativeEvents))
         {
             if ( pokeWorld.GetUnlockedDoor() == true )
             {
