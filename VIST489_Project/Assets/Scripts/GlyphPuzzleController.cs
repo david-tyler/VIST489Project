@@ -12,10 +12,19 @@ public class GlyphPuzzleController : MonoBehaviour
     public Material baseColor;
 
     public GameObject gate;
+    public bool gateOpen = false;
 
-    public void Start()
+    public void Update()
     {
-       
+        Touch touch = Input.GetTouch(0);
+
+        if(!gateOpen)
+        {
+            if(touch.phase == TouchPhase.Ended)
+            {
+                IncorrectOrder();
+            }
+        }
     }
 
     public bool CheckOrder()
@@ -31,7 +40,6 @@ public class GlyphPuzzleController : MonoBehaviour
 
         OpenGate();
         return true;
-        
     }
 
     public void IncorrectOrder()
@@ -55,6 +63,8 @@ public class GlyphPuzzleController : MonoBehaviour
         gate.SetActive(false);
     }
 
+
+    
 
 
 
