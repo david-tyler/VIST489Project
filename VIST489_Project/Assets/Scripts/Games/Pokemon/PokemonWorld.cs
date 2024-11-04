@@ -150,7 +150,6 @@ public class PokemonWorld : MonoBehaviour
 
         Vector3 startPosition = charizard.transform.position;
 
-        Debug.Log("moving");
         pit.SetActive(true);
 
         while (elapsedTime < duration)
@@ -215,9 +214,11 @@ public class PokemonWorld : MonoBehaviour
     public void SetUnlockedDoor(bool status)
     {
         unlockedDoor = status;
+        gameSystem = GameSystemBehavior.instance;
         if (status == true && firstTimeUnlockingDoor == true)
         {
             firstTimeUnlockingDoor = false;
+            gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.FreedAsh, true);
 
             foreach (GameObject item in objectsToSetActiveAfterDoor)
             {

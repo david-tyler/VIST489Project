@@ -140,7 +140,7 @@ public class GameSystemBehavior : MonoBehaviour
 
 
         // Remember to remove line below in for actual deployment using it for now just for testing
-        gameObjectsNotActive.Clear();
+        
         foreach (GameObject item in gameObjectsNotActive)
         {
             if(item != null)

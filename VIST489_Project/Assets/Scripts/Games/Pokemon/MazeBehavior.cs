@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MazeBehavior : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class MazeBehavior : MonoBehaviour
     public Material goodSquare;
     public Material badSquare;
     public Material PlatformOriginalMat;
+    public Material falsePlatformMaterial;
+
 
     public GameObject firstMaze;
     public GameObject secondMaze;
@@ -29,6 +32,9 @@ public class MazeBehavior : MonoBehaviour
 
     public AudioSource goalReachedAudio;
     public TMPro.TextMeshProUGUI timerText;
+
+    public Button PopUpBoxButton;
+
     public GameObject Timer;
     public float remainingTime = 20.0f;
 
@@ -40,12 +46,14 @@ public class MazeBehavior : MonoBehaviour
     // --------------------------------------
 
     public Animator zoroarkStanding;
+    public Animator leftKlefkiAnimation;
+    public Animator rightKlefkiAnimation;
 
-    PopUpSystem popUp;
-    PokemonWorld pokeWorld;
-
-    MazeSelector firstMazeScript;
-    MazeSelector secondMazeScript;
+    public GameObject zoroark;
+    public GameObject leftKlefki;
+    public GameObject rightKlefki;
+    public GameObject escapeButton;
+    
 
     public string WrongSquareMessage = "Oh no! Looks like you stepped on the wrong platform. " +
         "You have to scan the key and start over again.";
@@ -60,9 +68,16 @@ public class MazeBehavior : MonoBehaviour
     private bool failed = false;
     private bool won = false;
 
+    public List<string> zoroarkAppearsLines = new List<string>();
 
     GameSystemBehavior GameSystem;
     ParaLensesButtonBehavior paraLenses;
+    PopUpSystem popUp;
+    PokemonWorld pokeWorld;
+
+    MazeSelector firstMazeScript;
+    MazeSelector secondMazeScript;
+    
 
     public AudioSource goodSquareSound;
     public AudioSource badSquareSound;
@@ -70,13 +85,6 @@ public class MazeBehavior : MonoBehaviour
     void Start()
     {
         originaltime = remainingTime;
-        AssignRandomMaze();
-
-        // ***** Remember to delete
-        MazeStarted();
-        // this line will start the animation
-        
-        //zoroarkStanding.SetTrigger("StartCrouch");
         
     }
 
@@ -123,13 +131,14 @@ public class MazeBehavior : MonoBehaviour
         // once we choose to step on a maze platform for the first time set the other one to false
         if (currentMazeScript.GetMazeTag() == "First Maze")
         {
-            
             if (secondMaze.activeSelf == true)
             {
                 secondMaze.SetActive(false);
                 currentMaze = firstMaze;
                 otherMaze = secondMaze;
+                rightKlefki.SetActive(false);
             }
+            
         }
         else if (currentMazeScript.GetMazeTag() == "Second Maze")
         {
@@ -138,6 +147,7 @@ public class MazeBehavior : MonoBehaviour
                 firstMaze.SetActive(false);
                 currentMaze = secondMaze;
                 otherMaze = firstMaze;
+                leftKlefki.SetActive(false);
             }
         }
 
@@ -155,14 +165,25 @@ public class MazeBehavior : MonoBehaviour
                         if (goodSquaresLanedCurrent >= landGoodSquaresBeforeGoal)
                         {
                             goalReached = true;
-                            won = true;
-                            // You win can play a sound and now can spawn the key and get it
-                            StartCoroutine(SolvedPuzzle());
-                            WonMaze(YouWonMessage);
-                            ResetMaze();
+                            if (currentMazeScript.GetIsReal() == true)
+                            {
+                                
+                                won = true;
+                                // You win can play a sound and now can spawn the key and get it
+                                goalReachedAudio.Play();
+                                WonMaze(YouWonMessage);
+                                ResetMaze();
+                            }
+                            else if (currentMazeScript.GetIsReal() == false)
+                            {
+                                
+                                FailedMaze(zoroarkAppearsLines[0]);
+                            }
+                            
                         }
                         else if (goodSquaresLanedCurrent < landGoodSquaresBeforeGoal)
                         {
+                            badSquareSound.Play();
                             startTimer = false;
                             FailedMaze("Nice Try.");
                             
@@ -197,13 +218,6 @@ public class MazeBehavior : MonoBehaviour
 
         
     }
-
-    IEnumerator SolvedPuzzle()
-    {
-        goalReachedAudio.Play();
-        yield return new WaitForSeconds(3);
-    }
-
     
     // add this method to button onclick for the popup button
     public void ResetMaze()
@@ -213,6 +227,19 @@ public class MazeBehavior : MonoBehaviour
             platforms[i].transform.parent.gameObject.GetComponent<Renderer>().material = PlatformOriginalMat;
         }
         platforms.Clear();
+
+        List<GameObject> firstMazePlatforms = GetChildren(firstMaze);
+        List<GameObject> secondMazePlatforms = GetChildren(secondMaze);
+
+        foreach (GameObject platform in firstMazePlatforms)
+        {
+            platform.gameObject.GetComponent<Renderer>().material = PlatformOriginalMat;
+        }
+
+        foreach (GameObject platform in secondMazePlatforms)
+        {
+            platform.gameObject.GetComponent<Renderer>().material = PlatformOriginalMat;
+        }
         currentMaze.SetActive(true);
         otherMaze.SetActive(true);
         startTimer = false;
@@ -220,6 +247,19 @@ public class MazeBehavior : MonoBehaviour
         Timer.SetActive(false);
         goodSquaresLanedCurrent = 0;
         AssignRandomMaze();
+
+        if (zoroark.activeSelf == true)
+        {
+            zoroark.SetActive(false);
+            zoroarkStanding.SetTrigger("Idle");
+        }
+
+        leftKlefki.SetActive(true);
+        rightKlefki.SetActive(true);
+
+        leftKlefkiAnimation.SetTrigger("Appear");
+        rightKlefkiAnimation.SetTrigger("Appear");
+        
 
     }
 
@@ -241,25 +281,16 @@ public class MazeBehavior : MonoBehaviour
         paraLenses = ParaLensesButtonBehavior.instance;
 
 
-        // if the maze we completed is the right one continue normally
-        if (currentMaze.GetComponent<MazeSelector>().GetIsReal() == true)
-        {
-            GameSystem.SetHaveMessage(true);
-            GameSystem.SetMessageText(text);
+        GameSystem.SetHaveMessage(true);
+        GameSystem.SetMessageText(text);
 
-            startTimer = false;
-            // popUp = PopUpSystem.instance;
+        startTimer = false;
+        
+        pokeWorld = PokemonWorld.instance;
 
-            // popUp.PopUp(text);
-            pokeWorld = PokemonWorld.instance;
-
-            pokeWorld.SolvedMaze();
-            StartCoroutine(WaitToSetTimerFalse());
-        }
-        else if (currentMaze.GetComponent<MazeSelector>().GetIsReal() == false)
-        {
-            
-        }
+        pokeWorld.SolvedMaze();
+        StartCoroutine(WaitToSetTimerFalse());
+        
         
     }
 
@@ -267,14 +298,82 @@ public class MazeBehavior : MonoBehaviour
     public void FailedMaze(string text)
     {
         GameSystem = GameSystemBehavior.instance;
-
+        popUp = PopUpSystem.instance;
 
         GameSystem.SetHaveMessage(true);
-        GameSystem.SetMessageText(text);
+        
 
         failed = true;
-        StartCoroutine(WaitToSetTimerFalse());
 
+        if ( goalReached == false)
+        {
+            GameSystem.SetMessageText(text);
+            StartCoroutine(WaitToSetTimerFalse());
+        }
+        else if (goalReached == true)
+        {
+            popUp.PopUp(text);
+            PopUpBoxButton.onClick.AddListener(ZoroarkAppear);
+            
+            
+
+        }
+
+    }
+
+    private void ZoroarkAppear()
+    {
+        PopUpBoxButton.onClick.RemoveAllListeners();
+
+        firstMazeScript = firstMaze.GetComponent<MazeSelector>();
+        secondMazeScript = secondMaze.GetComponent<MazeSelector>();
+        
+        
+        
+
+        
+        // tell user to click escape button so they can run away then prompt them to try tapping the key again.
+        StartCoroutine(EscapeFromZoroark());
+
+
+    }
+
+    IEnumerator EscapeFromZoroark()
+    {
+        if (firstMazeScript.GetIsReal() == false)
+        {
+            leftKlefkiAnimation.SetTrigger("Disappear");
+        }
+        else if (secondMazeScript.GetIsReal() == false)
+        {
+            rightKlefkiAnimation.SetTrigger("Disappear");
+        }
+        yield return new WaitForSeconds(2);
+
+        zoroark.SetActive(true);
+        zoroarkStanding.SetTrigger("StartCrouch");
+        GameSystem = GameSystemBehavior.instance;
+        // maybe play an audio showing zoroark appears
+        yield return new WaitForSeconds(2);
+
+        GameSystem.SetHaveMessage(true);
+        GameSystem.SetMessageText(zoroarkAppearsLines[1]);
+        escapeButton.SetActive(true);
+
+
+    }
+
+    public void ClickedEscape()
+    {
+        escapeButton.SetActive(false);
+        
+        
+
+        ResetMaze();
+        leftKlefkiAnimation.SetTrigger("Appear");
+    
+        rightKlefkiAnimation.SetTrigger("Appear");
+        
     }
 
     // personal preference think would be nice to have the timer still show if you fail before resetting it
@@ -302,16 +401,46 @@ public class MazeBehavior : MonoBehaviour
         {
             firstMazeScript.SetIsReal(true);
             secondMazeScript.SetIsReal(false);
-            
+            setFalzeMazePlatformMaterial(secondMaze);
 
+            zoroark.transform.localEulerAngles = new Vector3(0, 61.9f, 0);
+            zoroark.transform.position = new Vector3(rightKlefki.transform.position.x, zoroark.transform.position.y, rightKlefki.transform.position.z);
+           
         }
         else
         {
             firstMazeScript.SetIsReal(false);
             secondMazeScript.SetIsReal(true);
+            setFalzeMazePlatformMaterial(firstMaze);
+            zoroark.transform.localEulerAngles = new Vector3(0, 242.5f, 0);
+            zoroark.transform.position = new Vector3(leftKlefki.transform.position.x, zoroark.transform.position.y, leftKlefki.transform.position.z);
+            
         }
         Debug.Log($"First Maze is: {firstMazeScript.GetIsReal()} and Second Maze is: {secondMazeScript.GetIsReal()} ");
         
 
     }
+
+    private void setFalzeMazePlatformMaterial(GameObject maze)
+    {
+        List<GameObject> falsePlatforms = GetChildren(maze);
+
+        int randomNumber = Random.Range(0, falsePlatforms.Count - 1);
+        
+        falsePlatforms[randomNumber].gameObject.GetComponent<Renderer>().material = falsePlatformMaterial;
+    }
+    private List<GameObject> GetChildren(GameObject parent)
+    {
+        List<GameObject> children = new List<GameObject>();
+
+        // Iterate through all child transforms
+        foreach (Transform child in parent.transform)
+        {
+            // Add the child GameObject to the list
+            children.Add(child.gameObject);
+        }
+
+        return children;
+    }
+
 }
