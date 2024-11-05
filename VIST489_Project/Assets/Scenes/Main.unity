@@ -2314,19 +2314,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5113892339900874105, guid: cefa57e7bc9653f4886efbf0a3a18b6a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5113892339900874105, guid: cefa57e7bc9653f4886efbf0a3a18b6a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5113892339900874105, guid: cefa57e7bc9653f4886efbf0a3a18b6a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5113892339900874105, guid: cefa57e7bc9653f4886efbf0a3a18b6a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5113892339900874105, guid: cefa57e7bc9653f4886efbf0a3a18b6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2334,7 +2334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5113892339900874105, guid: cefa57e7bc9653f4886efbf0a3a18b6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 5113892339900874105, guid: cefa57e7bc9653f4886efbf0a3a18b6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -17855,7 +17855,7 @@ MonoBehaviour:
   m_Script: {fileID: 996249435, guid: 8a9a760f95896c34689febc965510927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DistanceToCamera: 0.5
+  DistanceToCamera: 2
   MidAirIndicator: {fileID: 1527064403990174, guid: e5581564ca4d5f2479d5f1694371ef2f, type: 3}
   OnAnchorPositionConfirmed:
     m_PersistentCalls:
