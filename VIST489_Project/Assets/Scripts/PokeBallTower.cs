@@ -12,6 +12,8 @@ public class PokeBallTower : Interactable
 
     public GameObject ball;
 
+    public AudioSource placePokeballAudio;
+
   
     public void AddSelfToCurrentList()
     {
@@ -36,6 +38,7 @@ public class PokeBallTower : Interactable
 
         if(foundBall)
         {
+            placePokeballAudio.PlayOneShot(placePokeballAudio.clip);
             AddSelfToCurrentList();
             ball.SetActive(true);
             controller.coloredPokeball.material = nextColor;
