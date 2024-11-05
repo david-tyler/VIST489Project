@@ -13,6 +13,10 @@ TagManager:
   - Charizard Zone
   - First Maze
   - Second Maze
+  - Classroom
+  - Bottom Hallway
+  - Middle Hallway
+  - Back Hallway
   layers:
   - Default
   - TransparentFX

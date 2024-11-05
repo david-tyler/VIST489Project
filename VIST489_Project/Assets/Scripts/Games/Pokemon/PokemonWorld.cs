@@ -51,6 +51,7 @@ public class PokemonWorld : MonoBehaviour
     PopUpSystem popUp;
     MazeBehavior mazeScript;
     AudioManager audioManagerScript;
+    TriggerZones triggerZonesScript;
 
     private int count = 0; // Used to limit in update how many times the pop up is called if we tap on an object that has a pop up box appear after
     // Start is called before the first frame update
@@ -195,13 +196,13 @@ public class PokemonWorld : MonoBehaviour
         gameSystem = GameSystemBehavior.instance;
         paraLenses = ParaLensesButtonBehavior.instance;
         mazeScript = MazeBehavior.instance;
+        triggerZonesScript = TriggerZones.instance;
 
         
         if (count == 0 || mazeScript.getFailed() == true)
         {
             count = 0;
             
-
             gameSystem.SetHaveMessage(true);
             gameSystem.SetMessageText(NeedToCompleteMazeText);
             // popUp = PopUpSystem.instance;
@@ -214,6 +215,7 @@ public class PokemonWorld : MonoBehaviour
             
             count += 1;
             //PopUpBoxButton.onClick.AddListener(SetCountForPopUpKey);
+            triggerZonesScript.ModifyLists();
         }
         
     }
@@ -229,11 +231,14 @@ public class PokemonWorld : MonoBehaviour
             firstTimeUnlockingDoor = false;
             gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.FreedAsh, true);
             audioManagerScript.PlayEventSound(freedAshAudioName);
+            triggerZonesScript = TriggerZones.instance;
+            
 
             foreach (GameObject item in objectsToSetActiveAfterDoor)
             {
                 item.SetActive(true);
             }
+            triggerZonesScript.ModifyLists();
         }
     }
 
