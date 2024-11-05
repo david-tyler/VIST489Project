@@ -1498,9 +1498,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 132246934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2142f6f87212944681428e3d079835d, type: 3}
+  m_Script: {fileID: 11500000, guid: b2e60c7d158e146d8ad9d68c0cecde59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ARCamera: {fileID: 437364105}
+  positionToGo: {fileID: 969525320}
 --- !u!1 &142142619
 GameObject:
   m_ObjectHideFlags: 0
@@ -13135,9 +13137,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1765791648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2142f6f87212944681428e3d079835d, type: 3}
+  m_Script: {fileID: 11500000, guid: b2e60c7d158e146d8ad9d68c0cecde59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ARCamera: {fileID: 437364105}
+  positionToGo: {fileID: 952955544}
 --- !u!23 &1768837115 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -2234040702563316214, guid: 899b41f9d1b4d4428808e1cb4fc6914e, type: 3}
@@ -13371,9 +13375,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1789316926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2142f6f87212944681428e3d079835d, type: 3}
+  m_Script: {fileID: 11500000, guid: b2e60c7d158e146d8ad9d68c0cecde59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ARCamera: {fileID: 437364105}
+  positionToGo: {fileID: 1203784531}
 --- !u!1001 &1792090699
 PrefabInstance:
   m_ObjectHideFlags: 0
