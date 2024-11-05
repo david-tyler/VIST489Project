@@ -36,12 +36,13 @@ public class AudioManager : MonoBehaviour
         eventAudioSource.spatialBlend = 0f; // 2D sound
         eventAudioSource.loop = true;
         eventAudioSource.volume = 0.7f;
+        currentAudioSource = eventAudioSource;
     }
 
     public void PlayEventSound(string clipName)
     {
         AudioClip clip = GetEventClipByName(clipName);
-        currentAudioSource = eventAudioSource;
+        
         if (clip != null)
         {
             if (currentAudioSource.isPlaying == true)
