@@ -131,16 +131,6 @@ public class GameSystemBehavior : MonoBehaviour
 
         paraLensesScript = ParaLensesButtonBehavior.instance;
 
-        // if our lenses are on turn on the image targets for certain worlds so we can start tracking
-        paraLensesScript.ActiveGameObjects.Add(ImageTargetEnterPokemonWorld);
-        paraLensesScript.ActiveGameObjects.Add(ImageTargetEnterMarioWorld);
-        paraLensesScript.ActiveGameObjects.Add(ImageTargetEnterZeldaWorld);
-        paraLensesScript.ActiveGameObjects.Add(ImageTargetEnterZeldaWorld);
-        paraLensesScript.ActiveGameObjects.Add(InventoryButtonGameObject);
-
-
-        // Remember to remove line below in for actual deployment using it for now just for testing
-        
         foreach (GameObject item in gameObjectsNotActive)
         {
             if(item != null)
@@ -319,7 +309,6 @@ public class GameSystemBehavior : MonoBehaviour
                 if (interactable != null)
                 {
                     ItemPickup currentItem = hit.collider.GetComponent<ItemPickup>();
-
                     if(currentItem != null)
                     {
                         if (IsNarrativeEventComplete(NarrativeEvent.EnteredPokemonWorld))

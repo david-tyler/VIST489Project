@@ -27,8 +27,7 @@ public class MazeBehavior : MonoBehaviour
 
     public GameObject firstMaze;
     public GameObject secondMaze;
-    private GameObject currentMaze;
-    private GameObject otherMaze;
+   
 
     public AudioSource goalReachedAudio;
     public TMPro.TextMeshProUGUI timerText;
@@ -67,6 +66,7 @@ public class MazeBehavior : MonoBehaviour
     private float originaltime;
     private bool failed = false;
     private bool won = false;
+    private bool enteredMaze;
 
     public List<string> zoroarkAppearsLines = new List<string>();
 
@@ -85,6 +85,7 @@ public class MazeBehavior : MonoBehaviour
     void Start()
     {
         originaltime = remainingTime;
+        enteredMaze = false;
         
     }
 
@@ -126,33 +127,37 @@ public class MazeBehavior : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         string tag = other.gameObject.tag;
-        MazeSelector currentMazeScript = other.gameObject.GetComponentInParent<MazeSelector>();
-
-        // once we choose to step on a maze platform for the first time set the other one to false
-        if (currentMazeScript.GetMazeTag() == "First Maze")
-        {
-            if (secondMaze.activeSelf == true)
-            {
-                secondMaze.SetActive(false);
-                currentMaze = firstMaze;
-                otherMaze = secondMaze;
-                rightKlefki.SetActive(false);
-            }
-            
-        }
-        else if (currentMazeScript.GetMazeTag() == "Second Maze")
-        {
-            if (firstMaze.activeSelf == true)
-            {
-                firstMaze.SetActive(false);
-                currentMaze = secondMaze;
-                otherMaze = firstMaze;
-                leftKlefki.SetActive(false);
-            }
-        }
+        
 
         if (tag == "Maze Platform")
         {
+            MazeSelector currentMazeScript = other.gameObject.GetComponentInParent<MazeSelector>();
+
+            // once we choose to step on a maze platform for the first time set the other one to false
+            if (enteredMaze == false)
+            {
+                if (currentMazeScript.GetMazeTag() == "First Maze")
+                {
+                    if (secondMaze.activeSelf == true)
+                    {
+                        secondMaze.SetActive(false);
+                        rightKlefkiAnimation.SetTrigger("Disappear");
+                    }
+                    
+                }
+                else if (currentMazeScript.GetMazeTag() == "Second Maze")
+                {
+                    if (firstMaze.activeSelf == true)
+                    {
+                        firstMaze.SetActive(false);
+
+                        leftKlefkiAnimation.SetTrigger("Disappear");
+                    }
+                }
+                enteredMaze = true;
+            }
+            
+
             // if you havent failed yet can keep trying. Used so that if you hit a bad square you wont be able to keep colliding with other squares.
             if (failed == false && won == false)
             {
@@ -240,11 +245,13 @@ public class MazeBehavior : MonoBehaviour
         {
             platform.gameObject.GetComponent<Renderer>().material = PlatformOriginalMat;
         }
-        currentMaze.SetActive(true);
-        otherMaze.SetActive(true);
-        startTimer = false;
+
+        enteredMaze = false;
+        firstMaze.SetActive(true);
+        secondMaze.SetActive(true);
+        
         remainingTime = originaltime;
-        Timer.SetActive(false);
+        
         goodSquaresLanedCurrent = 0;
         AssignRandomMaze();
 
@@ -256,10 +263,6 @@ public class MazeBehavior : MonoBehaviour
 
         leftKlefki.SetActive(true);
         rightKlefki.SetActive(true);
-
-        leftKlefkiAnimation.SetTrigger("Appear");
-        rightKlefkiAnimation.SetTrigger("Appear");
-        
 
     }
 
@@ -289,7 +292,15 @@ public class MazeBehavior : MonoBehaviour
         pokeWorld = PokemonWorld.instance;
 
         pokeWorld.SolvedMaze();
-        StartCoroutine(WaitToSetTimerFalse());
+
+
+
+
+        Timer.SetActive(false);
+        firstMaze.SetActive(false);
+        secondMaze.SetActive(false);
+        leftKlefki.SetActive(false);
+        rightKlefki.SetActive(false);
         
         
     }
@@ -304,11 +315,12 @@ public class MazeBehavior : MonoBehaviour
         
 
         failed = true;
-
+        startTimer = false;
+        Timer.SetActive(false);
         if ( goalReached == false)
         {
             GameSystem.SetMessageText(text);
-            StartCoroutine(WaitToSetTimerFalse());
+            Timer.SetActive(false);
         }
         else if (goalReached == true)
         {
@@ -377,14 +389,6 @@ public class MazeBehavior : MonoBehaviour
     }
 
     // personal preference think would be nice to have the timer still show if you fail before resetting it
-    IEnumerator WaitToSetTimerFalse()
-    {
-        yield return new WaitForSeconds(2.0f);
-        Timer.SetActive(false);
-
-        // ***** Remember to delete
-        MazeStarted();
-    }
     public bool getFailed()
     {
         return failed;

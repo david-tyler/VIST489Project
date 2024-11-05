@@ -20,11 +20,12 @@ public class ParaLensesButtonBehavior : MonoBehaviour
     #endregion
     private bool isParaLensesOn = false;
     
-    public GameObject ImageTargetEnterPkWorld;
+
     public GameObject ImageTargetPKAudio;
+
     public TMPro.TextMeshProUGUI ParaLensesText;
 
-    public GameSystemBehavior gameSystem;
+    GameSystemBehavior gameSystem;
 
 
     private string text_EnableParaLenses = "Enable Paranormal Lenses";

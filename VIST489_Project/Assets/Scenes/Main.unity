@@ -1663,6 +1663,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PopUpBoxButton: {fileID: 1082783804}
+  AshLines:
+  - Oh No! Where did he go!?
+  - I'm trapped in this room and I lost my Charizard. Will you please help me escape?
+  - Thank you! That door is locked and the key isn't in this room, I have no clue
+    where it could possibly be.
+  placeGlyphLines:
+  - To open that gate you'll need to place a glyph.
+  - Press on the screen and hold it. The glyph gets bigger the longer you hold down.
   cantEnterGateLine: It seems like we can't enter this area right now. We need to
     find the key and free Ash first.
   doTheGlyphLine: The gate is locked. Maybe we can open it by solving that glyph
@@ -2436,15 +2444,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8.088044
+      value: 8.088045
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.y
-      value: 8.088048
+      value: 8.088056
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8.088045
+      value: 8.088052
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2464,7 +2472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.70710677
+      value: -0.7071067
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalRotation.y
@@ -2472,7 +2480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.7071068
+      value: 0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3102,6 +3110,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1577711599}
     - target: {fileID: 4858692670053877681, guid: 1e619b64f7dba4ccbaa8074417165083, type: 3}
+      propertyPath: radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858692670053877681, guid: 1e619b64f7dba4ccbaa8074417165083, type: 3}
       propertyPath: parentObject
       value: 
       objectReference: {fileID: 1872253846}
@@ -3200,6 +3212,10 @@ PrefabInstance:
       propertyPath: tower
       value: 
       objectReference: {fileID: 1577711600}
+    - target: {fileID: 4858692670053877681, guid: 1e619b64f7dba4ccbaa8074417165083, type: 3}
+      propertyPath: radius
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4858692670053877681, guid: 1e619b64f7dba4ccbaa8074417165083, type: 3}
       propertyPath: parentObject
       value: 
@@ -4323,11 +4339,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52c0a21506e3438ca90de0959aeed2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ImageTargetEnterPkWorld: {fileID: 0}
   ImageTargetPKAudio: {fileID: 665597108}
   ParaLensesText: {fileID: 720782750}
-  gameSystem: {fileID: 0}
-  ActiveGameObjects: []
+  ActiveGameObjects:
+  - {fileID: 2100602115}
+  - {fileID: 1386398224}
+  - {fileID: 309248378}
 --- !u!114 &535425576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4378,6 +4395,10 @@ MonoBehaviour:
   - {fileID: 384846601}
   - {fileID: 1338955727}
   - {fileID: 812531082}
+  - {fileID: 2100602115}
+  - {fileID: 702661803}
+  - {fileID: 782628375}
+  - {fileID: 1044728417}
 --- !u!114 &535425580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4404,7 +4425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da745d3d4946745aebdd6dae36d0e909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entireMaze: {fileID: 567687095}
+  firstMaze: {fileID: 567687095}
+  secondMaze: {fileID: 702661803}
   NeedToCompleteMazeText: It seems we can't get the key, but look there! On the ground
     to your left, there seems to be a maze. Maybe you need to complete it to obtain
     the key.
@@ -7276,6 +7298,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1577711598}
     - target: {fileID: 4858692670053877681, guid: 1e619b64f7dba4ccbaa8074417165083, type: 3}
+      propertyPath: radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858692670053877681, guid: 1e619b64f7dba4ccbaa8074417165083, type: 3}
       propertyPath: parentObject
       value: 
       objectReference: {fileID: 1770141496}
@@ -8272,7 +8298,7 @@ RectTransform:
   m_GameObject: {fileID: 994956754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.7, y: 1.7, z: 1}
+  m_LocalScale: {x: 1.7784001, y: 2.01552, z: 1.4227201}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1489198487}
@@ -8280,7 +8306,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 537}
+  m_AnchoredPosition: {x: 0, y: 511}
   m_SizeDelta: {x: 256.78, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &994956756
@@ -11603,6 +11629,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 0cd8f069de43b41878b80d52c635a8b7, type: 2}
     - target: {fileID: 4858692670053877681, guid: 1e619b64f7dba4ccbaa8074417165083, type: 3}
+      propertyPath: radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858692670053877681, guid: 1e619b64f7dba4ccbaa8074417165083, type: 3}
       propertyPath: parentObject
       value: 
       objectReference: {fileID: 282088768}
@@ -11756,7 +11786,6 @@ Transform:
   - {fileID: 686874860}
   - {fileID: 783597524}
   - {fileID: 1656221322}
-  - {fileID: 1646158424}
   m_Father: {fileID: 782628378}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1640518126
@@ -11953,112 +11982,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1640518126}
   m_CullTransparentMesh: 1
---- !u!1 &1646158420
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1646158424}
-  - component: {fileID: 1646158423}
-  - component: {fileID: 1646158422}
-  - component: {fileID: 1646158421}
-  m_Layer: 0
-  m_Name: Test Scene Object
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!64 &1646158421
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646158420}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1646158422
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646158420}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 0833bdcf98cc842db93f80aac3168021, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1646158423
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646158420}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1646158424
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646158420}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.6995673, y: 0.10298351, z: -0.10298351, w: 0.6995673}
-  m_LocalPosition: {x: -0.12, y: -1.74, z: 1.85}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1638373497}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1646316799
 GameObject:
   m_ObjectHideFlags: 0
@@ -12936,6 +12859,10 @@ PrefabInstance:
       propertyPath: tower
       value: 
       objectReference: {fileID: 1577711601}
+    - target: {fileID: 4858692670053877681, guid: 1e619b64f7dba4ccbaa8074417165083, type: 3}
+      propertyPath: radius
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4858692670053877681, guid: 1e619b64f7dba4ccbaa8074417165083, type: 3}
       propertyPath: parentObject
       value: 
@@ -15799,7 +15726,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -170, y: -416}
+  m_AnchoredPosition: {x: -170, y: -386}
   m_SizeDelta: {x: 836.45, y: 860.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2100602117

@@ -115,6 +115,7 @@
     <Compile Include="Assets/Scripts/GlyphPuzzleController.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/SkewTextExample.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/WarpTextExample.cs" />
+    <Compile Include="Assets/AllowGlyphPlacement.cs" />
     <Compile Include="Assets/Scripts/General System/Trigger Zones.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TextMeshProFloatingText.cs" />
     <Compile Include="Assets/Scripts/Interactables/Interactable.cs" />

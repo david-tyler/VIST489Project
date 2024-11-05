@@ -18,12 +18,16 @@ public class TriggerZones : MonoBehaviour
 
     // index for ash's lines
     private int AshLinesIndex;
-    private List<string> AshLines = new List<string>();
+    public List<string> AshLines = new List<string>();
 
-    private string AshLine1 = "Oh No! Where did he go!?";
-    private string AshLine2 = "I'm trapped in this room and I lost my Charizard. Will you please help me escape?";
-    private string AshLine3 = "Thank you! That door is locked and the key isn't in this room, I have no clue where it could possibly be.";
-    private string AshLine4 = "";
+    public List<string> placeGlyphLines = new List<string>();
+
+    private List<string> currentDialogue;
+    private int currentDialogueIndex;
+    
+    private int placeGlyphLinesIndex;
+
+   
 
     public string cantEnterGateLine = "It seems like we can't enter this area right now. We need to find the key and free Ash first.";
     public string doTheGlyphLine = "The gate is locked. Maybe we can open it by solving that glyph on the wall to your right.";
@@ -31,10 +35,10 @@ public class TriggerZones : MonoBehaviour
 
     private void Start()
     {
-        AshLines.Add(AshLine1);
-        AshLines.Add(AshLine2);
-        AshLines.Add(AshLine3);
+       
         AshLinesIndex = 0;
+        placeGlyphLinesIndex = 0;
+
         
     }
 
@@ -55,7 +59,7 @@ public class TriggerZones : MonoBehaviour
         
         if (gameSystem.AreNarrativeEventsComplete(narrativeEvents))
         {
-            if ( pokeWorld.GetUnlockedDoor() == false )
+            if (gameSystem.IsNarrativeEventComplete(GameSystemBehavior.NarrativeEvent.FreedAsh) == false)
             {
                 switch (colliderTag)
                 {
@@ -64,8 +68,11 @@ public class TriggerZones : MonoBehaviour
                         {
                             PopUpBoxButton.onClick.AddListener(DisplayNextLines);
                             popUp.PopUp(AshLines[AshLinesIndex]);
+                            currentDialogue = AshLines;
+                            
                             gameSystem.ToggleSkipButton(true);
                             AshLinesIndex += 1;
+                            currentDialogueIndex = AshLinesIndex;
                             StartCoroutine(WaitForPressedSkip());
                             
                             
@@ -77,7 +84,7 @@ public class TriggerZones : MonoBehaviour
                         break;
                 }
             }
-            else if ( pokeWorld.GetUnlockedDoor() == true )
+            else if ( gameSystem.IsNarrativeEventComplete(GameSystemBehavior.NarrativeEvent.FreedAsh) == true )
             {
                 switch (colliderTag)
                 {
@@ -85,16 +92,18 @@ public class TriggerZones : MonoBehaviour
                          // New Lines for Ash once you unlock the door but haven't freed Charizard yet.
                         AshLines.Clear();
                         AshLinesIndex = 0;
-                        AshLine1 = "Wow! You actually managed to unlock the door! Thanks for your help.";
-                        AshLine2 = "But I can't leave without my Charizard and I have no idea where he is. Please help me find him.";
-                        AshLines.Add(AshLine1);
-                        AshLines.Add(AshLine2);
+                        string lineOne = "Wow! You actually managed to unlock the door! Thanks for your help.";
+                        string lineTwo = "But I can't leave without my Charizard and I have no idea where he is. Please help me find him.";
+                        AshLines.Add(lineOne);
+                        AshLines.Add(lineTwo);
 
+                        currentDialogue = AshLines;
                         if (AshLinesIndex == 0)
                         {
                             PopUpBoxButton.onClick.AddListener(DisplayNextLines);
                             popUp.PopUp(AshLines[AshLinesIndex]);
                             AshLinesIndex += 1;
+                            currentDialogueIndex = AshLinesIndex;
                             StartCoroutine(WaitForPressedSkip());
                         }
                        
@@ -106,6 +115,14 @@ public class TriggerZones : MonoBehaviour
                     case "Glyph Trigger Zone":
                         gameSystem.SetHaveMessage(true);
                         gameSystem.SetMessageText(lookForGlyphPokeballs);
+
+                        currentDialogue = placeGlyphLines;
+                        PopUpBoxButton.onClick.AddListener(DisplayNextLines);
+                        popUp.PopUp(placeGlyphLines[placeGlyphLinesIndex]);
+                        placeGlyphLinesIndex += 1;
+                        currentDialogueIndex = placeGlyphLinesIndex;
+
+                        StartCoroutine(WaitForPressedSkip());
                         break;
                     case "Charizard Zone":
                         pokeWorld.SetCanTapCharizard(true);
@@ -121,7 +138,7 @@ public class TriggerZones : MonoBehaviour
     IEnumerator WaitForPressedSkip()
     {
         gameSystem = GameSystemBehavior.instance;
-        while (AshLinesIndex <= AshLines.Count)
+        while (currentDialogueIndex <= currentDialogue.Count)
         {
             Debug.Log("Waiting To Press Skip");
             if (gameSystem.getPressedSkip() == true)
@@ -129,7 +146,7 @@ public class TriggerZones : MonoBehaviour
                 PopUpBoxButton.onClick.RemoveAllListeners();
                 popUp.RemovePopUp();
                 gameSystem.ToggleSkipButton(false);
-                AshLinesIndex = 0;
+                currentDialogueIndex = 0;
                 
 
                 // skip the dialogue so break from the coroutine
@@ -174,7 +191,7 @@ public class TriggerZones : MonoBehaviour
 
     private void DisplayNextLines()
     {
-        if (AshLinesIndex >= AshLines.Count)
+        if (currentDialogueIndex >= currentDialogue.Count)
         {
             
             PopUpBoxButton.onClick.RemoveAllListeners();
@@ -194,15 +211,15 @@ public class TriggerZones : MonoBehaviour
     {
         
         yield return new WaitForSeconds(1.0f);
-        if (AshLinesIndex == 0)
+        if (currentDialogueIndex == 0)
         {
             // if user presses skip before the next pop up appears then this ensures that next pop up won't appear
             // bug I found when trying to press skip like this
             yield break;
         }
         popUp = PopUpSystem.instance;
-        popUp.PopUp(AshLines[AshLinesIndex]);
-        AshLinesIndex += 1;
+        popUp.PopUp(currentDialogue[currentDialogueIndex]);
+        currentDialogueIndex += 1;
     }
 
 

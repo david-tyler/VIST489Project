@@ -24,7 +24,9 @@ public class PokemonWorld : MonoBehaviour
     }
     #endregion
 
-    public GameObject entireMaze;
+    public GameObject firstMaze;
+    public GameObject secondMaze;
+
     private bool canGetKey = false;
     private bool unlockedDoor = false;
     private bool pickedUpKey = false;
@@ -202,8 +204,10 @@ public class PokemonWorld : MonoBehaviour
 
             // popUp.PopUp(NeedToCompleteMazeText);
             
-            entireMaze.SetActive(true);
+            
             mazeScript.MazeStarted();
+            mazeScript.ResetMaze();
+            
             count += 1;
             //PopUpBoxButton.onClick.AddListener(SetCountForPopUpKey);
         }

@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
-    path: Assets/Scenes/SurfaceTracking.unity
+    path: Assets/Scenes/SurfaceTracking-Glyph.unity
     guid: 5b463f0bc0c4afb469501fa50a160793
   m_configObjects: {}
