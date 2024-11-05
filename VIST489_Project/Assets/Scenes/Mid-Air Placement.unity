@@ -245,19 +245,28 @@ MonoBehaviour:
   goodSquare: {fileID: 2100000, guid: 961c5dc7664084853b5ab31cf02e1a39, type: 2}
   badSquare: {fileID: 2100000, guid: 0833bdcf98cc842db93f80aac3168021, type: 2}
   PlatformOriginalMat: {fileID: 2100000, guid: f69acfcb2dec7bb43847fbc8f1116509, type: 2}
+  falsePlatformMaterial: {fileID: 0}
   firstMaze: {fileID: 0}
   secondMaze: {fileID: 0}
   goalReachedAudio: {fileID: 0}
   timerText: {fileID: 0}
+  PopUpBoxButton: {fileID: 0}
   Timer: {fileID: 0}
   remainingTime: 60
   landGoodSquaresBeforeGoal: 5
   zoroarkStanding: {fileID: 0}
+  leftKlefkiAnimation: {fileID: 0}
+  rightKlefkiAnimation: {fileID: 0}
+  zoroark: {fileID: 0}
+  leftKlefki: {fileID: 0}
+  rightKlefki: {fileID: 0}
+  escapeButton: {fileID: 0}
   WrongSquareMessage: Looks like you stepped on the wrong platform. You have to scan
     the key and start over again.
   RanOutOfTimeMessage: You ran out of time. Try scanning the key again to start over
   YouWonMessage: Congrats! You solved the maze, try scanning the key again, we should
     be able to pick it up now.
+  zoroarkAppearsLines: []
   goodSquareSound: {fileID: 0}
   badSquareSound: {fileID: 0}
 --- !u!114 &142142625
@@ -273,6 +282,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PopUpBoxButton: {fileID: 0}
+  AshLines: []
+  placeGlyphLines: []
   cantEnterGateLine: It seems like we can't enter this area right now. We need to
     find the key and free Ash first.
   doTheGlyphLine: The gate is locked. Maybe we can open it by solving that glyph
@@ -994,11 +1005,130 @@ MonoBehaviour:
   glyphPlaced: 0
   stage: {fileID: 717297849}
   positioner: {fileID: 1339291756}
+--- !u!1 &1838456010 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1968115942778917368, guid: cefa57e7bc9653f4886efbf0a3a18b6a, type: 3}
+  m_PrefabInstance: {fileID: 4942578747670696019}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1938907220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5113892339900874105, guid: cefa57e7bc9653f4886efbf0a3a18b6a, type: 3}
   m_PrefabInstance: {fileID: 4942578747670696019}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1938907221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838456010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82472ecf9a235c440ba63b98dacbbd91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  growthRate: 0.1
+  hasBeenSized: 0
+  timer: 0
+  maxTime: 10
+  hasPlayedSound: 0
+  source: {fileID: 1938907222}
+--- !u!82 &1938907222
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838456010}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ea927d561620d4741bfe5fa9f9793641, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1990086905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1175,7 +1305,13 @@ PrefabInstance:
     - {fileID: 5722439503503627368, guid: cefa57e7bc9653f4886efbf0a3a18b6a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1968115942778917368, guid: cefa57e7bc9653f4886efbf0a3a18b6a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1938907221}
+    - targetCorrespondingSourceObject: {fileID: 1968115942778917368, guid: cefa57e7bc9653f4886efbf0a3a18b6a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1938907222}
   m_SourcePrefab: {fileID: 100100000, guid: cefa57e7bc9653f4886efbf0a3a18b6a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

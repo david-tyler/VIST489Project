@@ -8,15 +8,8 @@ public class AllowGlyphPlacement : MonoBehaviour
     public bool glyphPlaced = false;
     public GameObject stage;
     public GameObject positioner;
+    
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         
@@ -34,6 +27,9 @@ public class AllowGlyphPlacement : MonoBehaviour
             stage.SetActive(false);
             positioner.SetActive(false);
         }
+
+
+        
     }
 
     public void OnTriggerExit(Collider other)
