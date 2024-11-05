@@ -16,15 +16,19 @@ public class GlyphPuzzleController : MonoBehaviour
 
     public void Update()
     {
-        Touch touch = Input.GetTouch(0);
-
-        if(!gateOpen)
+        if(Input.touchCount > 0)
         {
-            if(touch.phase == TouchPhase.Ended)
+            Touch touch = Input.GetTouch(0);
+
+            if (!gateOpen)
             {
-                IncorrectOrder();
+                if (touch.phase == TouchPhase.Ended)
+                {
+                    IncorrectOrder();
+                }
             }
         }
+        
     }
 
     public bool CheckOrder()
