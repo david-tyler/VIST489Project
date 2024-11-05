@@ -517,8 +517,31 @@ public class TriggerZones : MonoBehaviour
         }
     }
 
-    public void ModifyLists()
+    public void ModifyLists(List<GameObject> objectsToRemove = null)
     {
+        if (objectsToRemove != null)
+        {
+            foreach (GameObject item in objectsToRemove)
+            {
+                if (middleHallwayGameObjects.Contains(item))
+                {
+                    middleHallwayGameObjects.Remove(item);
+                }
+                if (backHallwayGameObjects.Contains(item))
+                {
+                    backHallwayGameObjects.Remove(item);
+                }
+                if (bottomHallwayGameObjects.Contains(item))
+                {
+                    bottomHallwayGameObjects.Remove(item);
+                }
+                if (classroomGameObejcts.Contains(item))
+                {
+                    classroomGameObejcts.Remove(item);
+                }
+            }
+        }
+        
         foreach (GameObject item in middleHallwayGameObjects)
         {
             if (item.activeSelf == true && currentMiddleHallwayGameObjects.Contains(item) == false)

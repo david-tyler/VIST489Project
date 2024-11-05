@@ -65,6 +65,8 @@ public class PokemonWorld : MonoBehaviour
     public string freedAshAudioName;
     public string crossPitAudioName;
 
+    public List<GameObject> removeGameObjects;
+
     private void Update()
     {
         
@@ -215,6 +217,7 @@ public class PokemonWorld : MonoBehaviour
             
             count += 1;
             //PopUpBoxButton.onClick.AddListener(SetCountForPopUpKey);
+
             triggerZonesScript.ModifyLists();
         }
         
@@ -238,7 +241,8 @@ public class PokemonWorld : MonoBehaviour
             {
                 item.SetActive(true);
             }
-            triggerZonesScript.ModifyLists();
+
+            triggerZonesScript.ModifyLists(removeGameObjects);
         }
     }
 

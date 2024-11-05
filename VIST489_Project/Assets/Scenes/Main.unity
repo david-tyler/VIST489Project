@@ -1738,11 +1738,15 @@ MonoBehaviour:
     to find objects with those colors, your map should help with this.
   middleHallwayGameObjects:
   - {fileID: 1839697904}
+  - {fileID: 242698646}
+  - {fileID: 150069717}
   backHallwayGameObjects:
   - {fileID: 1872253846}
   - {fileID: 1851315127}
   - {fileID: 2047133614}
   - {fileID: 1711832076}
+  - {fileID: 242698646}
+  - {fileID: 150069717}
   bottomHallwayGameObjects:
   - {fileID: 782628375}
   - {fileID: 1044728417}
@@ -1959,6 +1963,11 @@ PrefabInstance:
 --- !u!4 &150069716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3128753950635769754, guid: c207a33700e88cb4dbb958e63758b9bd, type: 3}
+  m_PrefabInstance: {fileID: 150069715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &150069717 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2314922263852279072, guid: c207a33700e88cb4dbb958e63758b9bd, type: 3}
   m_PrefabInstance: {fileID: 150069715}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &180049445 stripped
@@ -3007,11 +3016,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.y
-      value: 8.088056
+      value: 8.088059
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8.088055
+      value: 8.08806
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5127,7 +5136,6 @@ MonoBehaviour:
   - {fileID: 1839697904}
   - {fileID: 1872253846}
   - {fileID: 1770141496}
-  - {fileID: 1577711597}
   - {fileID: 2047133614}
   charizard: {fileID: 2047133614}
   targetCharizardPlatform1: {fileID: 686874859}
@@ -5138,6 +5146,12 @@ MonoBehaviour:
   CharizardAnim: {fileID: 2047133615}
   freedAshAudioName: 23 - Team Plasma Plots
   crossPitAudioName: 42 - There's Trouble!
+  removeGameObjects:
+  - {fileID: 782628375}
+  - {fileID: 1044728417}
+  - {fileID: 812531082}
+  - {fileID: 567687095}
+  - {fileID: 702661803}
 --- !u!224 &535509171 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5551066961514420604, guid: d9644cfe0eef54d8b8f33aa938458c40, type: 3}
@@ -10156,7 +10170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1146394896
 Transform:
   m_ObjectHideFlags: 0
