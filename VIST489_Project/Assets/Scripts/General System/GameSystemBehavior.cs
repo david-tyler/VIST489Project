@@ -124,6 +124,9 @@ public class GameSystemBehavior : MonoBehaviour
     private ParaLensesButtonBehavior paraLensesScript;
     private PopUpSystem popUp;
     private Interactable focus;
+    private AudioManager audioManagerScript;
+
+    public string backgroundMusicName;
 
     void Start()
     {
@@ -572,6 +575,9 @@ public class GameSystemBehavior : MonoBehaviour
     // Function to determine if we entered a world just setting it to true if we have so we set the behavior for the intro audio.
     public void SetEnteredPokemonWorld()
     {
+        audioManagerScript = AudioManager.instance;
+        audioManagerScript.PlayEventSound(backgroundMusicName);
+
         SetNarrativeEvent(NarrativeEvent.EnteredPokemonWorld, true);
         SetNarrativeEvent(NarrativeEvent.InIntroductionStage, false);
 

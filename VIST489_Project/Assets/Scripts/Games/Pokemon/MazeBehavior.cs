@@ -74,6 +74,7 @@ public class MazeBehavior : MonoBehaviour
     ParaLensesButtonBehavior paraLenses;
     PopUpSystem popUp;
     PokemonWorld pokeWorld;
+    AudioManager audioManagerScript;
 
     MazeSelector firstMazeScript;
     MazeSelector secondMazeScript;
@@ -81,6 +82,9 @@ public class MazeBehavior : MonoBehaviour
 
     public AudioSource goodSquareSound;
     public AudioSource badSquareSound;
+
+    public string ZoroarkEncounterAudioName;
+    public string backgroundMusicName;
 
     void Start()
     {
@@ -175,7 +179,7 @@ public class MazeBehavior : MonoBehaviour
                                 
                                 won = true;
                                 // You win can play a sound and now can spawn the key and get it
-                                goalReachedAudio.Play();
+                                goalReachedAudio.PlayOneShot(goalReachedAudio.clip);
                                 WonMaze(YouWonMessage);
                                 ResetMaze();
                             }
@@ -188,7 +192,6 @@ public class MazeBehavior : MonoBehaviour
                         }
                         else if (goodSquaresLanedCurrent < landGoodSquaresBeforeGoal)
                         {
-                            badSquareSound.Play();
                             startTimer = false;
                             FailedMaze("Nice Try.");
                             
@@ -199,7 +202,7 @@ public class MazeBehavior : MonoBehaviour
                     }
                     else if (other.gameObject.GetComponent<Platform>().isGoal == false)
                     {
-                        goodSquareSound.Play();
+                        goodSquareSound.PlayOneShot(goodSquareSound.clip);
                         platforms.Add(other);
                         other.transform.parent.gameObject.GetComponent<Renderer>().material = goodSquare;
                     }
@@ -208,7 +211,7 @@ public class MazeBehavior : MonoBehaviour
                 }
                 else if (other.gameObject.GetComponent<Platform>().isValidSquare == false)
                 {
-                    badSquareSound.Play();
+                   
                     platforms.Add(other);
                     other.transform.parent.gameObject.GetComponent<Renderer>().material = badSquare;
                     startTimer = false;
@@ -308,6 +311,7 @@ public class MazeBehavior : MonoBehaviour
 
     public void FailedMaze(string text)
     {
+        badSquareSound.PlayOneShot(badSquareSound.clip);
         GameSystem = GameSystemBehavior.instance;
         popUp = PopUpSystem.instance;
 
@@ -335,6 +339,8 @@ public class MazeBehavior : MonoBehaviour
 
     private void ZoroarkAppear()
     {
+        audioManagerScript = AudioManager.instance;
+        audioManagerScript.PlayEventSound(ZoroarkEncounterAudioName);
         PopUpBoxButton.onClick.RemoveAllListeners();
 
         firstMazeScript = firstMaze.GetComponent<MazeSelector>();
@@ -377,6 +383,8 @@ public class MazeBehavior : MonoBehaviour
 
     public void ClickedEscape()
     {
+        audioManagerScript = AudioManager.instance;
+        audioManagerScript.PlayEventSound(backgroundMusicName);
         escapeButton.SetActive(false);
         
         

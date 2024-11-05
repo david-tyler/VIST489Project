@@ -119,6 +119,7 @@
     <Compile Include="Assets/Scripts/General System/Trigger Zones.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TextMeshProFloatingText.cs" />
     <Compile Include="Assets/Scripts/Interactables/Interactable.cs" />
+    <Compile Include="Assets/Scripts/General System/AudioManager.cs" />
     <Compile Include="Assets/Scripts/Items/ItemPickup.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/ShaderPropAnimator.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/CameraController.cs" />

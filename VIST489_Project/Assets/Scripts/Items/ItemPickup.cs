@@ -39,7 +39,7 @@ public class ItemPickup : Interactable
 
         if (completedPickUp == true)
         {
-            ItemPickupSound.Play();
+            ItemPickupSound.PlayOneShot(ItemPickupSound.clip);
             // if we picked up the key set the bool that we have the key to true
             if (item.name == "Key")
             {
