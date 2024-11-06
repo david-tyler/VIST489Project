@@ -133,6 +133,7 @@ public class GameSystemBehavior : MonoBehaviour
 
     public List<Item> itemsReachedGlyph;
     public List<Item> itemsReachedPit;
+    public List<PokeBallTower> towers = new List<PokeBallTower>();
 
     void Start()
     {
@@ -757,6 +758,11 @@ public class GameSystemBehavior : MonoBehaviour
         foreach (Item item in itemsReachedGlyph)
         {
             inventoryScript.Add(item);
+        }
+
+        foreach (PokeBallTower tower in towers)
+        {
+            tower.foundBall = true;
         }
 
     }
