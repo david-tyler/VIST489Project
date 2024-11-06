@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -125,8 +126,13 @@ public class GameSystemBehavior : MonoBehaviour
     private PopUpSystem popUp;
     private Interactable focus;
     private AudioManager audioManagerScript;
+    TriggerZones triggerZonesScript;
+    Inventory inventoryScript;
 
     public string backgroundMusicName;
+
+    public List<Item> itemsReachedGlyph;
+    public List<Item> itemsReachedPit;
 
     void Start()
     {
@@ -580,6 +586,7 @@ public class GameSystemBehavior : MonoBehaviour
 
         SetNarrativeEvent(NarrativeEvent.EnteredPokemonWorld, true);
         SetNarrativeEvent(NarrativeEvent.InIntroductionStage, false);
+        triggerZonesScript = TriggerZones.instance;
 
         EnteredPokemonWorld = true;
         AreWeInAWorld = EnteredPokemonWorld;
@@ -603,6 +610,8 @@ public class GameSystemBehavior : MonoBehaviour
         string AshOverThereText = "Over there! Is that Ash? There's something wrong with him.";
         MessageText = AshOverThereText;
         haveMessage = true;
+
+        triggerZonesScript.ModifyLists();
     }
 
     // will have conditoins for this that once we have completed the world we can now leave probably will need to make another button
@@ -712,5 +721,88 @@ public class GameSystemBehavior : MonoBehaviour
         {
             narrativeState[i] = false;
         }
+    }
+
+    public void SetOverallNarrativeState(List<bool> currentState)
+    {
+        if (currentState.Count != narrativeState.Length)
+        {
+            Debug.LogWarning("Incorrect size of booleans for narrative");
+
+            return;
+        }
+        for (int i = 0; i < narrativeState.Length; i++)
+        {
+            narrativeState[i] = currentState[i];
+            
+        }
+    }
+
+    public void SetUpGlyphNarrativeState()
+    {
+        inventoryScript = Inventory.instance;
+        List<bool> currentState = new List<bool>();
+        currentState.Add(IsNarrativeEventComplete(NarrativeEvent.ParalensesOn));
+        currentState.Add(false);
+        currentState.Add(true);
+        currentState.Add(true);
+        currentState.Add(true);
+        currentState.Add(false);
+        currentState.Add(false);
+        currentState.Add(false);
+        currentState.Add(false);
+        SetOverallNarrativeState(currentState);
+
+        inventoryScript.Clear();
+        foreach (Item item in itemsReachedGlyph)
+        {
+            inventoryScript.Add(item);
+        }
+
+    }
+
+    public void SetUpMazeNarrativeState()
+    {
+        inventoryScript = Inventory.instance;
+        List<bool> currentState = new List<bool>();
+        currentState.Add(IsNarrativeEventComplete(NarrativeEvent.ParalensesOn));
+        currentState.Add(false);
+        currentState.Add(true);
+        currentState.Add(false);
+        currentState.Add(false);
+        currentState.Add(false);
+        currentState.Add(false);
+        currentState.Add(false);
+        currentState.Add(false);
+        SetOverallNarrativeState(currentState);
+
+        inventoryScript.Clear();
+        foreach (Item item in itemsReachedGlyph)
+        {
+            inventoryScript.Add(item);
+        }
+
+    }
+    public void SetUpPitNarrativeState()
+    {
+        inventoryScript = Inventory.instance;
+        List<bool> currentState = new List<bool>();
+        currentState.Add(IsNarrativeEventComplete(NarrativeEvent.ParalensesOn));
+        currentState.Add(false);
+        currentState.Add(true);
+        currentState.Add(true);
+        currentState.Add(true);
+        currentState.Add(true);
+        currentState.Add(false);
+        currentState.Add(false);
+        currentState.Add(false);
+        SetOverallNarrativeState(currentState);
+
+        inventoryScript.Clear();
+        foreach (Item item in itemsReachedPit)
+        {
+            inventoryScript.Add(item);
+        }
+
     }
 }

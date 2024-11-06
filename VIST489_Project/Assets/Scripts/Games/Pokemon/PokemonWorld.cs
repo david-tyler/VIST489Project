@@ -218,7 +218,7 @@ public class PokemonWorld : MonoBehaviour
             count += 1;
             //PopUpBoxButton.onClick.AddListener(SetCountForPopUpKey);
 
-            triggerZonesScript.ModifyLists();
+            triggerZonesScript.ModifyLists(null, false, false, false, true);
         }
         
     }

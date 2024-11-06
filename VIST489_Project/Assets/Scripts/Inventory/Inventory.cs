@@ -49,6 +49,24 @@ public class Inventory : MonoBehaviour
    
         
     }
+    public void Clear()
+    {
+        // Update the inventory status of each item before clearing
+        foreach (Item item in items)
+        {
+            item.SetInventoryStatus(false);
+        }
+
+        // Clear the list of items
+        items.Clear();
+
+        // Invoke the callback to update any UI elements or other listeners
+        if (onItemChangedCallback != null)
+        {
+            onItemChangedCallback.Invoke();
+        }
+    }
+
     
     public void Remove(Item item)
     {

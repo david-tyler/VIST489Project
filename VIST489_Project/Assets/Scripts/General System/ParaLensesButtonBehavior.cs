@@ -47,7 +47,7 @@ public class ParaLensesButtonBehavior : MonoBehaviour
 
         gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.ParalensesOn, isParaLensesOn); // potentially return and see if we can avoid using isParaLensesOn
 
-        if (isParaLensesOn == true)
+        if (gameSystem.IsNarrativeEventComplete(GameSystemBehavior.NarrativeEvent.ParalensesOn) == true)
         {
             ParaLensesText.text = text_DisableParaLenses;
             foreach (GameObject currentGameObject in ActiveGameObjects)
@@ -55,7 +55,7 @@ public class ParaLensesButtonBehavior : MonoBehaviour
                 currentGameObject.SetActive(true);
             }
         }
-        else if (isParaLensesOn == false)
+        else if (gameSystem.IsNarrativeEventComplete(GameSystemBehavior.NarrativeEvent.ParalensesOn) == false)
         {
             ParaLensesText.text = text_EnableParaLenses;
             foreach (GameObject currentGameObject in ActiveGameObjects)

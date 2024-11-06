@@ -67,8 +67,11 @@ public class ItemPickup : Interactable
             
             
         }
-
-        tower.foundBall = true;
+        if (tower != null)
+        {
+            tower.foundBall = true;
+        }
+        
     }
 
 }

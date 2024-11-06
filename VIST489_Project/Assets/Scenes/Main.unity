@@ -1506,6 +1506,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 535425576}
+        m_TargetAssemblyTypeName: GameSystemBehavior, Assembly-CSharp
+        m_MethodName: SetUpPitNarrativeState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &132246938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3016,11 +3028,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.y
-      value: 8.088059
+      value: 8.088067
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8.08806
+      value: 8.08807
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5097,6 +5109,14 @@ MonoBehaviour:
   - {fileID: 782628375}
   - {fileID: 1044728417}
   backgroundMusicName: 15 - Dragonspiral Tower
+  itemsReachedGlyph:
+  - {fileID: 11400000, guid: 8dcc0e0070f0d4c0ead31cde5ca5cebd, type: 2}
+  - {fileID: 11400000, guid: 469e27988a290409c99e93b784cadd33, type: 2}
+  - {fileID: 11400000, guid: 1e6490760b73c4ac08bfb3b0bf6ff86b, type: 2}
+  - {fileID: 11400000, guid: 7aab34f4154ce4b88ad0b164ec3bc48d, type: 2}
+  - {fileID: 11400000, guid: 0cd8f069de43b41878b80d52c635a8b7, type: 2}
+  itemsReachedPit:
+  - {fileID: 11400000, guid: 0cd8f069de43b41878b80d52c635a8b7, type: 2}
 --- !u!114 &535425580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14710,6 +14730,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 535425576}
+        m_TargetAssemblyTypeName: GameSystemBehavior, Assembly-CSharp
+        m_MethodName: SetUpGlyphNarrativeState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1765791652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14955,6 +14987,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 9c351e5c9f9d944f0a5cfbfa6891429b, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 535425576}
+        m_TargetAssemblyTypeName: GameSystemBehavior, Assembly-CSharp
+        m_MethodName: SetUpMazeNarrativeState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
