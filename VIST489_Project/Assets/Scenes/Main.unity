@@ -1570,6 +1570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ARCamera: {fileID: 437364105}
   positionToGo: {fileID: 969525320}
+  cameraOrigin: {fileID: 1266720393}
 --- !u!1 &142142619
 GameObject:
   m_ObjectHideFlags: 0
@@ -10653,6 +10654,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255173644}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1266720392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1266720393}
+  m_Layer: 0
+  m_Name: CameraOriginObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1266720393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266720392}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.082515605, z: -0, w: 0.9965898}
+  m_LocalPosition: {x: 15.31, y: -0.413, z: 4.398}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1275355207
 GameObject:
   m_ObjectHideFlags: 0
@@ -14794,6 +14826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ARCamera: {fileID: 437364105}
   positionToGo: {fileID: 952955544}
+  cameraOrigin: {fileID: 1266720393}
 --- !u!23 &1768837115 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -2234040702563316214, guid: 899b41f9d1b4d4428808e1cb4fc6914e, type: 3}
@@ -15056,6 +15089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ARCamera: {fileID: 437364105}
   positionToGo: {fileID: 1203784531}
+  cameraOrigin: {fileID: 1266720393}
 --- !u!1001 &1792090699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18204,6 +18238,7 @@ SceneRoots:
   - {fileID: 535425574}
   - {fileID: 147632369}
   - {fileID: 705507995}
+  - {fileID: 1266720393}
   - {fileID: 437364110}
   - {fileID: 999165100}
   - {fileID: 2039407609}

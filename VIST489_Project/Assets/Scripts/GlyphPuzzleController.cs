@@ -16,11 +16,21 @@ public class GlyphPuzzleController : MonoBehaviour
 
     public void Update()
     {
-        Touch touch = Input.GetTouch(0);
-
-        if(!gateOpen)
+        if (Input.touchCount > 0)
         {
-            if(touch.phase == TouchPhase.Ended)
+            Touch touch = Input.GetTouch(0);
+
+            if (!gateOpen)
+            {
+                if (touch.phase == TouchPhase.Ended)
+                {
+                    IncorrectOrder();
+                }
+            }
+        }
+        else if(Input.GetMouseButtonUp(0))
+        {
+            if (!gateOpen)
             {
                 IncorrectOrder();
             }
@@ -55,12 +65,15 @@ public class GlyphPuzzleController : MonoBehaviour
             placedBalls[i].SetActive(false);
         }
 
+        placedBalls.Clear();
+
         coloredPokeball.material = baseColor;
     }
 
     public void OpenGate()
     {
         gate.SetActive(false);
+        gateOpen = true;
     }
 
 
