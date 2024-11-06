@@ -15,6 +15,8 @@ public class PokeBallTower : Interactable
 
     public AudioSource placePokeballAudio;
 
+    public bool placed = false;
+
 
     public void AddSelfToCurrentList()
     {
@@ -39,9 +41,19 @@ public class PokeBallTower : Interactable
 
         if (foundBall)
         {
-            placePokeballAudio.PlayOneShot(placePokeballAudio.clip);
-            AddSelfToCurrentList();
+            if(!placed)
+            {
+                placePokeballAudio.PlayOneShot(placePokeballAudio.clip);
+                controller.placedBalls.Add(ball);
+                placed = true;
+                AddSelfToCurrentList();
+            }
+            
+
+
+            
             ball.SetActive(true);
+            
             controller.coloredPokeball.material = nextColor;
         }
 
@@ -74,7 +86,11 @@ public class PokeBallTower : Interactable
                         Interact();
                     }
                 }
+            }
+            else
+            {
 
+                controller.IncorrectOrder();
             }
         }
         else if (Input.GetMouseButton(0)) // 0 is for left-click
@@ -94,6 +110,15 @@ public class PokeBallTower : Interactable
                     Interact();
                 }
             }
+        }
+        else
+        {
+            controller.IncorrectOrder();
+        }
+
+        if(!ball.activeInHierarchy)
+        {
+            placed = false;
         }
     }
 }

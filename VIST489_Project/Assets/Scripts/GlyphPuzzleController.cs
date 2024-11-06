@@ -65,12 +65,15 @@ public class GlyphPuzzleController : MonoBehaviour
             placedBalls[i].SetActive(false);
         }
 
+        placedBalls.Clear();
+
         coloredPokeball.material = baseColor;
     }
 
     public void OpenGate()
     {
         gate.SetActive(false);
+        gateOpen = true;
     }
 
 
