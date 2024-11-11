@@ -7,29 +7,14 @@ using Vuforia;
 public class ResetScenePositions : MonoBehaviour
 {
     private ObserverBehaviour observerBehaviour;
-    public GameObject imageTargetRecalibrate;
-    public GameObject sceneObject;
 
-    private Vector3 initialOffset;
-    public Transform initialTransform;
-    private Quaternion initialRotation;
-    private Vector3 initialPosition;
-    private Vector3 imageTargetPosition;
-    private Quaternion imageTargetRotation;
-    private Vector3 initialImagePosition;
+    public Transform MoviePoster;
+    public Transform SpaceCalibrator;
+    public Transform ARCamera;
 
-    private PopUpSystem popUp;
+    private Vector3 offset;
 
-    // Threshold for detecting significant drift
-    public float driftThreshold = 2.0f; // Adjust as needed
-    public string message = "The world seems to have shifted. Scan the Inside Out movie poster in the main hallway to fix it.";
-
-    private bool shownMessage;
-
-    // first scan to store the position of the image
-    bool firstScanToStore = true;
-    private Vector3 intendedSceneObjectPosition;
-    bool firstShift = true;
+    private bool enabledScan = false;
 
     void Start()
     {
@@ -40,41 +25,15 @@ public class ResetScenePositions : MonoBehaviour
             observerBehaviour.OnTargetStatusChanged += OnTargetStatusChanged;
             observerBehaviour.OnBehaviourDestroyed += OnObserverDestroyed;
         }
-        
-        
-        initialPosition = initialTransform.position;
-        initialRotation = initialTransform.rotation;
 
-        initialImagePosition = imageTargetRecalibrate.transform.position;
-
-        shownMessage = false;
-        popUp = PopUpSystem.instance;
-        if (firstScanToStore)
-        {
-            popUp.PopUp("Scan the Inside Out movie poster for world calibration checks");
-        }
-       
+        offset = SpaceCalibrator.position - MoviePoster.position;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (firstScanToStore == false)
-        {
-            Vector3 currentOffset = imageTargetPosition - sceneObject.transform.position;
-            float driftDistance = Vector3.Distance(initialOffset, currentOffset);
-
-            // Threshold for detecting significant drift
-            if (driftDistance > driftThreshold && shownMessage == false)
-            {
-                
-                popUp.PopUp(message);
-                shownMessage = true;
-
-            }
-        }
-       
+        
     }
 
     private void OnObserverDestroyed(ObserverBehaviour behaviour)
@@ -90,62 +49,34 @@ public class ResetScenePositions : MonoBehaviour
             targetStatus.Status == Status.EXTENDED_TRACKED ||
             targetStatus.Status == Status.LIMITED)
         {
+            if (enabledScan == true)
+            {
+                ResetScenePosition();
+            }
             
-            // The image target is being tracked
-            if (firstScanToStore)
-            {
-                imageTargetPosition = imageTargetRecalibrate.transform.position;
-                imageTargetRotation = imageTargetRecalibrate.transform.rotation;
-
-                initialOffset = imageTargetPosition - initialPosition;
-
-                Vector3 initialDelta = imageTargetPosition - initialImagePosition;
-                firstScanToStore = false;
-                
-
-            }
-            else
-            {
-                ResetVirtualObjectPosition();
-            }
+            
             
             
            
         }
     }
-    private void ResetVirtualObjectPosition()
+
+    void ResetScenePosition()
     {
+        MoviePoster.transform.position = this.transform.position;
+        
+        SpaceCalibrator.position = MoviePoster.transform.position + offset;
+        Vuforia.VuforiaBehaviour.Instance.DevicePoseBehaviour.enabled = false;
+        
+        ARCamera.position = new Vector3(MoviePoster.position.x, ARCamera.position.y, MoviePoster.position.z);
+        ARCamera.rotation = MoviePoster.transform.rotation;
+        Vuforia.VuforiaBehaviour.Instance.DevicePoseBehaviour.RecenterPose();
+        Vuforia.VuforiaBehaviour.Instance.DevicePoseBehaviour.enabled = true;
+        enabledScan = false;
+    }
 
-        Vector3 virtualImageTargetPosition = imageTargetPosition;
-        Vector3 realWorldImageTargetPosition = imageTargetRecalibrate.transform.position;
-        
-        Vector3 positionDelta = realWorldImageTargetPosition - virtualImageTargetPosition;
-
-        if ( firstShift )
-        {
-            intendedSceneObjectPosition = sceneObject.transform.position - positionDelta;
-            firstShift = false;
-        }
-        
-
-        popUp.PopUp($"real image: {realWorldImageTargetPosition} virtual image: {virtualImageTargetPosition} \n Scene: {sceneObject.transform.position } Calculation: {intendedSceneObjectPosition}");
-        sceneObject.transform.position = intendedSceneObjectPosition;
-
-        
-
-        Vector3 currentOffset = realWorldImageTargetPosition - sceneObject.transform.position;
-        float driftDistance = Vector3.Distance(initialOffset, currentOffset);
-        
-        
-        if (driftDistance > driftThreshold)
-        {
-            
-            shownMessage = false;
-
-            Debug.Log($"Drift detected: {driftDistance} units");
-            
-        }
-        
-        
+    private void SetEnabledScan(bool status)
+    {
+        enabledScan = status;
     }
 }

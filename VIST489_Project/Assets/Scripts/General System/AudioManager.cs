@@ -35,7 +35,7 @@ public class AudioManager : MonoBehaviour
         eventAudioSource.playOnAwake = false;
         eventAudioSource.spatialBlend = 0f; // 2D sound
         eventAudioSource.loop = true;
-        eventAudioSource.volume = 0.7f;
+        eventAudioSource.volume = 0.5f;
         currentAudioSource = eventAudioSource;
     }
 

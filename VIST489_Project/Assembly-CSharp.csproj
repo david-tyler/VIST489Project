@@ -112,6 +112,7 @@
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark02.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextSelector_B.cs" />
     <Compile Include="Assets/Scripts/DebugCameraMove.cs" />
+    <Compile Include="Assets/Scripts/General System/UI/PokemonDisplay.cs" />
     <Compile Include="Assets/Scripts/GlyphPuzzleController.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/SkewTextExample.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/WarpTextExample.cs" />
@@ -124,10 +125,13 @@
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/ShaderPropAnimator.cs" />
     <Compile Include="Assets/GlyphGrower.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/CameraController.cs" />
+    <Compile Include="Assets/Scripts/General System/UI/UIOptionButtonsBehavior.cs" />
     <Compile Include="Assets/Scripts/General System/PopUpSystem.cs" />
     <Compile Include="Assets/Scripts/ITPokemonSoundController.cs" />
+    <Compile Include="Assets/Scripts/Games/Pokemon/Actual Pokemon/Pokemon.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark03.cs" />
     <Compile Include="Assets/Scripts/SpawnMaze.cs" />
+    <Compile Include="Assets/Scripts/General System/UI/PokedexBehavior.cs" />
     <Compile Include="Assets/Scripts/General System/ParaLensesButtonBehavior.cs" />
     <Compile Include="Assets/Scripts/Inventory/InventoryBehaviorUI.cs" />
     <Compile Include="Assets/Scripts/General System/GameSystemBehavior.cs" />

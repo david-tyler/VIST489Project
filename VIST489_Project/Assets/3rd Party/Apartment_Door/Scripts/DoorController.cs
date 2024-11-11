@@ -80,14 +80,21 @@ public class DoorController : MonoBehaviour
         txtToDisplay.SetActive(true);
         playerInZone = true;
 
-        popUp = PopUpSystem.instance;
         gameSystem = GameSystemBehavior.instance;
         paraLensesScript = ParaLensesButtonBehavior.instance;
         pokeWorld = PokemonWorld.instance;
 
+        Dictionary<GameSystemBehavior.NarrativeEvent, bool> eventsToCheck = new Dictionary<GameSystemBehavior.NarrativeEvent, bool>()
+        {
+            {GameSystemBehavior.NarrativeEvent.EnteredPokemonWorld, true},
+            {GameSystemBehavior.NarrativeEvent.ParalensesOn, true},
+            {GameSystemBehavior.NarrativeEvent.FreedAsh, false}
+        };
+
+        
         if(pokeWorld.GetPickedUpKey() == false)
         {
-            if (gameSystem.GetEnteredPokemonWorld() == true && paraLensesScript.getIsParaLensesOn() && pokeWorld.GetUnlockedDoor() == false)
+            if (gameSystem.CheckNarrativeEvents(eventsToCheck) == true)
             {
                 gameSystem.SetHaveMessage(true);
                 gameSystem.SetMessageText(FindKeyTextForDoor);
@@ -101,7 +108,7 @@ public class DoorController : MonoBehaviour
         }
         else if(pokeWorld.GetPickedUpKey() == true)
         {
-            if (gameSystem.GetEnteredPokemonWorld() == true && paraLensesScript.getIsParaLensesOn() && pokeWorld.GetUnlockedDoor() == false)
+            if (gameSystem.CheckNarrativeEvents(eventsToCheck) == true)
             {
                 gameSystem.SetHaveMessage(true);
                 gameSystem.SetMessageText(UseKeyTextForDoor);

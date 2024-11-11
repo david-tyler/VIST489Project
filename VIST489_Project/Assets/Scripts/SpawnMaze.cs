@@ -16,7 +16,7 @@ public class SpawnMaze : MonoBehaviour
         {
             objectsToSpawn[i].SetActive(true);
         }
-
+        gameSystem = GameSystemBehavior.instance;
         gameSystem.SetHaveMessage(true);
         gameSystem.SetMessageText(klefkiEndHallway);
     }

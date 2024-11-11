@@ -70,7 +70,7 @@ public class MazeBehavior : MonoBehaviour
 
     public List<string> zoroarkAppearsLines = new List<string>();
 
-    GameSystemBehavior GameSystem;
+    GameSystemBehavior gameSystem;
     ParaLensesButtonBehavior paraLenses;
     PopUpSystem popUp;
     PokemonWorld pokeWorld;
@@ -181,7 +181,7 @@ public class MazeBehavior : MonoBehaviour
                                 // You win can play a sound and now can spawn the key and get it
                                 goalReachedAudio.PlayOneShot(goalReachedAudio.clip);
                                 WonMaze(YouWonMessage);
-                                ResetMaze();
+                                
                             }
                             else if (currentMazeScript.GetIsReal() == false)
                             {
@@ -283,12 +283,10 @@ public class MazeBehavior : MonoBehaviour
 
     public void WonMaze(string text)
     {
-        GameSystem = GameSystemBehavior.instance;
-        paraLenses = ParaLensesButtonBehavior.instance;
+        gameSystem = GameSystemBehavior.instance;
 
-
-        GameSystem.SetHaveMessage(true);
-        GameSystem.SetMessageText(text);
+        gameSystem.SetHaveMessage(true);
+        gameSystem.SetMessageText(text);
 
         startTimer = false;
         
@@ -302,8 +300,9 @@ public class MazeBehavior : MonoBehaviour
         Timer.SetActive(false);
         firstMaze.SetActive(false);
         secondMaze.SetActive(false);
-        leftKlefki.SetActive(false);
-        rightKlefki.SetActive(false);
+        leftKlefkiAnimation.SetTrigger("Disappear");
+        rightKlefkiAnimation.SetTrigger("Disappear");
+        
         
         
     }
@@ -312,10 +311,10 @@ public class MazeBehavior : MonoBehaviour
     public void FailedMaze(string text)
     {
         badSquareSound.PlayOneShot(badSquareSound.clip);
-        GameSystem = GameSystemBehavior.instance;
+        gameSystem = GameSystemBehavior.instance;
         popUp = PopUpSystem.instance;
 
-        GameSystem.SetHaveMessage(true);
+        gameSystem.SetHaveMessage(true);
         
 
         failed = true;
@@ -323,7 +322,7 @@ public class MazeBehavior : MonoBehaviour
         Timer.SetActive(false);
         if ( goalReached == false)
         {
-            GameSystem.SetMessageText(text);
+            gameSystem.SetMessageText(text);
             Timer.SetActive(false);
         }
         else if (goalReached == true)
@@ -370,12 +369,12 @@ public class MazeBehavior : MonoBehaviour
 
         zoroark.SetActive(true);
         zoroarkStanding.SetTrigger("StartCrouch");
-        GameSystem = GameSystemBehavior.instance;
+        gameSystem = GameSystemBehavior.instance;
         // maybe play an audio showing zoroark appears
         yield return new WaitForSeconds(2);
 
-        GameSystem.SetHaveMessage(true);
-        GameSystem.SetMessageText(zoroarkAppearsLines[1]);
+        gameSystem.SetHaveMessage(true);
+        gameSystem.SetMessageText(zoroarkAppearsLines[1]);
         escapeButton.SetActive(true);
 
 

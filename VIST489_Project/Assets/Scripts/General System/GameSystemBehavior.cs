@@ -40,9 +40,17 @@ public class GameSystemBehavior : MonoBehaviour
     private bool[] narrativeState = new bool[9];
 
     // Keep track of what interactable we have focused
+    
     public GameObject ParaNormalLensesGameObject;
     public Button ParaNormalLensesButton;
     public Camera mainCamera;
+
+    private ParaLensesButtonBehavior paraLensesScript;
+    private PopUpSystem popUp;
+    private Interactable focus;
+    private AudioManager audioManagerScript;
+    private TriggerZones triggerZonesScript;
+    private Inventory inventoryScript;
 
     // Narration Audio Sources
     // --------------------------------------
@@ -56,6 +64,9 @@ public class GameSystemBehavior : MonoBehaviour
     // --------------------------------------
     public GameObject PopUpBox; // Our dialogue box
     public Animator PopUpBoxAnimator;
+
+    public Animator MessageButtonAnimator;
+
     public TMPro.TextMeshProUGUI PopUpBoxText;
     // --------------------------------------
 
@@ -90,7 +101,7 @@ public class GameSystemBehavior : MonoBehaviour
     // --------------------------------------
     private string display_EnterPokemonWorld = "Enter Pokemon World";
     private string display_LeavePokemonWorld = "Leave Pokemon World";
-    private string CurrentWorld = "";
+
     private string MessageText = "";
     // --------------------------------------
 
@@ -99,7 +110,6 @@ public class GameSystemBehavior : MonoBehaviour
     // --------------------------------------
     private bool gameStarted = false;
     // boolean to track if we have entered a world or not at least once for the introduction audio behavior
-    private bool EnteredPokemonWorld = false;
 
     private bool AreWeInAWorld = false;
     private bool haveMessage = false;
@@ -120,19 +130,17 @@ public class GameSystemBehavior : MonoBehaviour
     */
 
     // All of the game objects we want to not be active once we start the game so like puzzles etc.
-    public List<GameObject> gameObjectsNotActive = new List<GameObject>();
+   
 
-    private ParaLensesButtonBehavior paraLensesScript;
-    private PopUpSystem popUp;
-    private Interactable focus;
-    private AudioManager audioManagerScript;
-    TriggerZones triggerZonesScript;
-    Inventory inventoryScript;
+    
 
     public string backgroundMusicName;
 
+     public List<GameObject> gameObjectsNotActive = new List<GameObject>();
     public List<Item> itemsReachedGlyph;
     public List<Item> itemsReachedPit;
+    public List<Item> itemsReachedMaze;
+
 
     void Start()
     {
@@ -423,12 +431,9 @@ public class GameSystemBehavior : MonoBehaviour
     public void PlayAudios()
     {
         paraLensesScript = ParaLensesButtonBehavior.instance;
-        bool isParaLensesOn = paraLensesScript.getIsParaLensesOn();
-
-        // With this functionality the Find A Gateway voice line only plays if we enable the paranormal lenses
 
         AudioSource currentAudio = null;
-        // if (isParaLensesOn == true && AreWeInAWorld == false)
+        
         List<NarrativeEvent> narrativeEvents = new List<NarrativeEvent>
         {
             NarrativeEvent.ParalensesOn,
@@ -539,7 +544,7 @@ public class GameSystemBehavior : MonoBehaviour
         popUp.animator = PopUpBoxAnimator;
         string ToggleLensesText = "Click the button below to toggle your Paranormal Lenses on or off.";
         MessageText = ToggleLensesText;
-        haveMessage = true;
+        SetHaveMessage(true);
     }
 
     public void SkipButtonInteraction(AudioSource currentAudio = null, bool inDialogueSequence = false)
@@ -588,10 +593,6 @@ public class GameSystemBehavior : MonoBehaviour
         SetNarrativeEvent(NarrativeEvent.InIntroductionStage, false);
         triggerZonesScript = TriggerZones.instance;
 
-        EnteredPokemonWorld = true;
-        AreWeInAWorld = EnteredPokemonWorld;
-        
-        CurrentWorld = "Pokemon World";
 
         // turn the enter pokemon world button off as we are now in the world and don't need to see it.
         // can add a brief pop up box or text saying welcome to the world of pokemon or soemthing later
@@ -609,7 +610,7 @@ public class GameSystemBehavior : MonoBehaviour
         
         string AshOverThereText = "Over there! Is that Ash? There's something wrong with him.";
         MessageText = AshOverThereText;
-        haveMessage = true;
+        SetHaveMessage(true);
 
         triggerZonesScript.ModifyLists();
     }
@@ -620,21 +621,9 @@ public class GameSystemBehavior : MonoBehaviour
     {
         SetNarrativeEvent(NarrativeEvent.EnteredPokemonWorld, false);
 
-        EnteredPokemonWorld = false;
-        CurrentWorld = "";
-        AreWeInAWorld = EnteredPokemonWorld;
+        AreWeInAWorld = narrativeState[(int)NarrativeEvent.EnteredPokemonWorld];
         text_PokemonWorldButtonGameObject.text = display_EnterPokemonWorld;
 
-    }
-
-    public bool GetEnteredPokemonWorld()
-    {
-        return EnteredPokemonWorld;
-    }
-
-    public string GetCurrentWorld()
-    {
-        return CurrentWorld;
     }
 
     public bool getPressedSkip()
@@ -657,6 +646,8 @@ public class GameSystemBehavior : MonoBehaviour
     public void SetHaveMessage(bool messageExists)
     {
         haveMessage = messageExists;
+        MessageButtonAnimator.SetTrigger("Shake");
+        Handheld.Vibrate(); // vibrate phone whenever player gets a message
     }
     public void SetMessageText(string text)
     {
@@ -738,6 +729,31 @@ public class GameSystemBehavior : MonoBehaviour
         }
     }
 
+    public bool CheckNarrativeEvents(Dictionary<NarrativeEvent, bool> expectedEvents)
+    {
+        foreach (KeyValuePair <NarrativeEvent, bool> kvp in expectedEvents)
+        {
+            NarrativeEvent narrativeEvent = kvp.Key;
+            bool expectedState = kvp.Value;
+
+            int index = (int)narrativeEvent;
+
+            if (index >= 0 && index < narrativeState.Length)
+            {
+                if (narrativeState[index] != expectedState)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"Invalid Narrative Event: {narrativeEvent}, checking at invalid index: {index}");
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void SetUpGlyphNarrativeState()
     {
         inventoryScript = Inventory.instance;
@@ -754,10 +770,14 @@ public class GameSystemBehavior : MonoBehaviour
         SetOverallNarrativeState(currentState);
 
         inventoryScript.Clear();
-        foreach (Item item in itemsReachedGlyph)
+        if (itemsReachedGlyph.Any())
         {
-            inventoryScript.Add(item);
+            foreach (Item item in itemsReachedGlyph)
+            {
+                inventoryScript.Add(item);
+            }
         }
+        
 
     }
 
@@ -777,10 +797,14 @@ public class GameSystemBehavior : MonoBehaviour
         SetOverallNarrativeState(currentState);
 
         inventoryScript.Clear();
-        foreach (Item item in itemsReachedGlyph)
+        if (itemsReachedMaze.Any())
         {
-            inventoryScript.Add(item);
+            foreach (Item item in itemsReachedMaze)
+            {
+                inventoryScript.Add(item);
+            }
         }
+        
 
     }
     public void SetUpPitNarrativeState()
@@ -799,10 +823,13 @@ public class GameSystemBehavior : MonoBehaviour
         SetOverallNarrativeState(currentState);
 
         inventoryScript.Clear();
-        foreach (Item item in itemsReachedPit)
+        if (itemsReachedPit.Any())
         {
-            inventoryScript.Add(item);
-        }
+            foreach (Item item in itemsReachedPit)
+            {
+                inventoryScript.Add(item);
+            }
+        }        
 
     }
 }

@@ -17,6 +17,8 @@ TagManager:
   - Bottom Hallway
   - Middle Hallway
   - Back Hallway
+  - Inventory
+  - Pokedex
   layers:
   - Default
   - TransparentFX
