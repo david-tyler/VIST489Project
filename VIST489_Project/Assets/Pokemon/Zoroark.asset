@@ -15,8 +15,8 @@ MonoBehaviour:
   name: Zoroark
   shortDescription: The Illusion Pokemon
   longDescription: "This Pok\xE9mon, has the power to create realistic illusions
-    to deceive others of their own reality. But if you look close enough you may
-    be able to unveil the truth."
+    to deceive others of their own reality. Hint: If one looks close enough they
+    may be able to unveil the truth."
   type:
   - Dark
   image: {fileID: 21300000, guid: 830d460dff4644881a4e8586234b5ee1, type: 3}

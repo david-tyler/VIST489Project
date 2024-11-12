@@ -267,6 +267,9 @@ public class GameSystemBehavior : MonoBehaviour
                                     case "Blue Glyph Pokeball":
                                         SetFocus(interactable);
                                         break;
+                                    case "Old Key":
+                                        SetFocus(interactable);
+                                        break;
                                 }
                             }
 
@@ -358,6 +361,9 @@ public class GameSystemBehavior : MonoBehaviour
                                     SetFocus(interactable);
                                     break;
                                 case "Blue Glyph Pokeball":
+                                    SetFocus(interactable);
+                                    break;
+                                case "Old Key":
                                     SetFocus(interactable);
                                     break;
                             }

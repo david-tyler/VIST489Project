@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c39178dda3f54b4b9a99fdd64854e7b, type: 3}
+  m_Name: Klefki
+  m_EditorClassIdentifier: 
+  name: Klefki
+  shortDescription: The Key Guardian
+  longDescription: "The Key Ring Pok\xE9mon, is a friendly and helpful guardian who
+    treasures its collection of keys and takes pride in keeping them safe. Solve
+    his puzzle and you will be rewarded. Hint: Tap on the image to get a clue."
+  type:
+  - Steel
+  - Fairy
+  image: {fileID: 21300000, guid: 92f192fe9a1c842709e6b3c89396f097, type: 3}
