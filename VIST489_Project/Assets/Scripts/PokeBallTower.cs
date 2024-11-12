@@ -6,6 +6,7 @@ public class PokeBallTower : Interactable
 {
 
     public GlyphPuzzleController controller;
+    public Camera camera;
 
     public Material nextColor;
     public bool foundBall = false;
@@ -14,13 +15,15 @@ public class PokeBallTower : Interactable
 
     public AudioSource placePokeballAudio;
 
-  
+    public bool placed = false;
+
+
     public void AddSelfToCurrentList()
     {
         controller.currentOrder.Add(this.gameObject);
 
 
-        if(controller.currentOrder.Count >= 4)
+        if (controller.currentOrder.Count >= 4)
         {
             controller.CheckOrder();
         }
@@ -31,19 +34,91 @@ public class PokeBallTower : Interactable
     {
         //base.Interact();
 
-       
-    
+
+
         // Event triggered when object is hit by raycast
         Debug.Log("Object hit by raycast: " + gameObject.name);
 
-        if(foundBall)
+        if (foundBall)
         {
-            placePokeballAudio.PlayOneShot(placePokeballAudio.clip);
-            AddSelfToCurrentList();
+            if(!placed)
+            {
+                placePokeballAudio.PlayOneShot(placePokeballAudio.clip);
+                controller.placedBalls.Add(ball);
+                placed = true;
+                AddSelfToCurrentList();
+            }
+            
+
+
+            
             ball.SetActive(true);
+            
             controller.coloredPokeball.material = nextColor;
         }
-       
+
         // You can add custom logic here, like changing color or triggering an animation
+    }
+
+    public void Update()
+    {
+
+        if (Input.touchCount > 0)
+        {
+            // Debug.Log("TOUCHING SCREEN");
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase != TouchPhase.Ended)
+            {
+                // Debug.Log("TOUCHING Begin");
+
+                // Create a ray from the screen point where the touch occurred.
+                Ray ray = camera.ScreenPointToRay(touch.position);
+
+                // Variable to store the hit information.
+                RaycastHit hit;
+
+                // Perform the raycast.
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.collider.gameObject == this.gameObject)
+                    {
+                        Interact();
+                    }
+                }
+            }
+            else
+            {
+
+                controller.IncorrectOrder();
+            }
+        }
+        else if (Input.GetMouseButton(0)) // 0 is for left-click
+        {
+
+            // Create a ray from the screen point where the touch occurred.
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+
+            // Variable to store the hit information.
+            RaycastHit hit;
+
+            // Perform the raycast.
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.gameObject == this.gameObject)
+                {
+                    Interact();
+                }
+            }
+        }
+        else
+        {
+            controller.IncorrectOrder();
+        }
+
+        if(!ball.activeInHierarchy)
+        {
+            placed = false;
+        }
     }
 }

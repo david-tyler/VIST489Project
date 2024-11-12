@@ -8,6 +8,7 @@ public class AllowGlyphPlacement : MonoBehaviour
     public bool glyphPlaced = false;
     public GameObject stage;
     public GameObject positioner;
+    public TrailRenderer trail;
     
 
     void Update()
@@ -26,6 +27,7 @@ public class AllowGlyphPlacement : MonoBehaviour
         {
             stage.SetActive(false);
             positioner.SetActive(false);
+            trail.gameObject.SetActive(true);
         }
 
 
@@ -36,6 +38,7 @@ public class AllowGlyphPlacement : MonoBehaviour
     {
         stage.SetActive(false);
         positioner.SetActive(false);
+        trail.gameObject.SetActive(false);
     }
 
 
