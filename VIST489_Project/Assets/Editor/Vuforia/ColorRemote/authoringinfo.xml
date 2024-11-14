@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="27.0" toolVersion="10.27.3">
+<ModelTarget name="ColorRemote" targetId="780a0ace58d7426ba85309c511283eda" version="14.0" toolVersion="10.27.3" bbox="-0.081125 0.111919 -0.278141 0.118694 0.222692 0.348856" previewImage="780a0ace58d7426ba85309c511283eda_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="ColorRemotes_assembly" assemblyId="7c104360d3394c9f90b8dcfa004e2bf1">
+<Part name="ColorRemote" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="GuideView_0000" translation="0.0164664 -0.0420477 0.954901" rotation="AD: -1 0.0333549 -0.0322617 88.1527" image="ColorRemote_GuideView_0000.png" trained="no">
+
+</EntryPoint>
+<EntryPoint name="GuideView_0001" translation="0.0151106 0.127126 0.903816" rotation="AD: 1 -0.0134086 0.0507215 209.577" image="ColorRemote_GuideView_0001.png" trained="no">
+
+</EntryPoint>
+<EntryPoint name="GuideView_0002" translation="-0.0140688 0.163662 0.840002" rotation="AD: -0.243375 -1.00617 3.75935 178.086" image="ColorRemote_GuideView_0002.png" trained="no">
+
+</EntryPoint>
+<EntryPoint name="GuideView_0003" translation="-0.017458 0.107943 0.92171" rotation="AD: -0.0355216 -1.1726 1.91165 178.887" image="ColorRemote_GuideView_0003.png" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARInfo>
