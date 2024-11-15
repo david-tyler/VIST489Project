@@ -4,36 +4,37 @@ using UnityEngine;
 using Vuforia;
 
 
-public class ResetScenePositions : MonoBehaviour
+public class ResetScenePositionScript : MonoBehaviour
 {
-    private ObserverBehaviour observerBehaviour;
-
     public Transform MoviePoster;
     public Transform SpaceCalibrator;
-    public Transform ARCamera;
+
+    private ObserverBehaviour observerBehaviour;
 
     private Vector3 offset;
 
     private bool enabledScan = false;
+    private Quaternion initialSceneRotation;
 
-    void Start()
+    void Awake()
     {
+        // Get the ObserverBehaviour component (e.g., Image Target)
         observerBehaviour = GetComponent<ObserverBehaviour>();
+
         if (observerBehaviour)
         {
-             // Register this script as an event handler
+            // Register event handlers
             observerBehaviour.OnTargetStatusChanged += OnTargetStatusChanged;
             observerBehaviour.OnBehaviourDestroyed += OnObserverDestroyed;
         }
-
-        offset = SpaceCalibrator.position - MoviePoster.position;
-
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
         
+        initialSceneRotation = SpaceCalibrator.rotation;
+        offset = SpaceCalibrator.position - MoviePoster.position;
+        initialSceneRotation = SpaceCalibrator.rotation;
     }
 
     private void OnObserverDestroyed(ObserverBehaviour behaviour)
@@ -49,29 +50,26 @@ public class ResetScenePositions : MonoBehaviour
             targetStatus.Status == Status.EXTENDED_TRACKED ||
             targetStatus.Status == Status.LIMITED)
         {
-            if (enabledScan == true)
-            {
-                ResetScenePosition();
-            }
-            
-            
-            
-            
-           
+            // The image target is being tracked
+            ResetScenePosition();
+        }
+        else
+        {
+            // The image target is not being tracked
+            // Optionally handle this case if needed
         }
     }
 
-    void ResetScenePosition()
+
+    private void ResetScenePosition()
     {
-        MoviePoster.transform.position = this.transform.position;
+        MoviePoster.position = observerBehaviour.transform.position;
+        //MoviePoster.rotation = observerBehaviour.transform.rotation;
+
+        SpaceCalibrator.position = MoviePoster.position + offset;
+        SpaceCalibrator.rotation = initialSceneRotation;
+
         
-        SpaceCalibrator.position = MoviePoster.transform.position + offset;
-        Vuforia.VuforiaBehaviour.Instance.DevicePoseBehaviour.enabled = false;
-        
-        ARCamera.position = new Vector3(MoviePoster.position.x, ARCamera.position.y, MoviePoster.position.z);
-        ARCamera.rotation = MoviePoster.transform.rotation;
-        Vuforia.VuforiaBehaviour.Instance.DevicePoseBehaviour.RecenterPose();
-        Vuforia.VuforiaBehaviour.Instance.DevicePoseBehaviour.enabled = true;
         enabledScan = false;
     }
 
