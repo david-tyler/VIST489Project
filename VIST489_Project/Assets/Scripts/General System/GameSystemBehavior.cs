@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,6 +37,8 @@ public class GameSystemBehavior : MonoBehaviour
         AlternatePath            // 8
     }
 
+    private NarrativeEvent state;
+    
     // Boolean array to track completion of narrative events
     private bool[] narrativeState = new bool[9];
 
@@ -45,12 +48,13 @@ public class GameSystemBehavior : MonoBehaviour
     public Button ParaNormalLensesButton;
     public Camera mainCamera;
 
-    private ParaLensesButtonBehavior paraLensesScript;
-    private PopUpSystem popUp;
-    private Interactable focus;
-    private AudioManager audioManagerScript;
-    private TriggerZones triggerZonesScript;
-    private Inventory inventoryScript;
+    ParaLensesButtonBehavior paraLensesScript;
+    PopUpSystem popUp;
+    Interactable focus;
+    AudioManager audioManagerScript;
+    TriggerZones triggerZonesScript;
+    Inventory inventoryScript;
+    MessageBehavior messageBehavior;
 
     // Narration Audio Sources
     // --------------------------------------
@@ -65,8 +69,6 @@ public class GameSystemBehavior : MonoBehaviour
     public GameObject PopUpBox; // Our dialogue box
     public Animator PopUpBoxAnimator;
 
-    public Animator MessageButtonAnimator;
-
     public TMPro.TextMeshProUGUI PopUpBoxText;
     // --------------------------------------
 
@@ -74,8 +76,6 @@ public class GameSystemBehavior : MonoBehaviour
     // ******* Image Targets that need to be scanned to enter respective World
     // --------------------------------------
     public GameObject ImageTargetEnterPokemonWorld;
-    public GameObject ImageTargetEnterMarioWorld;
-    public GameObject ImageTargetEnterZeldaWorld;
     // --------------------------------------
 
     
@@ -87,11 +87,10 @@ public class GameSystemBehavior : MonoBehaviour
     public GameObject PokemonWorldButtonGameObject;
     public GameObject LeavePokemonWorldButtonGameObject;
     public GameObject InventoryButtonGameObject; // the title button for the inventory to toggle it on/off.
-    public GameObject MessageNotification;
 
     public Button PokemonWorldButton;
     public Button LeavePokemonWorldButton;
-    public GameObject MessageButton;
+    
     public GameObject SkipButtonGameObject;
     private Button SkipButton;
     // --------------------------------------
@@ -101,18 +100,15 @@ public class GameSystemBehavior : MonoBehaviour
     // --------------------------------------
     private string display_EnterPokemonWorld = "Enter Pokemon World";
     private string display_LeavePokemonWorld = "Leave Pokemon World";
+    [SerializeField] string AshOverThereText = "Over there! Is that Ash? There's something wrong with him.";
+    [SerializeField] string ToggleLensesText = "Click the button below to toggle your Paranormal Lenses on or off.";
 
-    private string MessageText = "";
     // --------------------------------------
 
 
     // ******* Booleans for different conditions
     // --------------------------------------
     private bool gameStarted = false;
-    // boolean to track if we have entered a world or not at least once for the introduction audio behavior
-
-    private bool AreWeInAWorld = false;
-    private bool haveMessage = false;
     private bool pressedSkip = false;
     private bool foundGateway = false;
     // --------------------------------------
@@ -122,21 +118,11 @@ public class GameSystemBehavior : MonoBehaviour
     public TMPro.TextMeshProUGUI text_LeavePokemonWorldButtonGameObject;
     public TMPro.TextMeshProUGUI text_PokemonWorldButtonGameObject;
     // --------------------------------------
-
-    /* Variable for functionality to enable or disable certain worlds only if previous worlds have been completed
-     *  if PreviosWorldsCompleted == 0, we can only enter the Pokemon world
-     *  if PreviosWorldsCompleted == 1, we can only enter the Pokemon world and the Mario World
-     *  if PreviosWorldsCompleted == 2, we can only enter the Pokemon world and the Mario World and the Zelda World
-    */
-
-    // All of the game objects we want to not be active once we start the game so like puzzles etc.
-   
-
     
 
     public string backgroundMusicName;
 
-     public List<GameObject> gameObjectsNotActive = new List<GameObject>();
+    public List<GameObject> gameObjectsNotActive = new List<GameObject>();
     public List<Item> itemsReachedGlyph;
     public List<Item> itemsReachedPit;
     public List<Item> itemsReachedMaze;
@@ -390,16 +376,6 @@ public class GameSystemBehavior : MonoBehaviour
         }
         // --------------------------------------
 
-        // handling when the message notification pops up in the game
-        if (haveMessage == true)
-        {
-            MessageNotification.SetActive(true);
-        }
-        else
-        {
-            MessageNotification.SetActive(false);
-        }
-
 
 
         
@@ -548,9 +524,11 @@ public class GameSystemBehavior : MonoBehaviour
         popUp.popUpBox = PopUpBox;
         popUp.popUpText = PopUpBoxText;
         popUp.animator = PopUpBoxAnimator;
-        string ToggleLensesText = "Click the button below to toggle your Paranormal Lenses on or off.";
-        MessageText = ToggleLensesText;
-        SetHaveMessage(true);
+
+        messageBehavior = MessageBehavior.instance;
+        
+        messageBehavior.SetMessageText(ToggleLensesText);
+        messageBehavior.SetHaveMessage(true);
     }
 
     public void SkipButtonInteraction(AudioSource currentAudio = null, bool inDialogueSequence = false)
@@ -559,7 +537,7 @@ public class GameSystemBehavior : MonoBehaviour
         if (inDialogueSequence == true) // if we are in a dialogue sequence we want to skip the sequence
         {
             // skip the current dialogue sequence
-            // haven't found use for this am only since the only dialogue sequence is in a coroutine
+            // haven't found use for this since the only dialogue sequence is in a coroutine
             // and i can't call yield ... here in a void method if i call this method in a coroutine.
         }
         else if (currentAudio != null) // if we are currently playing an audio we want to skip that
@@ -613,10 +591,10 @@ public class GameSystemBehavior : MonoBehaviour
         text_LeavePokemonWorldButtonGameObject.text = display_LeavePokemonWorld;
 
         popUp = PopUpSystem.instance;
-        
-        string AshOverThereText = "Over there! Is that Ash? There's something wrong with him.";
-        MessageText = AshOverThereText;
-        SetHaveMessage(true);
+
+        messageBehavior = MessageBehavior.instance;
+        messageBehavior.SetMessageText(AshOverThereText);
+        messageBehavior.SetHaveMessage(true);
 
         triggerZonesScript.ModifyLists();
     }
@@ -627,7 +605,6 @@ public class GameSystemBehavior : MonoBehaviour
     {
         SetNarrativeEvent(NarrativeEvent.EnteredPokemonWorld, false);
 
-        AreWeInAWorld = narrativeState[(int)NarrativeEvent.EnteredPokemonWorld];
         text_PokemonWorldButtonGameObject.text = display_EnterPokemonWorld;
 
     }
@@ -637,28 +614,6 @@ public class GameSystemBehavior : MonoBehaviour
         return pressedSkip;
     }
 
-    public void DisplayMessage()
-    {
-        if (haveMessage == true)
-        {
-
-            popUp = PopUpSystem.instance;
-            popUp.PopUp(MessageText);
-
-        }
-        haveMessage = false;
-        MessageText = "";
-    }
-    public void SetHaveMessage(bool messageExists)
-    {
-        haveMessage = messageExists;
-        MessageButtonAnimator.SetTrigger("Shake");
-        Handheld.Vibrate(); // vibrate phone whenever player gets a message
-    }
-    public void SetMessageText(string text)
-    {
-        MessageText = text;
-    }
 
     public void SetFoundGateway()
     {
@@ -837,5 +792,15 @@ public class GameSystemBehavior : MonoBehaviour
             }
         }        
 
+    }
+
+    public void SetNarrativeState(NarrativeEvent newState)
+    {
+        state = newState;
+    }
+    
+    public NarrativeEvent GetCurrentState()
+    {
+        return state;
     }
 }

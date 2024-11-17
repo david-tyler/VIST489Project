@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
@@ -52,6 +53,7 @@ public class PokemonWorld : MonoBehaviour
     MazeBehavior mazeScript;
     AudioManager audioManagerScript;
     TriggerZones triggerZonesScript;
+    MessageBehavior messageBehavior;
 
     private int count = 0; // Used to limit in update how many times the pop up is called if we tap on an object that has a pop up box appear after
     // Start is called before the first frame update
@@ -177,9 +179,9 @@ public class PokemonWorld : MonoBehaviour
         transform.position = targetPlatform.transform.position;
         yield return new WaitForSeconds(1.0f);
 
-        gameSystem = GameSystemBehavior.instance;
-        gameSystem.SetHaveMessage(true);
-        gameSystem.SetMessageText(MoveLikeCharizardLine);
+        messageBehavior = MessageBehavior.instance;
+        messageBehavior.SetHaveMessage(true);
+        messageBehavior.SetMessageText(MoveLikeCharizardLine);
     }
 
     public void SolvedMaze()
@@ -199,14 +201,15 @@ public class PokemonWorld : MonoBehaviour
         paraLenses = ParaLensesButtonBehavior.instance;
         mazeScript = MazeBehavior.instance;
         triggerZonesScript = TriggerZones.instance;
+        messageBehavior = MessageBehavior.instance;
 
         
         if (count == 0 || mazeScript.getFailed() == true)
         {
             count = 0;
             
-            gameSystem.SetHaveMessage(true);
-            gameSystem.SetMessageText(NeedToCompleteMazeText);
+            messageBehavior.SetHaveMessage(true);
+            messageBehavior.SetMessageText(NeedToCompleteMazeText);
             // popUp = PopUpSystem.instance;
 
             // popUp.PopUp(NeedToCompleteMazeText);

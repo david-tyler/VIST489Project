@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class SpawnMaze : MonoBehaviour
@@ -8,7 +9,8 @@ public class SpawnMaze : MonoBehaviour
     public Transform environmentPivot;
     public Vector3 offset;
 
-    GameSystemBehavior gameSystem;
+    MessageBehavior messageBehavior;
+
     public string klefkiEndHallway = "If you go back out to the hallway, a Klefki randomly spawned there. Maybe that's a clue, try looking in your book.";
     public void SpawnObjects()
     {
@@ -16,9 +18,9 @@ public class SpawnMaze : MonoBehaviour
         {
             objectsToSpawn[i].SetActive(true);
         }
-        gameSystem = GameSystemBehavior.instance;
-        gameSystem.SetHaveMessage(true);
-        gameSystem.SetMessageText(klefkiEndHallway);
+        messageBehavior = MessageBehavior.instance;
+        messageBehavior.SetHaveMessage(true);
+        messageBehavior.SetMessageText(klefkiEndHallway);
     }
 
     public void MoveEnvironmentToMatch()

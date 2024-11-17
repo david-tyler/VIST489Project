@@ -28,6 +28,7 @@ public class TriggerZones : MonoBehaviour
     GameSystemBehavior gameSystem;
     ParaLensesButtonBehavior paraLensesScript;
     PokemonWorld pokeWorld;
+    MessageBehavior messageBehavior;
 
     // index for ash's lines
     private int AshLinesIndex;
@@ -93,6 +94,7 @@ public class TriggerZones : MonoBehaviour
         gameSystem = GameSystemBehavior.instance;
         paraLensesScript = ParaLensesButtonBehavior.instance;
         pokeWorld = PokemonWorld.instance;
+        messageBehavior = MessageBehavior.instance;
 
         string colliderTag = other.gameObject.tag;
 
@@ -125,8 +127,8 @@ public class TriggerZones : MonoBehaviour
                         }
                         break;
                     case "Gate Trigger Zone":
-                        gameSystem.SetHaveMessage(true);
-                        gameSystem.SetMessageText(cantEnterGateLine);
+                        messageBehavior.SetHaveMessage(true);
+                        messageBehavior.SetMessageText(cantEnterGateLine);
                         break;         
                 }
             }
@@ -155,12 +157,12 @@ public class TriggerZones : MonoBehaviour
                        
                         break;
                     case "Gate Trigger Zone":
-                        gameSystem.SetHaveMessage(true);
-                        gameSystem.SetMessageText(doTheGlyphLine);
+                        messageBehavior.SetHaveMessage(true);
+                        messageBehavior.SetMessageText(doTheGlyphLine);
                         break;
                     case "Glyph Trigger Zone":
-                        gameSystem.SetHaveMessage(true);
-                        gameSystem.SetMessageText(lookForGlyphPokeballs);
+                        messageBehavior.SetHaveMessage(true);
+                        messageBehavior.SetMessageText(lookForGlyphPokeballs);
 
                         currentDialogue = placeGlyphLines;
                         PopUpBoxButton.onClick.AddListener(DisplayNextLines);

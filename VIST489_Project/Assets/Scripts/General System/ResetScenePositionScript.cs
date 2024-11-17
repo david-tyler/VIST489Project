@@ -7,14 +7,14 @@ using Vuforia;
 public class ResetScenePositionScript : MonoBehaviour
 {
     public Transform MoviePoster;
-    public Transform SpaceCalibrator;
+    public Transform sceneTransform;
 
     private ObserverBehaviour observerBehaviour;
 
     private Vector3 offset;
 
     private bool enabledScan = false;
-    private Quaternion initialSceneRotation;
+    private Quaternion initialRelativeRotation;
 
     void Awake()
     {
@@ -32,9 +32,8 @@ public class ResetScenePositionScript : MonoBehaviour
     void Start()
     {
         
-        initialSceneRotation = SpaceCalibrator.rotation;
-        offset = SpaceCalibrator.position - MoviePoster.position;
-        initialSceneRotation = SpaceCalibrator.rotation;
+        offset = sceneTransform.position - MoviePoster.position;
+        initialRelativeRotation =  Quaternion.Inverse(MoviePoster.rotation) * sceneTransform.rotation;;
     }
 
     private void OnObserverDestroyed(ObserverBehaviour behaviour)
@@ -63,11 +62,25 @@ public class ResetScenePositionScript : MonoBehaviour
 
     private void ResetScenePosition()
     {
+        
         MoviePoster.position = observerBehaviour.transform.position;
-        //MoviePoster.rotation = observerBehaviour.transform.rotation;
+        MoviePoster.rotation = observerBehaviour.transform.rotation;
 
-        SpaceCalibrator.position = MoviePoster.position + offset;
-        SpaceCalibrator.rotation = initialSceneRotation;
+        // Object A's new position and rotation
+        Vector3 newPositionA = MoviePoster.position;
+        Quaternion newRotationA = MoviePoster.rotation;
+        newRotationA = Quaternion.Euler(newRotationA.eulerAngles.x - 90f, newRotationA.eulerAngles.y + 90f, newRotationA.eulerAngles.z);
+        // Rotate the initial offset by Object A's new rotation
+        Vector3 rotatedOffset = newRotationA * offset;
+
+         // Update Object B's position
+        sceneTransform.position = newPositionA + rotatedOffset;
+
+        // Update Object B's rotation
+        sceneTransform.rotation = newRotationA * initialRelativeRotation;
+
+        // sceneTransform.position = MoviePoster.position + offset;
+        // sceneTransform.rotation = initialRelativeRotation;
 
         
         enabledScan = false;

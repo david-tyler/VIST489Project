@@ -38,6 +38,8 @@ public class DoorController : MonoBehaviour
     PokemonWorld pokeWorld;
     GameSystemBehavior gameSystem;
     ParaLensesButtonBehavior paraLensesScript;
+    MessageBehavior messageBehavior;
+
     public GameObject gate;
 
     public string FindKeyTextForDoor = "He's right the door is locked, we need to find the key. Look inside your book you should have a map of the building. Use that to guide you";
@@ -81,6 +83,7 @@ public class DoorController : MonoBehaviour
         playerInZone = true;
 
         gameSystem = GameSystemBehavior.instance;
+        messageBehavior = MessageBehavior.instance;
         paraLensesScript = ParaLensesButtonBehavior.instance;
         pokeWorld = PokemonWorld.instance;
 
@@ -96,8 +99,8 @@ public class DoorController : MonoBehaviour
         {
             if (gameSystem.CheckNarrativeEvents(eventsToCheck) == true)
             {
-                gameSystem.SetHaveMessage(true);
-                gameSystem.SetMessageText(FindKeyTextForDoor);
+                messageBehavior.SetHaveMessage(true);
+                messageBehavior.SetMessageText(FindKeyTextForDoor);
                 if(firstTimeEnteringDoor == true)
                 {
                     firstTimeEnteringDoor = false;
@@ -110,8 +113,8 @@ public class DoorController : MonoBehaviour
         {
             if (gameSystem.CheckNarrativeEvents(eventsToCheck) == true)
             {
-                gameSystem.SetHaveMessage(true);
-                gameSystem.SetMessageText(UseKeyTextForDoor);
+                messageBehavior.SetHaveMessage(true);
+                messageBehavior.SetMessageText(UseKeyTextForDoor);
                     
             }
         }

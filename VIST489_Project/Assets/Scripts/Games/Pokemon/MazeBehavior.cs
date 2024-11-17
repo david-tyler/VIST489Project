@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -75,6 +76,7 @@ public class MazeBehavior : MonoBehaviour
     PopUpSystem popUp;
     PokemonWorld pokeWorld;
     AudioManager audioManagerScript;
+    MessageBehavior messageBehavior;
 
     MazeSelector firstMazeScript;
     MazeSelector secondMazeScript;
@@ -283,10 +285,10 @@ public class MazeBehavior : MonoBehaviour
 
     public void WonMaze(string text)
     {
-        gameSystem = GameSystemBehavior.instance;
+        messageBehavior = MessageBehavior.instance;
 
-        gameSystem.SetHaveMessage(true);
-        gameSystem.SetMessageText(text);
+        messageBehavior.SetHaveMessage(true);
+        messageBehavior.SetMessageText(text);
 
         startTimer = false;
         
@@ -311,10 +313,10 @@ public class MazeBehavior : MonoBehaviour
     public void FailedMaze(string text)
     {
         badSquareSound.PlayOneShot(badSquareSound.clip);
-        gameSystem = GameSystemBehavior.instance;
         popUp = PopUpSystem.instance;
 
-        gameSystem.SetHaveMessage(true);
+        messageBehavior = MessageBehavior.instance;
+        messageBehavior.SetHaveMessage(true);
         
 
         failed = true;
@@ -322,7 +324,7 @@ public class MazeBehavior : MonoBehaviour
         Timer.SetActive(false);
         if ( goalReached == false)
         {
-            gameSystem.SetMessageText(text);
+            messageBehavior.SetMessageText(text);
             Timer.SetActive(false);
         }
         else if (goalReached == true)
@@ -369,12 +371,12 @@ public class MazeBehavior : MonoBehaviour
 
         zoroark.SetActive(true);
         zoroarkStanding.SetTrigger("StartCrouch");
-        gameSystem = GameSystemBehavior.instance;
+        messageBehavior = MessageBehavior.instance;
         // maybe play an audio showing zoroark appears
         yield return new WaitForSeconds(2);
 
-        gameSystem.SetHaveMessage(true);
-        gameSystem.SetMessageText(zoroarkAppearsLines[1]);
+        messageBehavior.SetHaveMessage(true);
+        messageBehavior.SetMessageText(zoroarkAppearsLines[1]);
         escapeButton.SetActive(true);
 
 

@@ -14,6 +14,8 @@ public class ItemPickup : Interactable
     DoorController doorScript;
 
     GameSystemBehavior gameSystem;
+    MessageBehavior messageBehavior;
+
     public AudioSource ItemPickupSound;
     public PokeBallTower tower;
 
@@ -32,6 +34,7 @@ public class ItemPickup : Interactable
 
         pokeWorld = PokemonWorld.instance;
         gameSystem = GameSystemBehavior.instance;
+        messageBehavior = MessageBehavior.instance;
 
         Debug.Log("Picking Up " + item.name);
 
@@ -47,8 +50,8 @@ public class ItemPickup : Interactable
                 doorScript = DoorController.instance;
                 doorScript.gotKey = true;
 
-                gameSystem.SetHaveMessage(true);
-                gameSystem.SetMessageText(TryOpeningDoor);
+                messageBehavior.SetHaveMessage(true);
+                messageBehavior.SetMessageText(TryOpeningDoor);
             }
 
             // store the model for later if we want to spawn it again;

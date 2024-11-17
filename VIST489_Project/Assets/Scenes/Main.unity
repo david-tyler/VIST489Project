@@ -1489,18 +1489,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6181339227047454452, guid: 4866ea0ecc9934e88be564bbb0b81ecb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6181339227047454452, guid: 4866ea0ecc9934e88be564bbb0b81ecb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6181339227047454452, guid: 4866ea0ecc9934e88be564bbb0b81ecb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 4866ea0ecc9934e88be564bbb0b81ecb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1437274232}
     - target: {fileID: 6181339227047454452, guid: 4866ea0ecc9934e88be564bbb0b81ecb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 535425582}
+    - target: {fileID: 6181339227047454452, guid: 4866ea0ecc9934e88be564bbb0b81ecb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 4866ea0ecc9934e88be564bbb0b81ecb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6181339227047454452, guid: 4866ea0ecc9934e88be564bbb0b81ecb, type: 3}
@@ -1508,8 +1520,16 @@ PrefabInstance:
       value: PlayOneShot
       objectReference: {fileID: 0}
     - target: {fileID: 6181339227047454452, guid: 4866ea0ecc9934e88be564bbb0b81ecb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SetDisplayingMessage
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 4866ea0ecc9934e88be564bbb0b81ecb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: UnityEngine.AudioSource, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 4866ea0ecc9934e88be564bbb0b81ecb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: MessageBehavior, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6181339227047454452, guid: 4866ea0ecc9934e88be564bbb0b81ecb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
@@ -1518,6 +1538,10 @@ PrefabInstance:
     - target: {fileID: 6181339227047454452, guid: 4866ea0ecc9934e88be564bbb0b81ecb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.AudioClip, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181339227047454452, guid: 4866ea0ecc9934e88be564bbb0b81ecb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6961398787548372551, guid: 4866ea0ecc9934e88be564bbb0b81ecb, type: 3}
       propertyPath: m_fontSize
@@ -1932,7 +1956,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 127975958}
-  - component: {fileID: 127975957}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -1940,27 +1963,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &127975957
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 127975956}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8246800cadf3f4b478730082fefd68fb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!224 &127975958
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2867,7 +2869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoviePoster: {fileID: 1939030873}
-  SpaceCalibrator: {fileID: 2048284181}
+  sceneTransform: {fileID: 2048284181}
 --- !u!114 &226153160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4058,7 +4060,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 513223263}
         m_TargetAssemblyTypeName: UIOptionButtonsBehavior, Assembly-CSharp
-        m_MethodName: ToggleInventory
+        m_MethodName: SlideIn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5952,8 +5954,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionPanelAnimator: {fileID: 1692636761}
-  inventoryAnimator: {fileID: 127975957}
   optionButton: {fileID: 2045027432}
+  inventoryTransform: {fileID: 127975958}
+  duration: 0.5
+  inventoryCloseButtonTransform: {fileID: 0}
 --- !u!1 &535425572
 GameObject:
   m_ObjectHideFlags: 0
@@ -5968,6 +5972,7 @@ GameObject:
   - component: {fileID: 535425576}
   - component: {fileID: 535425580}
   - component: {fileID: 535425581}
+  - component: {fileID: 535425582}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -6043,20 +6048,18 @@ MonoBehaviour:
   ThatBook: {fileID: 285712493}
   PopUpBox: {fileID: 2122360565}
   PopUpBoxAnimator: {fileID: 2122360567}
-  MessageButtonAnimator: {fileID: 1646316805}
   PopUpBoxText: {fileID: 1308401672}
   ImageTargetEnterPokemonWorld: {fileID: 1386398224}
-  ImageTargetEnterMarioWorld: {fileID: 0}
-  ImageTargetEnterZeldaWorld: {fileID: 0}
   PokemonWorld: {fileID: 1638373496}
   PokemonWorldButtonGameObject: {fileID: 994956754}
   LeavePokemonWorldButtonGameObject: {fileID: 271230571}
   InventoryButtonGameObject: {fileID: 309248378}
-  MessageNotification: {fileID: 1962163504}
   PokemonWorldButton: {fileID: 994956758}
   LeavePokemonWorldButton: {fileID: 271230573}
-  MessageButton: {fileID: 1646316799}
   SkipButtonGameObject: {fileID: 384846601}
+  AshOverThereText: Over there! Is that Ash? There's something wrong with him.
+  ToggleLensesText: Click the button below to toggle your Paranormal Lenses on or
+    off.
   text_LeavePokemonWorldButtonGameObject: {fileID: 247326603}
   text_PokemonWorldButtonGameObject: {fileID: 1489198489}
   backgroundMusicName: 15 - Dragonspiral Tower
@@ -6144,6 +6147,21 @@ MonoBehaviour:
   - {fileID: 812531082}
   - {fileID: 567687095}
   - {fileID: 702661803}
+--- !u!114 &535425582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535425572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36b3d967456fe4f50b3097015d132737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MessageButton: {fileID: 1646316799}
+  MessageButtonAnimator: {fileID: 1646316805}
+  MessageNotification: {fileID: 1962163504}
 --- !u!224 &535509171 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5551066961514420604, guid: d9644cfe0eef54d8b8f33aa938458c40, type: 3}
@@ -8492,8 +8510,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1368101942}
   m_HandleRect: {fileID: 1368101941}
   m_Direction: 2
-  m_Value: 0.9999998
-  m_Size: 0.3333333
+  m_Value: 1
+  m_Size: 0.33333334
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10327,7 +10345,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 513223263}
         m_TargetAssemblyTypeName: UIOptionButtonsBehavior, Assembly-CSharp
-        m_MethodName: ToggleInventory
+        m_MethodName: SlideOut
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17685,8 +17703,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 535425576}
-        m_TargetAssemblyTypeName: GameSystemBehavior, Assembly-CSharp
+      - m_Target: {fileID: 535425582}
+        m_TargetAssemblyTypeName: MessageBehavior, Assembly-CSharp
         m_MethodName: DisplayMessage
         m_Mode: 1
         m_Arguments:
@@ -20297,13 +20315,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939030869}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.697632, z: -0, w: -0.7164563}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.627, y: 0, z: 3.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 271.525, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1946150896
 GameObject:
   m_ObjectHideFlags: 0
