@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
@@ -25,8 +24,7 @@ public class PokemonWorld : MonoBehaviour
     }
     #endregion
 
-    public GameObject firstMaze;
-    public GameObject secondMaze;
+    public GameObject enitreMaze;
 
     private bool canGetKey = false;
     private bool unlockedDoor = false;
@@ -207,6 +205,7 @@ public class PokemonWorld : MonoBehaviour
         if (count == 0 || mazeScript.getFailed() == true)
         {
             count = 0;
+            enitreMaze.SetActive(true);
             
             messageBehavior.SetHaveMessage(true);
             messageBehavior.SetMessageText(NeedToCompleteMazeText);

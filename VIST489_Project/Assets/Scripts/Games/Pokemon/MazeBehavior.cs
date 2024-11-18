@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,7 +38,7 @@ public class MazeBehavior : MonoBehaviour
     public float remainingTime = 20.0f;
 
     // so you cant cheat the game and go to the end
-    public int landGoodSquaresBeforeGoal = 5;
+    private int landGoodSquaresBeforeGoal;
     private int goodSquaresLanedCurrent = 0;
 
     // ******* PopUp Boxes
@@ -90,8 +89,17 @@ public class MazeBehavior : MonoBehaviour
 
     void Start()
     {
+        landGoodSquaresBeforeGoal = 0;
         originaltime = remainingTime;
         enteredMaze = false;
+        foreach (Transform child in firstMaze.transform)
+        {
+            bool valid = child.gameObject.GetComponentInChildren<Platform>().isValidSquare;
+            if (valid == true)
+            {
+                landGoodSquaresBeforeGoal += 1;
+            }
+        }
         
     }
 
@@ -252,6 +260,7 @@ public class MazeBehavior : MonoBehaviour
         }
 
         enteredMaze = false;
+        goalReached = false;
         firstMaze.SetActive(true);
         secondMaze.SetActive(true);
         
