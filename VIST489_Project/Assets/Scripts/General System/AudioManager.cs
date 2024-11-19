@@ -104,6 +104,7 @@ public class AudioManager : MonoBehaviour
 
         otherSource.volume = 1f;
         currentAudioSource = otherSource;
+        currentAudioSource.loop = true;
 
     }
 

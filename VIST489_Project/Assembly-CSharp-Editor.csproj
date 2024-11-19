@@ -186,6 +186,7 @@
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/cm-help.zh-Hans.txt" />
     <None Include="Library/PackageCache/com.ptc.vuforia.engine@b724a8714d15/Vuforia/Plugins/Managed/Editor/Vuforia.Unity.Editor.dll" />
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/zlib64Plastic.dll" />
+    <None Include="Assets/Editor/Vuforia/ControllerModelClass/authoringinfo.xml" />
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/plastic-gui.zh-Hans.txt" />
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/commontypes.ja.txt" />
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/xdiff.zh-Hant.txt" />

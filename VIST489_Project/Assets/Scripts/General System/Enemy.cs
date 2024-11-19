@@ -12,26 +12,45 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] List<Transform> attackOrigins;
     [SerializeField] Transform player;
+    [SerializeField] GameObject weakPoints;
+    [SerializeField] string backgroundMusicName;
+    [SerializeField] string beatZoroarkText;
+    [SerializeField] GameObject model;
+
+    AudioManager audioManagerScript;
+    PokemonWorld pokeWorld;
+    MessageBehavior messageBehavior;
+    UIBehavior uiBehaviorScript;
+    bool encounterStarted;
+   
+
+
 
 
     float timer = 0f;
  
     public HealthBar healthBar;
-    
-    void Update()
-    {
-        timer += Time.deltaTime;
-        if (timer >= attackInterval)
-        {
-            timer = 0f;
-            AttackPlayer();
-        }
-    }
 
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        weakPoints.SetActive(false);
+        encounterStarted = false;
+    }
+
+    void Update()
+    {
+        if (encounterStarted == true)
+        {
+            timer += Time.deltaTime;
+            if (timer >= attackInterval)
+            {
+                timer = 0f;
+                AttackPlayer();
+            }
+        }
+        
     }
 
     void AttackPlayer()
@@ -56,5 +75,50 @@ public class Enemy : MonoBehaviour
 
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         healthBar.SetHealth(currentHealth);
+
+        if (currentHealth == 0)
+        {
+            EnemyDefeated();
+        }
+    }
+
+    public void EnemyDefeated()
+    {
+        SetEncounterStarted(false);
+        model.SetActive(false);
+        
+        audioManagerScript = AudioManager.instance;
+        audioManagerScript.PlayEventSound(backgroundMusicName);
+
+        messageBehavior = MessageBehavior.instance;
+
+        messageBehavior.SetHaveMessage(true);
+        messageBehavior.SetMessageText(beatZoroarkText);
+        
+        pokeWorld = PokemonWorld.instance;
+
+        pokeWorld.SolvedMaze();
+        uiBehaviorScript = UIBehavior.instance;
+        uiBehaviorScript.SetState(UIBehavior.UiState.RoamState);
+    }
+
+    public void ShowWeakPoints()
+    {
+        weakPoints.SetActive(true);
+    }
+
+    public void SetEncounterStarted(bool status)
+    {
+
+        encounterStarted = status;
+        if (status == false)
+        {
+            timer = 0f;
+        }
+    }
+
+    public bool GetEncounterStarted()
+    {
+        return encounterStarted;
     }
 }

@@ -21,6 +21,10 @@ public class Player : MonoBehaviour
     Enemy currentEnemy;
     GameObject currentWeakPoint;
 
+    public float cooldownDuration = 2f; // Cooldown duration in seconds
+
+    private bool isCooldown = false;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -48,6 +52,7 @@ public class Player : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Weak Point") == true)
             {
+                canAttack = true;
                 currentEnemy = hit.collider.GetComponent<WeakPoint>().enemyObject;
                 damageMultiplier = hit.collider.GetComponent<WeakPoint>().multiplier;
                 currentWeakPoint = hit.collider.gameObject;
@@ -66,6 +71,11 @@ public class Player : MonoBehaviour
         {
             canAttack = false;
             hitWeakPoint = false;
+        }
+
+        if (isCooldown == true)
+        {
+            StartCoroutine(StartCooldown());
         }
     }
 
@@ -105,15 +115,29 @@ public class Player : MonoBehaviour
     }
     void PerformAttack(Enemy enemy)
     {
-        float playerDamage = baseDamage;
-        if (hitWeakPoint)
+        if (isCooldown == false)
         {
-            playerDamage *= damageMultiplier;
-            if (currentWeakPoint != null)
+            float playerDamage = baseDamage;
+            if (hitWeakPoint)
             {
-                currentWeakPoint.SetActive(false);
+                playerDamage *= damageMultiplier;
+                if (currentWeakPoint != null)
+                {
+                    currentWeakPoint.SetActive(false);
+                }
             }
+            enemy.TakeDamage(playerDamage);
+            isCooldown = true;
         }
-        enemy.TakeDamage(playerDamage);
+        
+        
+    }
+
+    private IEnumerator StartCooldown()
+    {
+
+        yield return new WaitForSeconds(cooldownDuration);
+
+        isCooldown = false;
     }
 }

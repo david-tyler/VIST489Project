@@ -51,7 +51,7 @@ public class MazeBehavior : MonoBehaviour
     public GameObject zoroark;
     public GameObject leftKlefki;
     public GameObject rightKlefki;
-    public GameObject escapeButton;
+    
     
 
     public string WrongSquareMessage = "Oh no! Looks like you stepped on the wrong platform. " +
@@ -76,10 +76,10 @@ public class MazeBehavior : MonoBehaviour
     PokemonWorld pokeWorld;
     AudioManager audioManagerScript;
     MessageBehavior messageBehavior;
-
+    UIBehavior uiBehaviorScript;
     MazeSelector firstMazeScript;
     MazeSelector secondMazeScript;
-    
+    [SerializeField] Enemy enemyScript;
 
     public AudioSource goodSquareSound;
     public AudioSource badSquareSound;
@@ -368,6 +368,7 @@ public class MazeBehavior : MonoBehaviour
 
     IEnumerator EscapeFromZoroark()
     {
+
         if (firstMazeScript.GetIsReal() == false)
         {
             leftKlefkiAnimation.SetTrigger("Disappear");
@@ -376,6 +377,10 @@ public class MazeBehavior : MonoBehaviour
         {
             rightKlefkiAnimation.SetTrigger("Disappear");
         }
+
+        firstMaze.SetActive(false);
+        secondMaze.SetActive(false);
+        
         yield return new WaitForSeconds(2);
 
         zoroark.SetActive(true);
@@ -386,7 +391,10 @@ public class MazeBehavior : MonoBehaviour
 
         messageBehavior.SetHaveMessage(true);
         messageBehavior.SetMessageText(zoroarkAppearsLines[1]);
-        escapeButton.SetActive(true);
+
+        uiBehaviorScript = UIBehavior.instance;
+        uiBehaviorScript.SetState(UIBehavior.UiState.BattleState);
+        enemyScript.SetEncounterStarted(true);
 
 
     }
@@ -395,8 +403,9 @@ public class MazeBehavior : MonoBehaviour
     {
         audioManagerScript = AudioManager.instance;
         audioManagerScript.PlayEventSound(backgroundMusicName);
-        escapeButton.SetActive(false);
-        
+        uiBehaviorScript = UIBehavior.instance;
+        uiBehaviorScript.SetState(UIBehavior.UiState.RoamState);
+        enemyScript.SetEncounterStarted(false);
         
 
         ResetMaze();
