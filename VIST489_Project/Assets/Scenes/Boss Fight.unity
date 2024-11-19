@@ -180,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3546183286804972514, guid: f6c4ffb4d9b01e6438aee492ee60e489, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.146
       objectReference: {fileID: 0}
     - target: {fileID: 3546183286804972514, guid: f6c4ffb4d9b01e6438aee492ee60e489, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1021,6 +1021,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2258537612773436011, guid: 55e4cdca9727a64468588a7bcfae8727, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2785109588689942257, guid: 55e4cdca9727a64468588a7bcfae8727, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.17
@@ -1207,6 +1211,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2258537612773436011, guid: 55e4cdca9727a64468588a7bcfae8727, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2785109588689942257, guid: 55e4cdca9727a64468588a7bcfae8727, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.07
@@ -1272,6 +1280,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 481217099566287933, guid: 55e4cdca9727a64468588a7bcfae8727, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2258537612773436011, guid: 55e4cdca9727a64468588a7bcfae8727, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2785109588689942257, guid: 55e4cdca9727a64468588a7bcfae8727, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.16
@@ -1593,7 +1609,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1713724819}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c94b99327c2c740049b37f44355610f7, type: 3}
   m_Name: 
@@ -1908,7 +1924,7 @@ MonoBehaviour:
   m_Script: {fileID: -75151077, guid: 8a9a760f95896c34689febc965510927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PreviewVisible: 0
+  PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
   mTrackableName: ColorRemote

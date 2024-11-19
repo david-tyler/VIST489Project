@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    public int health = 3;
+    public HealthSystem healthSystem;
     public AudioSource source;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        healthSystem = GameObject.Find("UI").GetComponent<HealthSystem>();
     }
 
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class Fireball : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        health--;
+        healthSystem.health--;
         if(other.gameObject.name == "Player")
         {
             source.Play();
