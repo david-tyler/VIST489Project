@@ -154,6 +154,7 @@
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/xdiff.es.txt" />
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/differences.es.txt" />
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/images.zh-Hans.txt" />
+    <None Include="Library/PackageCache/com.unity.postprocessing@3.4.0/PostProcessing/Shaders/Editor/CurveGrid.shader" />
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/mergetool.zh-Hans.txt" />
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/differences.zh-Hant.txt" />
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/configurehelper.en.txt" />
@@ -176,7 +177,9 @@
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/clientcommon.ko.txt" />
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/cm.en.txt" />
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/semantic.ko.txt" />
+    <None Include="Library/PackageCache/com.unity.postprocessing@3.4.0/PostProcessing/Shaders/Editor/Trackball.shader" />
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/configurehelper.ko.txt" />
+    <None Include="Library/PackageCache/com.unity.postprocessing@3.4.0/PostProcessing/Shaders/Editor/ConvertToLog.shader" />
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/cm.ja.txt" />
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/cm-help.en.txt" />
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Lib/Editor/PlasticSCM/Localization/workspaceserver.en.txt" />
@@ -1129,34 +1132,36 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj" />
-    <ProjectReference Include="UnityEngine.TestRunner.csproj" />
     <ProjectReference Include="UnityEditor.TestRunner.csproj" />
+    <ProjectReference Include="UnityEngine.TestRunner.csproj" />
+    <ProjectReference Include="VuforiaEditorScripts.csproj" />
+    <ProjectReference Include="Unity.EditorCoroutines.Editor.csproj" />
+    <ProjectReference Include="Unity.Postprocessing.Runtime.csproj" />
+    <ProjectReference Include="Unity.PlasticSCM.Editor.csproj" />
+    <ProjectReference Include="Unity.Timeline.Editor.csproj" />
+    <ProjectReference Include="Unity.VisualScripting.Shared.Editor.csproj" />
+    <ProjectReference Include="Unity.VisualStudio.Editor.csproj" />
+    <ProjectReference Include="UnityEditor.UI.csproj" />
+    <ProjectReference Include="Unity.VisualScripting.Core.csproj" />
+    <ProjectReference Include="UnityEngine.UI.csproj" />
+    <ProjectReference Include="Unity.VisualScripting.Core.Editor.csproj" />
+    <ProjectReference Include="Unity.Rider.Editor.csproj" />
+    <ProjectReference Include="Unity.2D.Sprite.Editor.csproj" />
+    <ProjectReference Include="Unity.VisualScripting.Flow.csproj" />
+    <ProjectReference Include="Unity.VisualScripting.Flow.Editor.csproj" />
     <ProjectReference Include="Unity.Timeline.csproj" />
     <ProjectReference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.csproj" />
-    <ProjectReference Include="VuforiaEditorScripts.csproj" />
-    <ProjectReference Include="UnityEngine.UI.csproj" />
-    <ProjectReference Include="Unity.EditorCoroutines.Editor.csproj" />
     <ProjectReference Include="VuforiaScripts.csproj" />
     <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj" />
     <ProjectReference Include="Unity.Performance.Profile-Analyzer.Editor.csproj" />
     <ProjectReference Include="Unity.TestTools.CodeCoverage.Editor.csproj" />
     <ProjectReference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.csproj" />
-    <ProjectReference Include="Unity.PlasticSCM.Editor.csproj" />
+    <ProjectReference Include="Unity.Postprocessing.Editor.csproj" />
     <ProjectReference Include="Unity.VisualScripting.State.Editor.csproj" />
-    <ProjectReference Include="Unity.Timeline.Editor.csproj" />
-    <ProjectReference Include="Unity.VisualScripting.Shared.Editor.csproj" />
-    <ProjectReference Include="Unity.VisualStudio.Editor.csproj" />
     <ProjectReference Include="Unity.TextMeshPro.csproj" />
-    <ProjectReference Include="Unity.VisualScripting.Core.csproj" />
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj" />
-    <ProjectReference Include="UnityEditor.UI.csproj" />
-    <ProjectReference Include="Unity.VisualScripting.Core.Editor.csproj" />
-    <ProjectReference Include="Unity.Rider.Editor.csproj" />
     <ProjectReference Include="Unity.VisualScripting.State.csproj" />
     <ProjectReference Include="Unity.VSCode.Editor.csproj" />
-    <ProjectReference Include="Unity.2D.Sprite.Editor.csproj" />
-    <ProjectReference Include="Unity.VisualScripting.Flow.csproj" />
-    <ProjectReference Include="Unity.VisualScripting.Flow.Editor.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>

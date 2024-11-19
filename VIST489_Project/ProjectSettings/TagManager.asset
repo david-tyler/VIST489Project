@@ -19,6 +19,9 @@ TagManager:
   - Back Hallway
   - Inventory
   - Pokedex
+  - Enemy
+  - Weak Point
+  - Destroy Zone
   layers:
   - Default
   - TransparentFX

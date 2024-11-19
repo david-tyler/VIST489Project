@@ -32,7 +32,7 @@ public class PokedexBehavior : MonoBehaviour
     private Vector2 offScreenPositionPokedex;
     public float duration = 0.5f; // Adjust as needed
 
-    [SerializeField] CanvasGroup cg;
+    [SerializeField] CanvasGroup focusedDisplayCanvasGroup;
     public float fadeDuration = 0.5f;
 
 
@@ -93,27 +93,27 @@ public class PokedexBehavior : MonoBehaviour
     IEnumerator FadeFocusedDisplay(float startAlpha, float endAlpha)
     {
         float elapsedTime = 0f;
-        cg.alpha = startAlpha;
+        focusedDisplayCanvasGroup.alpha = startAlpha;
 
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
-            cg.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / duration);
+            focusedDisplayCanvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / duration);
             yield return null;
         }
 
-        cg.alpha = endAlpha;
+        focusedDisplayCanvasGroup.alpha = endAlpha;
 
         // Optional: Disable interactivity when fully transparent
         if (endAlpha == 0)
         {
-            cg.interactable = false;
-            cg.blocksRaycasts = false;
+            focusedDisplayCanvasGroup.interactable = false;
+            focusedDisplayCanvasGroup.blocksRaycasts = false;
         }
         else
         {
-            cg.interactable = true;
-            cg.blocksRaycasts = true;
+            focusedDisplayCanvasGroup.interactable = true;
+            focusedDisplayCanvasGroup.blocksRaycasts = true;
         }
     }
     public void OpenPokedex(bool status)

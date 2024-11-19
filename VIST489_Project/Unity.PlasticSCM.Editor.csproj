@@ -195,9 +195,9 @@
     <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Editor/PlasticSCM/Views/Diff/DiffPanel.cs" />
     <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Editor/PlasticSCM/UI/Tree/ListViewItemIds.cs" />
     <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Editor/PlasticSCM/UI/DrawActionButton.cs" />
-    <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Editor/PlasticSCM/SwitchModeConfirmationDialog.cs" />
     <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Editor/PlasticSCM/PlasticMenuItem.cs" />
     <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Editor/PlasticSCM/Views/PendingChanges/FilesFilterPatternsMenuBuilder.cs" />
+    <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Editor/PlasticSCM/SwitchModeConfirmationDialog.cs" />
     <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Editor/PlasticSCM/Developer/UpdateReport/UpdateReportLineListViewItem.cs" />
     <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Editor/PlasticSCM/Configuration/ConfigurePartialWorkspace.cs" />
     <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.5.1/Editor/PlasticSCM/AssetsUtils/RefreshAsset.cs" />
@@ -1289,8 +1289,8 @@
   <ItemGroup>
     <ProjectReference Include="UnityEditor.UI.csproj" />
     <ProjectReference Include="UnityEngine.UI.csproj" />
-    <ProjectReference Include="UnityEngine.TestRunner.csproj" />
     <ProjectReference Include="UnityEditor.TestRunner.csproj" />
+    <ProjectReference Include="UnityEngine.TestRunner.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>
