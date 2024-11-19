@@ -22,6 +22,10 @@ public class Fireball : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         health--;
-        source.Play();
+        if(other.gameObject.name == "Player")
+        {
+            source.Play();
+        }
+        
     }
 }
