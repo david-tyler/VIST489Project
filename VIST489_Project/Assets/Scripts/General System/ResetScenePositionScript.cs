@@ -8,6 +8,7 @@ public class ResetScenePositionScript : MonoBehaviour
 {
     public Transform MoviePoster;
     public Transform sceneTransform;
+    public Transform ARCamera;
 
     private ObserverBehaviour observerBehaviour;
 
@@ -33,7 +34,7 @@ public class ResetScenePositionScript : MonoBehaviour
     {
         
         offset = sceneTransform.position - MoviePoster.position;
-        initialRelativeRotation =  Quaternion.Inverse(MoviePoster.rotation) * sceneTransform.rotation;;
+        initialRelativeRotation =  Quaternion.Inverse(MoviePoster.rotation) * sceneTransform.rotation;
     }
 
     private void OnObserverDestroyed(ObserverBehaviour behaviour)
@@ -62,22 +63,20 @@ public class ResetScenePositionScript : MonoBehaviour
 
     private void ResetScenePosition()
     {
-        
+        // not the actual image target in unity it is the gameobject representing it
         MoviePoster.position = observerBehaviour.transform.position;
         MoviePoster.rotation = observerBehaviour.transform.rotation;
+
 
         // Object A's new position and rotation
         Vector3 newPositionA = MoviePoster.position;
         Quaternion newRotationA = MoviePoster.rotation;
-        newRotationA = Quaternion.Euler(newRotationA.eulerAngles.x - 90f, newRotationA.eulerAngles.y + 90f, newRotationA.eulerAngles.z);
+
         // Rotate the initial offset by Object A's new rotation
         Vector3 rotatedOffset = newRotationA * offset;
 
-         // Update Object B's position
+        Quaternion rotationX = Quaternion.Euler(-90, 0, 0);
         sceneTransform.position = newPositionA + rotatedOffset;
-
-        // Update Object B's rotation
-        sceneTransform.rotation = newRotationA * initialRelativeRotation;
 
         // sceneTransform.position = MoviePoster.position + offset;
         // sceneTransform.rotation = initialRelativeRotation;

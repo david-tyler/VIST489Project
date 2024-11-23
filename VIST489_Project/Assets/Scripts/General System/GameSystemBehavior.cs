@@ -36,7 +36,6 @@ public class GameSystemBehavior : MonoBehaviour
         ReunitedAshWithCharizard,// 7
         AlternatePath            // 8
     }
-
     private NarrativeEvent state;
     
     // Boolean array to track completion of narrative events
@@ -484,6 +483,7 @@ public class GameSystemBehavior : MonoBehaviour
             // Fuctionality to play the intro Audio so now it doesn't constantly play
             StartCoroutine(SetUpIntroduction());
         }
+        state = NarrativeEvent.InIntroductionStage;
         narrativeState[(int)NarrativeEvent.InIntroductionStage] = true;
 
     }
@@ -567,14 +567,23 @@ public class GameSystemBehavior : MonoBehaviour
         pressedSkip = true;
     }
 
+    public void ShowPKWorldButton()
+    {
+        if (state == NarrativeEvent.InIntroductionStage)
+        {
+            PokemonWorldButtonGameObject.SetActive(true);
+        }
+    }
     // Function to determine if we entered a world just setting it to true if we have so we set the behavior for the intro audio.
     public void SetEnteredPokemonWorld()
     {
         audioManagerScript = AudioManager.instance;
         audioManagerScript.PlayEventSound(backgroundMusicName);
 
+        state = NarrativeEvent.EnteredPokemonWorld;
         SetNarrativeEvent(NarrativeEvent.EnteredPokemonWorld, true);
         SetNarrativeEvent(NarrativeEvent.InIntroductionStage, false);
+
         triggerZonesScript = TriggerZones.instance;
 
 
