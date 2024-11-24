@@ -34,12 +34,14 @@ public class GameSystemBehavior : MonoBehaviour
         SolvedGlyph,             // 5
         SolvedPit,               // 6
         ReunitedAshWithCharizard,// 7
-        AlternatePath            // 8
+        AlternatePath,           // 8
+        ZoroarkBattle,           // 9
+        SolveMaze                // 10
     }
     private NarrativeEvent state;
     
     // Boolean array to track completion of narrative events
-    private bool[] narrativeState = new bool[9];
+    private bool[] narrativeState = new bool[10];
 
     // Keep track of what interactable we have focused
     
@@ -122,6 +124,7 @@ public class GameSystemBehavior : MonoBehaviour
     public string backgroundMusicName;
 
     public List<GameObject> gameObjectsNotActive = new List<GameObject>();
+    public List<GameObject> gameObjectsActiveAtStart = new List<GameObject>();
     public List<Item> itemsReachedGlyph;
     public List<Item> itemsReachedPit;
     public List<Item> itemsReachedMaze;
@@ -138,6 +141,15 @@ public class GameSystemBehavior : MonoBehaviour
             if(item != null)
             {
                 item.SetActive(false);
+            }
+            
+        }
+
+        foreach (GameObject item in gameObjectsActiveAtStart)
+        {
+            if(item != null)
+            {
+                item.SetActive(true);
             }
             
         }
@@ -578,7 +590,13 @@ public class GameSystemBehavior : MonoBehaviour
     public void SetEnteredPokemonWorld()
     {
         audioManagerScript = AudioManager.instance;
-        audioManagerScript.PlayEventSound(backgroundMusicName);
+
+        if (audioManagerScript == null)
+        {
+        Debug.LogError("AudioManager instance is null! Make sure AudioManager is in the scene and initialized.");
+        return;
+        }
+        audioManagerScript.PlayEventSound(audioManagerScript.GetBackgroundMusic().name);
 
         state = NarrativeEvent.EnteredPokemonWorld;
         SetNarrativeEvent(NarrativeEvent.EnteredPokemonWorld, true);

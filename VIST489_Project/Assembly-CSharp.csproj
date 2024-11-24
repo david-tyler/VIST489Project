@@ -83,6 +83,7 @@
     <Compile Include="Assets/3rd Party/Apartment_Door/Scripts/DoorController.cs" />
     <Compile Include="Assets/Scripts/General System/ResetScenePositionScript.cs" />
     <Compile Include="Assets/Scripts/Games/Pokemon/MazeSelector.cs" />
+    <Compile Include="Assets/HealthSystem.cs" />
     <Compile Include="Assets/Scripts/General System/Player.cs" />
     <Compile Include="Assets/3rd Party/Apartment_Door/Scripts/KeyController.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextSelector_A.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Assets/Scripts/General System/UI/PokedexBehavior.cs" />
     <Compile Include="Assets/Scripts/General System/ParaLensesButtonBehavior.cs" />
     <Compile Include="Assets/Scripts/Inventory/InventoryBehaviorUI.cs" />
+    <Compile Include="Assets/PowerCrystal.cs" />
     <Compile Include="Assets/Scripts/General System/GameSystemBehavior.cs" />
     <Compile Include="Assets/Scripts/General System/UI/HealthBar.cs" />
     <Compile Include="Assets/Scripts/GlyphRaycaster.cs" />
@@ -155,8 +157,12 @@
     <None Include="Assets/StreamingAssets/Vuforia/VIST489ProjectImageTargets.xml" />
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets/3rd Party/SineVFX/TranslucentCrystals/Resources/Shaders/SkyboxProceduralDesaturated.shader" />
+    <None Include="Assets/3rd Party/SineVFX/TranslucentCrystals/Readme.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader" />
     <None Include="Assets/TextMesh Pro/Examples &amp; Extras/Fonts/Oswald-Bold - OFL.txt" />
+    <None Include="Assets/HandPainted Lava Textures/Documentation/Documentation.txt" />
+    <None Include="Assets/3rd Party/SineVFX/TranslucentCrystals/_SRP/!!!_ReadBeforeImport_!!!.txt" />
     <None Include="Assets/TextMesh Pro/Examples &amp; Extras/Fonts/Anton OFL.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc" />
     <None Include="Assets/3rd Party/karsiori/Sprites/Pixel Art Key Pack - Animated/Key Pack - Read Me.txt" />
@@ -170,6 +176,7 @@
     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc" />
+    <None Include="Assets/3rd Party/SineVFX/TranslucentCrystals/Resources/Shaders/Crystal.shader" />
     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc" />
     <None Include="Assets/StreamingAssets/Vuforia/VuforiaMars_Images.xml" />
     <None Include="Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt" />
@@ -180,7 +187,7 @@
     <None Include="Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt" />
     <None Include="Assets/StreamingAssets/Vuforia/ControllerModelClass.xml" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader" />
-    <None Include="Assets/HandPainted Lava Textures/Documentation/Documentation.txt" />
+    <None Include="Assets/3rd Party/HandPainted Lava Textures/Documentation/Documentation.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_Sprite.shader" />
     <None Include="Assets/TextMesh Pro/Examples &amp; Extras/Fonts/Bangers - OFL.txt" />
   </ItemGroup>

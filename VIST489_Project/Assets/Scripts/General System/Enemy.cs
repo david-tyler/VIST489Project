@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] List<Transform> attackOrigins;
     [SerializeField] Transform player;
     [SerializeField] GameObject weakPoints;
-    [SerializeField] string backgroundMusicName;
+    [SerializeField] AudioClip backgroundMusicName;
     [SerializeField] string beatZoroarkText;
     [SerializeField] GameObject model;
 
@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     PokemonWorld pokeWorld;
     MessageBehavior messageBehavior;
     UIBehavior uiBehaviorScript;
+    GameSystemBehavior gameSystem;
     bool encounterStarted;
    
 
@@ -71,6 +72,8 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+         gameSystem = GameSystemBehavior.instance;
+        GameSystemBehavior.NarrativeEvent currentState = gameSystem.GetCurrentState();
         currentHealth -= damage;
 
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
@@ -78,17 +81,25 @@ public class Enemy : MonoBehaviour
 
         if (currentHealth == 0)
         {
-            EnemyDefeated();
+            switch (currentState)
+            {
+                case GameSystemBehavior.NarrativeEvent.ZoroarkBattle:
+                    StartCoroutine(ZoroarkDefeated());
+                    break;
+                
+            }
         }
     }
 
-    public void EnemyDefeated()
+    IEnumerator ZoroarkDefeated()
     {
+        yield return new WaitForSeconds(2.0f);
+        
         SetEncounterStarted(false);
         model.SetActive(false);
         
         audioManagerScript = AudioManager.instance;
-        audioManagerScript.PlayEventSound(backgroundMusicName);
+        audioManagerScript.PlayEventSound(audioManagerScript.GetBackgroundMusic().name);
 
         messageBehavior = MessageBehavior.instance;
 
@@ -101,7 +112,7 @@ public class Enemy : MonoBehaviour
         uiBehaviorScript = UIBehavior.instance;
         uiBehaviorScript.SetState(UIBehavior.UiState.RoamState);
     }
-
+    
     public void ShowWeakPoints()
     {
         weakPoints.SetActive(true);

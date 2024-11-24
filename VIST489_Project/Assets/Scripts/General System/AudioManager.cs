@@ -4,31 +4,32 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
+    
 
     public AudioClip[] eventClips;
     private AudioSource eventAudioSource;
     public AudioSource newSource;
-    public AudioSource currentAudioSource = new AudioSource();
+    AudioSource currentAudioSource;
 
-    public string backgroundMusicName;
+    AudioClip backgroundMusic;
+    [SerializeField] AudioClip startingMusic;
+
     public float fadeDuration = 1.5f;
-    private bool isPlayingSource1 = true;
+    bool isPlayingSource1 = true;
 
+    Dictionary<string, AudioClip> audioClipMap = new Dictionary<string, AudioClip>();
 
+    #region  Singleton
+    public static AudioManager instance;
     void Awake()
     {
-        if (instance == null)
+        if (instance != null && instance != this)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
+            Debug.LogWarning("More than one instance of AudioManager found!");
             Destroy(gameObject);
             return;
         }
-
+        instance = this;
         // Set up the AudioSource
         eventAudioSource = gameObject.AddComponent<AudioSource>();
         eventAudioSource.loop = false;
@@ -37,6 +38,20 @@ public class AudioManager : MonoBehaviour
         eventAudioSource.loop = true;
         eventAudioSource.volume = 0.5f;
         currentAudioSource = eventAudioSource;
+    }
+    #endregion
+
+    void Start()
+    {
+        backgroundMusic = startingMusic;
+        foreach (AudioClip item in eventClips)
+        {
+            if (audioClipMap.ContainsKey(item.name) == false)
+            {
+                audioClipMap.Add(item.name, item);
+
+            }
+        }
     }
 
     public void PlayEventSound(string clipName)
@@ -64,7 +79,6 @@ public class AudioManager : MonoBehaviour
     }
     private IEnumerator FadeMusic(AudioClip newClip)
     {
-        Debug.Log(newClip.name);
         AudioSource activeSource;
         AudioSource otherSource;
 
@@ -110,16 +124,23 @@ public class AudioManager : MonoBehaviour
 
     private AudioClip GetEventClipByName(string clipName)
     {
-        foreach (AudioClip clip in eventClips)
-        {
-            if (clip.name == clipName)
-                return clip;
-        }
+        if (audioClipMap.ContainsKey(clipName))
+            return audioClipMap[clipName];
+        Debug.LogError("Clip Map does not contain this key: " + clipName);
         return null;
     }
 
     public AudioSource GetEventAudioSource()
     {
         return eventAudioSource;
+    }
+    public AudioClip GetBackgroundMusic()
+    {
+        return backgroundMusic;
+    }
+    public void SetBackgroundMusic(AudioClip newBackground)
+    {
+        backgroundMusic = newBackground;
+        
     }
 }

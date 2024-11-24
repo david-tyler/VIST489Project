@@ -49,7 +49,7 @@ public class PokedexBehavior : MonoBehaviour
         onScreenPositionPokedex = pokdexTransform.anchoredPosition;
 
         float width = pokdexTransform.rect.width;
-        offScreenPositionPokedex = new Vector2(onScreenPositionPokedex.x - width, onScreenPositionPokedex.y);
+        offScreenPositionPokedex = new Vector2(onScreenPositionPokedex.x - (width + 20), onScreenPositionPokedex.y);
 
         pokdexTransform.anchoredPosition = offScreenPositionPokedex;
     }

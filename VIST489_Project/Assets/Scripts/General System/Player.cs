@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] int baseDamage = 10;
     [SerializeField] float damageMultiplier = 2.5f;
     [SerializeField] Camera cam;
+    [SerializeField] AudioClip backgroundMusicName;
 
     public string[] moveset = new string[4];
     private const int movesetCapacity = 4;
@@ -20,8 +21,15 @@ public class Player : MonoBehaviour
 
     Enemy currentEnemy;
     GameObject currentWeakPoint;
+    GameSystemBehavior gameSystem;
+    PokemonWorld pokeWorld;
+    MazeBehavior mazeBehavior;
+    MessageBehavior messageBehavior;
+    UIBehavior uiBehaviorScript;
+    AudioManager audioManagerScript;
+    
 
-    public float cooldownDuration = 2f; // Cooldown duration in seconds
+    public float cooldownDuration = 2f; // Cooldown duration in seconds between button click to attack
 
     private bool isCooldown = false;
 
@@ -81,11 +89,44 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        healthBar.SetHealth(currentHealth);
-    }
+        gameSystem = GameSystemBehavior.instance;
+        GameSystemBehavior.NarrativeEvent currentState = gameSystem.GetCurrentState();
 
+        if (currentHealth != 0 )
+        {
+            currentHealth -= damage;
+            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+            healthBar.SetHealth(currentHealth);
+            if (currentHealth == 0)
+            {
+                switch (currentState)
+                {
+                    case GameSystemBehavior.NarrativeEvent.ZoroarkBattle:
+                        StartCoroutine(RetryMaze());
+                        break;
+                    
+                }
+            }
+        }
+        
+
+        
+    }
+    IEnumerator RetryMaze()
+    {
+        yield return new WaitForSeconds(5f);
+
+        audioManagerScript = AudioManager.instance;
+        audioManagerScript.PlayEventSound(audioManagerScript.GetBackgroundMusic().name);
+
+        mazeBehavior = MazeBehavior.instance;
+        mazeBehavior.ResetMaze();
+
+        uiBehaviorScript = UIBehavior.instance;
+        uiBehaviorScript.SetState(UIBehavior.UiState.RoamState);
+        
+        
+    }
     public void Attack(int index)
     {
         if (index < 0 || index > 3)

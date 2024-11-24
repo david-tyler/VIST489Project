@@ -62,8 +62,8 @@ public class PokemonWorld : MonoBehaviour
     // Make sure the player is across the pit and in range to tap charizard
     private bool canTapCharizard = false;
 
-    public string freedAshAudioName;
-    public string crossPitAudioName;
+    public AudioClip freedAshAudioName;
+    public AudioClip crossPitAudioName;
 
     public List<GameObject> removeGameObjects;
 
@@ -99,7 +99,7 @@ public class PokemonWorld : MonoBehaviour
                         if (canTapCharizard)
                         {
                             audioManagerScript = AudioManager.instance;
-                            audioManagerScript.PlayEventSound(crossPitAudioName);
+                            audioManagerScript.PlayEventSound(crossPitAudioName.name);
                             pit.SetActive(true);
                             StartCoroutine(MoveCharizard(targetCharizardPlatform1));
                             
@@ -235,7 +235,7 @@ public class PokemonWorld : MonoBehaviour
         {
             firstTimeUnlockingDoor = false;
             gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.FreedAsh, true);
-            audioManagerScript.PlayEventSound(freedAshAudioName);
+            audioManagerScript.PlayEventSound(freedAshAudioName.name);
             triggerZonesScript = TriggerZones.instance;
             
 

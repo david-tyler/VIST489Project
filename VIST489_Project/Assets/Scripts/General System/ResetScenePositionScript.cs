@@ -76,8 +76,11 @@ public class ResetScenePositionScript : MonoBehaviour
         Vector3 rotatedOffset = newRotationA * offset;
 
         Quaternion rotationX = Quaternion.Euler(-90, 0, 0);
-        sceneTransform.position = newPositionA + rotatedOffset;
 
+        Vector3 result = newPositionA + rotatedOffset;
+        float distance = Vector3.Distance(ARCamera.transform.position, MoviePoster.position);
+        Debug.Log(distance);
+        sceneTransform.position = new Vector3(result.x + (-distance), sceneTransform.position.y, result.z);
         // sceneTransform.position = MoviePoster.position + offset;
         // sceneTransform.rotation = initialRelativeRotation;
 

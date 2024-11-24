@@ -84,8 +84,8 @@ public class MazeBehavior : MonoBehaviour
     public AudioSource goodSquareSound;
     public AudioSource badSquareSound;
 
-    public string ZoroarkEncounterAudioName;
-    public string backgroundMusicName;
+    public AudioClip ZoroarkEncounterAudioName;
+    public AudioClip backgroundMusicName;
 
     void Start()
     {
@@ -240,6 +240,8 @@ public class MazeBehavior : MonoBehaviour
     // add this method to button onclick for the popup button
     public void ResetMaze()
     {
+        gameSystem = GameSystemBehavior.instance;
+        gameSystem.SetNarrativeState(GameSystemBehavior.NarrativeEvent.SolveMaze);
         for (int i = 0; i < platforms.Count; i++)
         {
             platforms[i].transform.parent.gameObject.GetComponent<Renderer>().material = PlatformOriginalMat;
@@ -282,6 +284,8 @@ public class MazeBehavior : MonoBehaviour
 
     public void MazeStarted()
     {
+        gameSystem = GameSystemBehavior.instance;
+        gameSystem.SetNarrativeState(GameSystemBehavior.NarrativeEvent.SolveMaze);
         if (failed == true)
         {
             ResetMaze();
@@ -350,11 +354,13 @@ public class MazeBehavior : MonoBehaviour
     private void ZoroarkAppear()
     {
         audioManagerScript = AudioManager.instance;
-        audioManagerScript.PlayEventSound(ZoroarkEncounterAudioName);
+        audioManagerScript.PlayEventSound(ZoroarkEncounterAudioName.name);
         PopUpBoxButton.onClick.RemoveAllListeners();
 
         firstMazeScript = firstMaze.GetComponent<MazeSelector>();
         secondMazeScript = secondMaze.GetComponent<MazeSelector>();
+        gameSystem = GameSystemBehavior.instance;
+        gameSystem.SetNarrativeState(GameSystemBehavior.NarrativeEvent.ZoroarkBattle);
         
         
         
@@ -402,7 +408,7 @@ public class MazeBehavior : MonoBehaviour
     public void ClickedEscape()
     {
         audioManagerScript = AudioManager.instance;
-        audioManagerScript.PlayEventSound(backgroundMusicName);
+        audioManagerScript.PlayEventSound(backgroundMusicName.name);
         uiBehaviorScript = UIBehavior.instance;
         uiBehaviorScript.SetState(UIBehavior.UiState.RoamState);
         enemyScript.SetEncounterStarted(false);
