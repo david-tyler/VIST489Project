@@ -60,7 +60,7 @@ public class MazeBehavior : MonoBehaviour
     public string YouWonMessage = "Congrats! Looks like you solved the maze. Try scanning the key again, we should be able to pick it up now.";
     // --------------------------------------
 
-    private List<Collider> platforms = new List<Collider>();
+    private HashSet<GameObject> platforms = new HashSet<GameObject>();
     private bool startTimer = false;
     private bool goalReached = false;
     private float originaltime;
@@ -146,6 +146,7 @@ public class MazeBehavior : MonoBehaviour
         if (tag == "Maze Platform")
         {
             MazeSelector currentMazeScript = other.gameObject.GetComponentInParent<MazeSelector>();
+            
 
             // once we choose to step on a maze platform for the first time set the other one to false
             if (enteredMaze == false)
@@ -212,8 +213,9 @@ public class MazeBehavior : MonoBehaviour
                     }
                     else if (other.gameObject.GetComponent<Platform>().isGoal == false)
                     {
-                        goodSquareSound.PlayOneShot(goodSquareSound.clip);
-                        platforms.Add(other);
+                        if (platforms.Contains(other.gameObject) == false)
+                            goodSquareSound.PlayOneShot(goodSquareSound.clip);
+                        
                         other.transform.parent.gameObject.GetComponent<Renderer>().material = goodSquare;
                     }
 
@@ -221,8 +223,8 @@ public class MazeBehavior : MonoBehaviour
                 }
                 else if (other.gameObject.GetComponent<Platform>().isValidSquare == false)
                 {
-                   
-                    platforms.Add(other);
+                   if (platforms.Contains(other.gameObject) == false)
+                            badSquareSound.PlayOneShot(badSquareSound.clip);
                     other.transform.parent.gameObject.GetComponent<Renderer>().material = badSquare;
                     startTimer = false;
                     
@@ -230,6 +232,7 @@ public class MazeBehavior : MonoBehaviour
                     
                 }
             }
+            platforms.Add(other.gameObject);
         }
         
         
@@ -242,9 +245,9 @@ public class MazeBehavior : MonoBehaviour
     {
         gameSystem = GameSystemBehavior.instance;
         gameSystem.SetNarrativeState(GameSystemBehavior.NarrativeEvent.SolveMaze);
-        for (int i = 0; i < platforms.Count; i++)
+        foreach (GameObject item in platforms)
         {
-            platforms[i].transform.parent.gameObject.GetComponent<Renderer>().material = PlatformOriginalMat;
+            item.transform.parent.gameObject.GetComponent<Renderer>().material = PlatformOriginalMat;
         }
         platforms.Clear();
 

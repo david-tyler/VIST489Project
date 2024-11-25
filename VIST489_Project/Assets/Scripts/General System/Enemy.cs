@@ -53,6 +53,11 @@ public class Enemy : MonoBehaviour
         }
         
     }
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+    }
 
     void AttackPlayer()
     {
@@ -93,7 +98,7 @@ public class Enemy : MonoBehaviour
 
     IEnumerator ZoroarkDefeated()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(5f);
         
         SetEncounterStarted(false);
         model.SetActive(false);
@@ -111,6 +116,8 @@ public class Enemy : MonoBehaviour
         pokeWorld.SolvedMaze();
         uiBehaviorScript = UIBehavior.instance;
         uiBehaviorScript.SetState(UIBehavior.UiState.RoamState);
+        ResetHealth();
+
     }
     
     public void ShowWeakPoints()

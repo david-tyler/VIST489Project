@@ -87,6 +87,13 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+    }
+    
+
     public void TakeDamage(float damage)
     {
         gameSystem = GameSystemBehavior.instance;
@@ -124,9 +131,11 @@ public class Player : MonoBehaviour
 
         uiBehaviorScript = UIBehavior.instance;
         uiBehaviorScript.SetState(UIBehavior.UiState.RoamState);
-        
+        ResetHealth();
         
     }
+    
+    
     public void Attack(int index)
     {
         if (index < 0 || index > 3)
