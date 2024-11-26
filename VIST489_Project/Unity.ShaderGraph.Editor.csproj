@@ -349,8 +349,8 @@
     <Compile Include="Library/PackageCache/com.unity.shadergraph@14.0.11/Editor/Util/Documentation.cs" />
     <Compile Include="Library/PackageCache/com.unity.shadergraph@14.0.11/Editor/Serialization/JsonData.cs" />
     <Compile Include="Library/PackageCache/com.unity.shadergraph@14.0.11/Editor/Data/Nodes/Artistic/Adjustment/ContrastNode.cs" />
-    <Compile Include="Library/PackageCache/com.unity.shadergraph@14.0.11/Editor/Data/Nodes/Math/Trigonometry/HyperbolicSineNode.cs" />
     <Compile Include="Library/PackageCache/com.unity.shadergraph@14.0.11/Editor/Data/Graphs/LightmappingShaderProperties.cs" />
+    <Compile Include="Library/PackageCache/com.unity.shadergraph@14.0.11/Editor/Data/Nodes/Math/Trigonometry/HyperbolicSineNode.cs" />
     <Compile Include="Library/PackageCache/com.unity.shadergraph@14.0.11/Editor/Generation/Data/FieldCondition.cs" />
     <Compile Include="Library/PackageCache/com.unity.shadergraph@14.0.11/Editor/Data/Graphs/ViewDirectionMaterialSlot.cs" />
     <Compile Include="Library/PackageCache/com.unity.shadergraph@14.0.11/Editor/Generation/Targets/BuiltIn/Editor/ShaderGraph/BuiltInStructFields.cs" />

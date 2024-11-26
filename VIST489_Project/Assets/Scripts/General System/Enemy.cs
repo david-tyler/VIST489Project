@@ -16,7 +16,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] AudioClip backgroundMusicName;
     [SerializeField] string beatZoroarkText;
     [SerializeField] GameObject model;
-    [SerializeField] GameObject particle;
 
     AudioManager audioManagerScript;
     PokemonWorld pokeWorld;
@@ -74,11 +73,6 @@ public class Enemy : MonoBehaviour
             rb.AddForce(rb.transform.forward * projectileSpeed);
         }
 
-        particle.transform.LookAt(player);
-        
-        var emission = particle.GetComponent<ParticleSystem>().emission;
-        emission.enabled = true;
-        
     }
 
     public void TakeDamage(float damage)

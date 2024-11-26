@@ -2219,7 +2219,7 @@ MonoBehaviour:
   secondMaze: {fileID: 1065411106}
   goalReachedAudio: {fileID: 1233619969}
   timerText: {fileID: 1111231860}
-  PopUpBoxButton: {fileID: 0}
+  PopUpBoxButton: {fileID: 870387129}
   Timer: {fileID: 1946150896}
   remainingTime: 60
   zoroarkStanding: {fileID: 812531084}
@@ -4973,15 +4973,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8.088036
+      value: 8.088034
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.y
-      value: 8.088086
+      value: 8.08809
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8.088097
+      value: 8.088102
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8930,7 +8930,6 @@ MonoBehaviour:
   backgroundMusicName: {fileID: 8300000, guid: f6ae412700c714b9ca35345c889c6066, type: 3}
   beatZoroarkText: Wow! You did it! Try picking up the key.
   model: {fileID: 812531082}
-  particle: {fileID: 0}
   healthBar: {fileID: 156329476}
 --- !u!136 &543921048
 CapsuleCollider:
@@ -28112,7 +28111,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939030869}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
