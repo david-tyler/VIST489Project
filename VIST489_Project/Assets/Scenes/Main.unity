@@ -2993,11 +2993,11 @@ PrefabInstance:
     - target: {fileID: 8695915025556499560, guid: 55e4cdca9727a64468588a7bcfae8727, type: 3}
       propertyPath: health
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 999165102}
     - target: {fileID: 8695915025556499560, guid: 55e4cdca9727a64468588a7bcfae8727, type: 3}
       propertyPath: spawner
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2091420809}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5413,8 +5413,8 @@ Transform:
   m_GameObject: {fileID: 291951523}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.2, y: 0.08, z: -1.46}
-  m_LocalScale: {x: 4.432227, y: 4.2242, z: 2.7374878}
+  m_LocalPosition: {x: 4.92, y: 0.08, z: -1.56}
+  m_LocalScale: {x: 4.432227, y: 4.2242, z: 2.0375123}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -8930,6 +8930,7 @@ MonoBehaviour:
   backgroundMusicName: {fileID: 8300000, guid: f6ae412700c714b9ca35345c889c6066, type: 3}
   beatZoroarkText: Wow! You did it! Try picking up the key.
   model: {fileID: 812531082}
+  particle: {fileID: 0}
   healthBar: {fileID: 156329476}
 --- !u!136 &543921048
 CapsuleCollider:
@@ -17651,11 +17652,11 @@ PrefabInstance:
     - target: {fileID: 8695915025556499560, guid: 55e4cdca9727a64468588a7bcfae8727, type: 3}
       propertyPath: health
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 999165102}
     - target: {fileID: 8695915025556499560, guid: 55e4cdca9727a64468588a7bcfae8727, type: 3}
       propertyPath: spawner
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2091420809}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19948,11 +19949,11 @@ PrefabInstance:
     - target: {fileID: 8695915025556499560, guid: 55e4cdca9727a64468588a7bcfae8727, type: 3}
       propertyPath: health
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 999165102}
     - target: {fileID: 8695915025556499560, guid: 55e4cdca9727a64468588a7bcfae8727, type: 3}
       propertyPath: spawner
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2091420809}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27020,7 +27021,7 @@ Transform:
   m_GameObject: {fileID: 1867017634}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0, z: -3.49}
+  m_LocalPosition: {x: -5.46, y: 0, z: -7.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
