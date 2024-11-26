@@ -40,7 +40,8 @@ public class ActivateBossFight : MonoBehaviour
         messageBehavior.SetMessageText("OH NO! A trap! Grab that remote, it's not what it appears to be! Break the crystals!");
         popUp.PopUp("OH NO! A trap! Grab that remote, it's not what it appears to be! Break the crystals!");
         messageBehavior.SetHaveMessage(true);
-        
+
+        this.gameObject.SetActive(false);
     }
 }
 
