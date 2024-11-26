@@ -5330,6 +5330,9 @@ MonoBehaviour:
   - {fileID: 2091420808}
   - {fileID: 1867017634}
   - {fileID: 1332977382}
+  PopUpBox: {fileID: 2314107385393667530}
+  PopUpBoxAnimator: {fileID: 4964281739071980802}
+  PopUpBoxText: {fileID: 945313730}
 --- !u!65 &291951525
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15422,7 +15425,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 545075447}
   m_HandleRect: {fileID: 545075446}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

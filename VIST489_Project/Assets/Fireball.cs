@@ -10,7 +10,7 @@ public class Fireball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthSystem = GameObject.Find("UI").GetComponent<HealthSystem>();
+        healthSystem = GameObject.Find("UI Canvas").GetComponent<HealthSystem>();
     }
 
     // Update is called once per frame

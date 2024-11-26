@@ -36,7 +36,8 @@ public class GameSystemBehavior : MonoBehaviour
         ReunitedAshWithCharizard,// 7
         AlternatePath,           // 8
         ZoroarkBattle,           // 9
-        SolveMaze                // 10
+        SolveMaze,               // 10
+        FinalBossAmbush          // 11
     }
     private NarrativeEvent state;
     

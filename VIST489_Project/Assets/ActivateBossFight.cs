@@ -5,6 +5,12 @@ using UnityEngine;
 public class ActivateBossFight : MonoBehaviour
 {
     public List<GameObject> bossFightobjects = new List<GameObject>();
+    public GameObject PopUpBox; // Our dialogue box
+    public Animator PopUpBoxAnimator;
+    MessageBehavior messageBehavior;
+    PopUpSystem popUp;
+
+    public TMPro.TextMeshProUGUI PopUpBoxText;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,5 +29,16 @@ public class ActivateBossFight : MonoBehaviour
         {
             bossFightobjects[i].SetActive(true);
         }
+
+        popUp = PopUpSystem.instance;
+        popUp.popUpBox = PopUpBox;
+        popUp.popUpText = PopUpBoxText;
+        popUp.animator = PopUpBoxAnimator;
+
+        messageBehavior = MessageBehavior.instance;
+
+        messageBehavior.SetMessageText("OH NO! A trap! Grab that remote, it's not what it appears to be! Break the crystals!");
+        messageBehavior.SetHaveMessage(true);
     }
 }
+
