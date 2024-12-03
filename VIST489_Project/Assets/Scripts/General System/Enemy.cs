@@ -45,12 +45,14 @@ public class Enemy : MonoBehaviour
         if (encounterStarted == true)
         {
             timer += Time.deltaTime;
+
             if (timer >= attackInterval)
             {
                 timer = 0f;
-                AttackPlayer();
+                AttackPlayer(player);
             }
         }
+        
         
     }
     public void ResetHealth()
@@ -59,18 +61,31 @@ public class Enemy : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
     }
 
-    void AttackPlayer()
+    void AttackPlayer(Transform currentPlayerTransform)
     {
         int index = Random.Range(0, attackOrigins.Count);
         Transform origin = attackOrigins[index];
+
         GameObject projectile = Instantiate(projectilePrefab, origin.position, Quaternion.identity);
-        projectile.transform.LookAt(player);
+        Vector3 direction = (currentPlayerTransform.position - origin.position).normalized;
         
+        // Rotate the projectile to face the player
+        //projectile.transform.rotation = Quaternion.LookRotation(direction);
+        
+        // projectile.transform.LookAt(currentPlayerTransform);
+        
+        // Vector3 projectileRotation = projectile.transform.localEulerAngles;
+        // projectile.transform.localEulerAngles = new Vector3(projectileRotation.x, projectileRotation.y, projectileRotation.z + 90);
+        projectile.GetComponent<Rigidbody>().freezeRotation = true;
+       
+
         projectile.GetComponent<Projectile>().SetDamage(baseDamage);
+        
+        // projectile.GetComponent<Projectile>().SetTarget(currentPlayerTransform.position, projectileSpeed);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.AddForce(rb.transform.forward * projectileSpeed);
+            rb.velocity = direction * projectileSpeed;
         }
 
     }

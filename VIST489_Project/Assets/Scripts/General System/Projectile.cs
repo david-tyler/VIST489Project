@@ -7,6 +7,24 @@ public class Projectile : MonoBehaviour
 {
     float baseDamage = 10f;
 
+    private Vector3 target;
+    private float speed;
+    private bool haveTarget = false;
+
+    void Update()
+    {
+        if (haveTarget)
+        {
+            //transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
+        }
+    }
+
+    public void SetTarget(Vector2 newTarget, float projectileSpeed)
+    {
+        target = newTarget;
+        speed = projectileSpeed;
+        haveTarget = true;
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") == true)

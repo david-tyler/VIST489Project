@@ -45,10 +45,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(20);
-        }
         Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
@@ -64,7 +60,6 @@ public class Player : MonoBehaviour
                 currentEnemy = hit.collider.GetComponent<WeakPoint>().enemyObject;
                 damageMultiplier = hit.collider.GetComponent<WeakPoint>().multiplier;
                 currentWeakPoint = hit.collider.gameObject;
-
                 hitWeakPoint = true;
             }
             else
