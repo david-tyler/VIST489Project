@@ -8365,7 +8365,7 @@ MonoBehaviour:
   PopUpBox: {fileID: 2314107385393667530}
   PopUpBoxAnimator: {fileID: 4964281739071980802}
   PopUpBoxText: {fileID: 945313730}
-  ImageTargetEnterPokemonWorld: {fileID: 1386398224}
+  PokemonWorldImageTarget: {fileID: 1386398224}
   PokemonWorld: {fileID: 1638373496}
   PokemonWorldButtonGameObject: {fileID: 994956754}
   LeavePokemonWorldButtonGameObject: {fileID: 271230571}
@@ -9325,7 +9325,7 @@ Transform:
   m_GameObject: {fileID: 607717732}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.19, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9408,8 +9408,8 @@ MonoBehaviour:
   mDataSetPath: 
   mAspectRatio: 1.3333333
   mImageTargetType: 3
-  mWidth: 0.15
-  mHeight: 0.2
+  mWidth: 0.7875
+  mHeight: 1.05
   mRuntimeTexture: {fileID: 2800000, guid: b94fc0a30bf154f97bb37a2b0e23eae6, type: 3}
   mMotionHint: 1
   mTrackingOptimization: 0
@@ -9462,7 +9462,7 @@ Transform:
   m_GameObject: {fileID: 610393980}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.263, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9568,7 +9568,7 @@ Transform:
   m_GameObject: {fileID: 616327094}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.25, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18765,7 +18765,7 @@ Transform:
   m_GameObject: {fileID: 1323447013}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.638748, y: 0.40800002, z: -0.42799234}
+  m_LocalPosition: {x: 1.018, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18848,8 +18848,8 @@ MonoBehaviour:
   mDataSetPath: 
   mAspectRatio: 1.3333333
   mImageTargetType: 3
-  mWidth: 0.15
-  mHeight: 0.2
+  mWidth: 0.7875
+  mHeight: 1.05
   mRuntimeTexture: {fileID: 2800000, guid: 6b3bab24cc78747e19b7d7f59e376455, type: 3}
   mMotionHint: 1
   mTrackingOptimization: 0

@@ -77,7 +77,7 @@ public class GameSystemBehavior : MonoBehaviour
 
     // ******* Image Targets that need to be scanned to enter respective World
     // --------------------------------------
-    public GameObject ImageTargetEnterPokemonWorld;
+    public GameObject PokemonWorldImageTarget;
     // --------------------------------------
 
     
@@ -590,6 +590,7 @@ public class GameSystemBehavior : MonoBehaviour
     // Function to determine if we entered a world just setting it to true if we have so we set the behavior for the intro audio.
     public void SetEnteredPokemonWorld()
     {
+        PokemonWorldImageTarget.SetActive(false);
         audioManagerScript = AudioManager.instance;
 
         if (audioManagerScript == null)
