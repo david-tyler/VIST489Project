@@ -2084,7 +2084,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ARCamera: {fileID: 437364105}
   positionToGo: {fileID: 969525320}
-  cameraOrigin: {fileID: 0}
 --- !u!4 &139557772 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6396341665341311114, guid: c221cda8750f8094cb880682a8945dab, type: 3}
@@ -2253,7 +2252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c94b99327c2c740049b37f44355610f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PopUpBoxButton: {fileID: 0}
+  PopUpBoxButton: {fileID: 870387129}
   AshLines:
   - Oh No! Where did he go!?
   - I'm trapped in this room and I lost my Charizard. Will you please help me escape?
@@ -4047,6 +4046,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Placeable_Glyph
       objectReference: {fileID: 0}
+    - target: {fileID: 3059404658612704743, guid: cefa57e7bc9653f4886efbf0a3a18b6a, type: 3}
+      propertyPath: gate
+      value: 
+      objectReference: {fileID: 1851315127}
     - target: {fileID: 3059404658612704743, guid: cefa57e7bc9653f4886efbf0a3a18b6a, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -14311,7 +14314,7 @@ GameObject:
   - component: {fileID: 893004704}
   - component: {fileID: 893004703}
   m_Layer: 0
-  m_Name: glyph controller (1)
+  m_Name: Glyph controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14413,7 +14416,7 @@ Transform:
   m_GameObject: {fileID: 893004702}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.37, y: 0, z: 10.58}
+  m_LocalPosition: {x: -3.98, y: 0, z: 12.11}
   m_LocalScale: {x: 4.4101, y: 4.3847, z: 2.7790093}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18907,7 +18910,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 3.0000153, y: 1}
+  m_AnchoredPosition: {x: 3.0000153, y: 0.99993896}
   m_SizeDelta: {x: 288.108, y: 660.43994}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &1338955727
@@ -25237,7 +25240,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ARCamera: {fileID: 437364105}
   positionToGo: {fileID: 952955544}
-  cameraOrigin: {fileID: 0}
 --- !u!23 &1768837115 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -2234040702563316214, guid: 899b41f9d1b4d4428808e1cb4fc6914e, type: 3}
@@ -25500,7 +25502,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ARCamera: {fileID: 437364105}
   positionToGo: {fileID: 1203784531}
-  cameraOrigin: {fileID: 0}
 --- !u!1001 &1792090699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26634,7 +26635,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -26980,29 +26981,29 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: ColorRemote
+  mTrackableName: woodsword
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/ColorRemote.xml
-  mBaseSize: 0.199819
-  mAspectRatioXY: 0.5543667
-  mAspectRatioXZ: 3.1378248
+  mDataSetPath: Vuforia/woodsword.xml
+  mBaseSize: 1.960583
+  mAspectRatioXY: 0.06832613
+  mAspectRatioXZ: 0.18204026
   mShowBoundingBox: 0
   mOverrideSnappingPose: 0
-  mBBoxMin: {x: -0.081125, y: 0.111919, z: -0.278141}
-  mBBoxMax: {x: 0.118694, y: 0.222692, z: 0.348856}
-  mPreviewImage: {fileID: 2800000, guid: af146bd0aa304cd984b27bd3ed305eb6, type: 3}
+  mBBoxMin: {x: -1.301295, y: 2.013125, z: -0.601881}
+  mBBoxMax: {x: 0.659288, y: 2.147084, z: -0.244976}
+  mPreviewImage: {fileID: 0}
   mEnhanceRuntimeDetection: 0
   m3DGuideViewModel: {fileID: 0}
   m2DGuideViewImage: {fileID: 0}
   mGuideViewDisplayMode: 0
   m2DGuideViewMaterial: {fileID: 0}
   m3DGuideViewMaterial: {fileID: 0}
-  mLength: 0.199819
-  mWidth: 0.110773
-  mHeight: 0.626997
+  mLength: 1.960583
+  mWidth: 0.13395905
+  mHeight: 0.35690504
   m2DGuideViewMaterials: []
   m3DGuideViewMaterials: []
-  mSelectedGuideView: GuideView_0000
+  mSelectedGuideView: 
   mMotionHint: 1
   mTrackingMode: 2
   mTrackingOptimization: 0
@@ -27042,8 +27043,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mObserverBehaviour: {fileID: 1867017637}
   mHiddenRoot: {fileID: 0}
-  mTargetName: ColorRemote
-  mDatasetName: Vuforia/ColorRemote.xml
+  mTargetName: woodsword
+  mDatasetName: Vuforia/woodsword.xml
   mCastedBehaviour: {fileID: 1867017637}
   mModelTargetPreview: {fileID: 0}
 --- !u!1001 &1872253844

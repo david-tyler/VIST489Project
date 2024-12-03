@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QCARInfo>
+    <TargetSet version="36.0" toolVersion="v7.1.0">
+        <ModelTarget name="woodsword" targetId="412bd321b49d4e09ba923703db3c5b32" version="14.0" toolVersion="v7.1.0" bbox="-1.301295 2.013125 -0.601881 0.659288 2.147084 -0.244976" trackingMode="scan" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="yes" />
+    </TargetSet>
+    <Assembly name="woodsword" assemblyId="3d9cecb53ec541d99f50f6f05dc05333">
+        <Part name="woodsword" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+</QCARInfo>

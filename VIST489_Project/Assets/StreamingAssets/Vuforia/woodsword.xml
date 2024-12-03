@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QCARConfig>
+    <Tracking>
+        <ModelTarget name="woodsword" trackingMode="scan" motionHint="adaptive" upVector="0.0 1.0 0.0" optimizeTrackingFor="default"></ModelTarget>
+    </Tracking>
+    <Assembly name="woodsword" assemblyId="3d9cecb53ec541d99f50f6f05dc05333">
+        <Part name="woodsword" translation="0 0 0" rotation="AD: 0 0 1 0"></Part>
+        <EntryPoint name="(none)" trained="yes"></EntryPoint>
+    </Assembly>
+</QCARConfig>
