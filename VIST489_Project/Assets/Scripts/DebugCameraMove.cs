@@ -7,7 +7,7 @@ public class DebugCameraMove : MonoBehaviour
     public GameObject ARCamera;
 
     public Transform positionToGo;
-    public Transform cameraOrigin;
+    //public Transform cameraOrigin;
 
 
     public void DebugMove()
@@ -24,8 +24,8 @@ public class DebugCameraMove : MonoBehaviour
 
 
         Vuforia.VuforiaBehaviour.Instance.DevicePoseBehaviour.enabled = false;
-        ARCamera.transform.position = positionToGo.position - (ARCamera.transform.position - cameraOrigin.position); // Set desired position
-        cameraOrigin.position = positionToGo.position;
+        ARCamera.transform.position = positionToGo.position; //- (ARCamera.transform.position - cameraOrigin.position); // Set desired position
+        //cameraOrigin.position = positionToGo.position;
         ARCamera.transform.rotation = positionToGo.rotation; // Set desired position
                                                              // Re-enable tracking when done
        

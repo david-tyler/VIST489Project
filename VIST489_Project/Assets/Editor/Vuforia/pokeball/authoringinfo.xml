@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QCARInfo>
+    <TargetSet version="36.0" toolVersion="v7.1.0">
+        <ModelTarget name="pokeball" targetId="6d9a8a1e2a8e4e57a583f10d0acad85f" version="14.0" toolVersion="v7.1.0" bbox="-0.115932 0.275189 0.014337 -0.024993 0.365815 0.106037" trackingMode="scan" upVector="0.0 1.0 0.0" optimizeTrackingFor="low_feature_objects" realisticTextures="yes" />
+    </TargetSet>
+    <Assembly name="pokeball" assemblyId="31c08e285fd7409cb62a64d13ff0aa37">
+        <Part name="pokeball" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+</QCARInfo>

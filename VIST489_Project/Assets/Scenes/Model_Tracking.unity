@@ -873,14 +873,12 @@ MonoBehaviour:
   PopUpBoxButton: {fileID: 0}
   Timer: {fileID: 0}
   remainingTime: 60
-  landGoodSquaresBeforeGoal: 5
   zoroarkStanding: {fileID: 0}
   leftKlefkiAnimation: {fileID: 0}
   rightKlefkiAnimation: {fileID: 0}
   zoroark: {fileID: 0}
   leftKlefki: {fileID: 0}
   rightKlefki: {fileID: 0}
-  escapeButton: {fileID: 0}
   WrongSquareMessage: Looks like you stepped on the wrong platform. You have to scan
     the key and start over again.
   RanOutOfTimeMessage: You ran out of time. Try scanning the key again to start over
@@ -889,10 +887,11 @@ MonoBehaviour:
   zoroarkAppearsLines:
   - Look out! A Zoroark has appeared!
   - Hurry we can't stay here! Press "Escape" to run away!
+  enemyScript: {fileID: 0}
   goodSquareSound: {fileID: 0}
   badSquareSound: {fileID: 0}
-  ZoroarkEncounterAudioName: 34 - N's Castle
-  backgroundMusicName: 15 - Dragonspiral Tower
+  ZoroarkEncounterAudioName: {fileID: 0}
+  backgroundMusicName: {fileID: 0}
 --- !u!135 &1713724824
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1125,29 +1124,29 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: ColorRemote
+  mTrackableName: pokeball
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/ColorRemote.xml
-  mBaseSize: 0.199819
-  mAspectRatioXY: 0.5543667
-  mAspectRatioXZ: 3.1378248
+  mDataSetPath: Vuforia/pokeball.xml
+  mBaseSize: 0.090939
+  mAspectRatioXY: 0.9965581
+  mAspectRatioXZ: 1.0083681
   mShowBoundingBox: 0
   mOverrideSnappingPose: 0
-  mBBoxMin: {x: -0.081125, y: 0.111919, z: -0.278141}
-  mBBoxMax: {x: 0.118694, y: 0.222692, z: 0.348856}
-  mPreviewImage: {fileID: 2800000, guid: af146bd0aa304cd984b27bd3ed305eb6, type: 3}
+  mBBoxMin: {x: -0.115932, y: 0.275189, z: 0.014337}
+  mBBoxMax: {x: -0.024993, y: 0.365815, z: 0.106037}
+  mPreviewImage: {fileID: 0}
   mEnhanceRuntimeDetection: 0
   m3DGuideViewModel: {fileID: 0}
   m2DGuideViewImage: {fileID: 0}
   mGuideViewDisplayMode: 0
   m2DGuideViewMaterial: {fileID: 0}
   m3DGuideViewMaterial: {fileID: 0}
-  mLength: 0.199819
-  mWidth: 0.110773
-  mHeight: 0.626997
+  mLength: 0.090939
+  mWidth: 0.090626
+  mHeight: 0.09169999
   m2DGuideViewMaterials: []
   m3DGuideViewMaterials: []
-  mSelectedGuideView: GuideView_0000
+  mSelectedGuideView: 
   mMotionHint: 1
   mTrackingMode: 2
   mTrackingOptimization: 0
@@ -1186,8 +1185,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mObserverBehaviour: {fileID: 1867017637}
   mHiddenRoot: {fileID: 0}
-  mTargetName: ColorRemote
-  mDatasetName: Vuforia/ColorRemote.xml
+  mTargetName: pokeball
+  mDatasetName: Vuforia/pokeball.xml
   mCastedBehaviour: {fileID: 1867017637}
   mModelTargetPreview: {fileID: 0}
 --- !u!1 &1909941618
