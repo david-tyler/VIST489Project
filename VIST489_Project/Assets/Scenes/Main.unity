@@ -8920,7 +8920,7 @@ MonoBehaviour:
   currentHealth: 0
   baseDamage: 20
   attackInterval: 3
-  projectileSpeed: 200
+  projectileSpeed: 5
   projectilePrefab: {fileID: 5747777888822036501, guid: 984d133a0c12d4b6f937b19dba82c473, type: 3}
   attackOrigins:
   - {fileID: 1190471436}
