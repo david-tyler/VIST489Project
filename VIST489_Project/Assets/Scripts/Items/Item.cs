@@ -16,6 +16,11 @@ public class Item : ScriptableObject
         Debug.Log("Using " + name);
     }
 
+    public virtual void CollectedItem()
+    {
+        Debug.Log("Collected " + name);
+    }
+
     public void RemoveFromInventory()
     {
         if (inventoryStatus == true)

@@ -33,16 +33,15 @@ public class GameSystemBehavior : MonoBehaviour
         FreedAsh,                // 4
         SolvedGlyph,             // 5
         SolvedPit,               // 6
-        ReunitedAshWithCharizard,// 7
-        AlternatePath,           // 8
-        ZoroarkBattle,           // 9
-        SolveMaze,               // 10
-        FinalBossAmbush          // 11
+        AlternatePath,           // 7
+        ZoroarkBattle,           // 8
+        SolveMaze,               // 9
+        FinalBossAmbush          // 10
     }
     private NarrativeEvent state;
     
     // Boolean array to track completion of narrative events
-    private bool[] narrativeState = new bool[10];
+    private bool[] narrativeState = new bool[11];
 
     // Keep track of what interactable we have focused
     
@@ -89,6 +88,7 @@ public class GameSystemBehavior : MonoBehaviour
     public GameObject PokemonWorldButtonGameObject;
     public GameObject LeavePokemonWorldButtonGameObject;
     public GameObject InventoryButtonGameObject; // the title button for the inventory to toggle it on/off.
+    public GameObject pit;
 
     public Button PokemonWorldButton;
     public Button LeavePokemonWorldButton;
@@ -566,6 +566,7 @@ public class GameSystemBehavior : MonoBehaviour
         {
             SkipButtonGameObject.SetActive(true);
             SkipButton.onClick.AddListener(SkipButtonListener);
+            pressedSkip = false;
         }
         else if(activate == false)
         {
@@ -746,17 +747,21 @@ public class GameSystemBehavior : MonoBehaviour
 
     public void SetUpGlyphNarrativeState()
     {
+        state = NarrativeEvent.CompletedMazeGotKey;
         inventoryScript = Inventory.instance;
+        paraLensesScript = ParaLensesButtonBehavior.instance;
         List<bool> currentState = new List<bool>();
-        currentState.Add(IsNarrativeEventComplete(NarrativeEvent.ParalensesOn));
-        currentState.Add(false);
-        currentState.Add(true);
-        currentState.Add(true);
-        currentState.Add(true);
-        currentState.Add(false);
-        currentState.Add(false);
-        currentState.Add(false);
-        currentState.Add(false);
+        narrativeState[0] = paraLensesScript.getIsParaLensesOn();
+        narrativeState[1] = false;
+        narrativeState[2] = true;
+        narrativeState[3] = true;
+        narrativeState[4] = true;
+        narrativeState[5] = false;
+        narrativeState[6] = false;
+        narrativeState[7] = false;
+        narrativeState[8] = false;
+        narrativeState[9] = true;
+        narrativeState[10] = false;
         SetOverallNarrativeState(currentState);
 
         inventoryScript.Clear();
@@ -773,17 +778,21 @@ public class GameSystemBehavior : MonoBehaviour
 
     public void SetUpMazeNarrativeState()
     {
+        state = NarrativeEvent.EnteredPokemonWorld;
         inventoryScript = Inventory.instance;
+        paraLensesScript = ParaLensesButtonBehavior.instance;
         List<bool> currentState = new List<bool>();
-        currentState.Add(IsNarrativeEventComplete(NarrativeEvent.ParalensesOn));
-        currentState.Add(false);
-        currentState.Add(true);
-        currentState.Add(false);
-        currentState.Add(false);
-        currentState.Add(false);
-        currentState.Add(false);
-        currentState.Add(false);
-        currentState.Add(false);
+        narrativeState[0] = paraLensesScript.getIsParaLensesOn();
+        narrativeState[1] = false;
+        narrativeState[2] = true;
+        narrativeState[3] = false;
+        narrativeState[4] = false;
+        narrativeState[5] = false;
+        narrativeState[6] = false;
+        narrativeState[7] = false;
+        narrativeState[8] = false;
+        narrativeState[9] = false;
+        narrativeState[10] = false;
         SetOverallNarrativeState(currentState);
 
         inventoryScript.Clear();
@@ -799,18 +808,22 @@ public class GameSystemBehavior : MonoBehaviour
     }
     public void SetUpPitNarrativeState()
     {
+        state = NarrativeEvent.SolvedGlyph;
         inventoryScript = Inventory.instance;
-        List<bool> currentState = new List<bool>();
-        currentState.Add(IsNarrativeEventComplete(NarrativeEvent.ParalensesOn));
-        currentState.Add(false);
-        currentState.Add(true);
-        currentState.Add(true);
-        currentState.Add(true);
-        currentState.Add(true);
-        currentState.Add(false);
-        currentState.Add(false);
-        currentState.Add(false);
-        SetOverallNarrativeState(currentState);
+        paraLensesScript = ParaLensesButtonBehavior.instance;
+        pit.SetActive(true);
+        narrativeState[0] = paraLensesScript.getIsParaLensesOn();
+        narrativeState[1] = false;
+        narrativeState[2] = true;
+        narrativeState[3] = true;
+        narrativeState[4] = true;
+        narrativeState[5] = true;
+        narrativeState[6] = false;
+        narrativeState[7] = false;
+        narrativeState[8] = false;
+        narrativeState[9] = true;
+        narrativeState[10] = false;
+
 
         inventoryScript.Clear();
         if (itemsReachedPit.Any())

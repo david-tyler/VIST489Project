@@ -7,6 +7,7 @@ public class KeyItem : Item
 {
     DoorController doorScript;
     PokemonWorld pokeWorld;
+    GameSystemBehavior gameSystem;
 
     public override void Use()
     {
@@ -19,8 +20,13 @@ public class KeyItem : Item
 
         pokeWorld.SetUnlockedDoor(true);
 
-
-
+    }
+    public override void CollectedItem()
+    {
+        base.CollectedItem();
+        gameSystem = GameSystemBehavior.instance;
+        gameSystem.SetNarrativeState(GameSystemBehavior.NarrativeEvent.FreedAsh);
 
     }
+
 }

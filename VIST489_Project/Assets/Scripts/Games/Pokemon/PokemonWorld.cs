@@ -38,8 +38,10 @@ public class PokemonWorld : MonoBehaviour
 
     public List<GameObject> objectsToSetActiveAfterDoor = new List<GameObject>();
     public GameObject charizard;
-    public GameObject targetCharizardPlatform1;
-    public GameObject targetCharizardPlatform2;
+    public GameObject charizardPlatform1;
+    public GameObject charizardPlatfrom2;
+    public GameObject charizardPlatform3;
+    public GameObject Ash;
     public Camera mainCamera;
     public GameObject pit;
     
@@ -62,12 +64,14 @@ public class PokemonWorld : MonoBehaviour
     // Make sure the player is across the pit and in range to tap charizard
     private bool canTapCharizard = false;
 
+    [SerializeField] float charizardMoveSpeed = 2.0f;
+
     public AudioClip freedAshAudioName;
     public AudioClip crossPitAudioName;
 
     public List<GameObject> removeGameObjects;
 
-    private void Update()
+    void Update()
     {
         
         // *******Touch Interactions
@@ -101,7 +105,7 @@ public class PokemonWorld : MonoBehaviour
                             audioManagerScript = AudioManager.instance;
                             audioManagerScript.PlayEventSound(crossPitAudioName.name);
                             pit.SetActive(true);
-                            StartCoroutine(MoveCharizard(targetCharizardPlatform1));
+                            StartCoroutine(MoveCharizard(charizardPlatform1, true));
                             
                         }
                         
@@ -142,8 +146,10 @@ public class PokemonWorld : MonoBehaviour
                     pit.SetActive(true);
                     if (canTapCharizard)
                     {
+                        audioManagerScript = AudioManager.instance;
+                        audioManagerScript.PlayEventSound(crossPitAudioName.name);
                         pit.SetActive(true);
-                        StartCoroutine(MoveCharizard(targetCharizardPlatform1));
+                        StartCoroutine(MoveCharizard(charizardPlatform1, true));
                     }
 
                 }
@@ -152,34 +158,44 @@ public class PokemonWorld : MonoBehaviour
         }
 
     }
+    
 
-    public IEnumerator MoveCharizard(GameObject targetPlatform)
+    // moving to charizard to multiple platforms
+    public IEnumerator MoveCharizardSequence()
     {
-        float elapsedTime = 0f;
+        yield return StartCoroutine(MoveCharizard(charizardPlatfrom2, false));
+        yield return StartCoroutine(MoveCharizard(charizardPlatform3, false));
+        charizard.transform.LookAt(Ash.transform);
+    }
+    public IEnumerator MoveCharizard(GameObject targetPlatform, bool isFirstPlatform)
+    {
 
-        Vector3 startPosition = charizard.transform.position;
+        charizard.transform.LookAt(targetPlatform.transform);
+        float distanceThreshold = 0.001f;
 
-        pit.SetActive(true);
-
-        while (elapsedTime < duration)
+        while (Vector3.Distance(charizard.transform.position, targetPlatform.transform.position) > distanceThreshold)
         {
-            // Calculate how far along the duration we are
-            elapsedTime += Time.deltaTime;
 
             // Interpolate between start and target positions
-            charizard.transform.position = Vector3.Lerp(startPosition, targetPlatform.transform.position, elapsedTime / duration);
-            Debug.Log(Vector3.Lerp(startPosition, targetPlatform.transform.position, elapsedTime / duration));
+            charizard.transform.position = Vector3.MoveTowards(
+                charizard.transform.position, 
+                targetPlatform.transform.position, 
+                charizardMoveSpeed * Time.deltaTime);
             // Wait for the next frame before continuing
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         // Ensure the object is exactly at the target position at the end
-        transform.position = targetPlatform.transform.position;
-        yield return new WaitForSeconds(1.0f);
+        charizard.transform.position = targetPlatform.transform.position;
+        if (isFirstPlatform)
+        {
+            yield return new WaitForSeconds(1.0f);
 
-        messageBehavior = MessageBehavior.instance;
-        messageBehavior.SetHaveMessage(true);
-        messageBehavior.SetMessageText(MoveLikeCharizardLine);
+            messageBehavior = MessageBehavior.instance;
+            messageBehavior.SetHaveMessage(true);
+            messageBehavior.SetMessageText(MoveLikeCharizardLine);
+        }
+        
     }
 
     public void SolvedMaze()
@@ -235,6 +251,8 @@ public class PokemonWorld : MonoBehaviour
         {
             firstTimeUnlockingDoor = false;
             gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.FreedAsh, true);
+            gameSystem.SetNarrativeState(GameSystemBehavior.NarrativeEvent.FreedAsh);
+
             audioManagerScript.PlayEventSound(freedAshAudioName.name);
             triggerZonesScript = TriggerZones.instance;
             
@@ -272,5 +290,28 @@ public class PokemonWorld : MonoBehaviour
     public bool GetCanTapCharizard()
     {
         return canTapCharizard;
+    }
+
+
+    public void SolvedPit()
+    {
+        gameSystem = GameSystemBehavior.instance;
+        gameSystem.SetNarrativeState(GameSystemBehavior.NarrativeEvent.SolvedPit);
+
+        gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.SolvedPit, true);
+        gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.FreedAsh, true);
+        gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.CompletedMazeGotKey, true);
+        gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.SolveMaze, true);
+        gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.SolvedGlyph, true);
+        gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.EnteredPokemonWorld, true);
+
+        audioManagerScript = AudioManager.instance;
+        audioManagerScript.PlayEventSound(crossPitAudioName.name);
+        
+        pit.SetActive(true);
+        charizard.SetActive(true);
+        charizard.transform.position = charizardPlatform1.transform.position;
+
+        
     }
 }

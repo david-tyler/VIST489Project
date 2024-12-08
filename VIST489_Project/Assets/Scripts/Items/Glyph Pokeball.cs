@@ -12,4 +12,9 @@ public class GlyphPokeball : Item
 
 
     }
+
+    public override void CollectedItem()
+    {
+        base.CollectedItem();
+    }
 }

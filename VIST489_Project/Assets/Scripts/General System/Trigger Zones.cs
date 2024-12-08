@@ -20,7 +20,6 @@ public class TriggerZones : MonoBehaviour
         instance = this;
     }
     #endregion
-    private const string AshTriggerZoneName = "Ash Trigger Zone";
     public Button PopUpBoxButton;
 
     // Singleton References
@@ -29,10 +28,6 @@ public class TriggerZones : MonoBehaviour
     ParaLensesButtonBehavior paraLensesScript;
     PokemonWorld pokeWorld;
     MessageBehavior messageBehavior;
-
-    // index for ash's lines
-    private int AshLinesIndex;
-    public List<string> AshLines = new List<string>();
 
     public List<string> placeGlyphLines = new List<string>();
 
@@ -66,25 +61,23 @@ public class TriggerZones : MonoBehaviour
     private bool leftBackHallway;
     private bool leftBottomHallway;
     private bool leftClassroom;
-
+    
+    private bool movedCharizard = false;
 
 
     private void Start()
     {
        
-        AshLinesIndex = 0;
         placeGlyphLinesIndex = 0;
         inMiddleHallway = false;
         inBackHallway = false;
         inBottomHallway = false;
         inClassroom = true;
 
-        leftMiddleHallway = false;
-        leftBackHallway = false;
-        leftBottomHallway = false;
+        leftMiddleHallway = true;
+        leftBackHallway = true;
+        leftBottomHallway = true;
         leftClassroom = false;
-
-
         
     }
 
@@ -106,56 +99,42 @@ public class TriggerZones : MonoBehaviour
         
         if (gameSystem.AreNarrativeEventsComplete(narrativeEvents))
         {
-            
+            if (gameSystem.GetCurrentState() == GameSystemBehavior.NarrativeEvent.SolvedPit)
+            {
+                if (other.tag == "Middle Hallway" && movedCharizard == false)
+                {
+                    foreach (GameObject item in backHallwayGameObjects)
+                    {
+                        if (item.tag == "Charizard")
+                        {
+                            backHallwayGameObjects.Remove(item);
+                            item.SetActive(true);
+                            break;
+                        }
+                            
+
+                    }
+                    pokeWorld = PokemonWorld.instance;
+                    StartCoroutine(pokeWorld.MoveCharizardSequence());
+                    movedCharizard = true;
+                    
+                }
+            }
             if (gameSystem.IsNarrativeEventComplete(GameSystemBehavior.NarrativeEvent.FreedAsh) == false)
             {
                 switch (colliderTag)
                 {
-                    case "Ash Trigger Zone":
-                        if (AshLinesIndex == 0)
-                        {
-                            PopUpBoxButton.onClick.AddListener(DisplayNextLines);
-                            popUp.PopUp(AshLines[AshLinesIndex]);
-                            currentDialogue = AshLines;
-                            
-                            gameSystem.ToggleSkipButton(true);
-                            AshLinesIndex += 1;
-                            currentDialogueIndex = AshLinesIndex;
-                            StartCoroutine(WaitForPressedSkip());
-                            
-                            
-                        }
-                        break;
+                    
                     case "Gate Trigger Zone":
                         messageBehavior.SetHaveMessage(true);
                         messageBehavior.SetMessageText(cantEnterGateLine);
                         break;         
                 }
             }
-            else if ( gameSystem.IsNarrativeEventComplete(GameSystemBehavior.NarrativeEvent.FreedAsh) == true )
+            else if ( gameSystem.IsNarrativeEventComplete(GameSystemBehavior.NarrativeEvent.FreedAsh) == true  && gameSystem.IsNarrativeEventComplete(GameSystemBehavior.NarrativeEvent.SolvedGlyph) == false)
             {
                 switch (colliderTag)
                 {
-                    case "Ash Trigger Zone":
-                         // New Lines for Ash once you unlock the door but haven't freed Charizard yet.
-                        AshLines.Clear();
-                        AshLinesIndex = 0;
-                        string lineOne = "Wow! You actually managed to unlock the door! Thanks for your help.";
-                        string lineTwo = "But I can't leave without my Charizard and I have no idea where he is. Please help me find him.";
-                        AshLines.Add(lineOne);
-                        AshLines.Add(lineTwo);
-
-                        currentDialogue = AshLines;
-                        if (AshLinesIndex == 0)
-                        {
-                            PopUpBoxButton.onClick.AddListener(DisplayNextLines);
-                            popUp.PopUp(AshLines[AshLinesIndex]);
-                            AshLinesIndex += 1;
-                            currentDialogueIndex = AshLinesIndex;
-                            StartCoroutine(WaitForPressedSkip());
-                        }
-                       
-                        break;
                     case "Gate Trigger Zone":
                         messageBehavior.SetHaveMessage(true);
                         messageBehavior.SetMessageText(doTheGlyphLine);
@@ -178,6 +157,8 @@ public class TriggerZones : MonoBehaviour
                 }
                 
             }
+            
+            
             switch (colliderTag)
             {
                 case "Middle Hallway":
@@ -189,7 +170,10 @@ public class TriggerZones : MonoBehaviour
                         {
                             item.SetActive(true);
                         }
+
                     }
+
+
                     leftMiddleHallway = false;
                     
                     break;
@@ -254,6 +238,7 @@ public class TriggerZones : MonoBehaviour
 
                 // skip the dialogue so break from the coroutine
                 // gameSystem.SkipButtonInteraction(null, true);
+                
                 yield break;
 
                 
