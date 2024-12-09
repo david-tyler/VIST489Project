@@ -50,7 +50,7 @@ public class GlyphGrower : MonoBehaviour
             {
                 this.transform.localScale += new Vector3(1f, 1f, 1f) * growthRate * Time.deltaTime;
 
-                if(this.transform.localScale.magnitude >= 1.0f)
+                if(this.transform.localScale.magnitude >= 0.5f)
                 {
                     if (!hasPlayedSound)
                     {

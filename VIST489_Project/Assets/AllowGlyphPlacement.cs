@@ -18,6 +18,7 @@ public class AllowGlyphPlacement : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
+        trail.gameObject.SetActive(true);
         if (!glyphPlaced)
         {
             stage.SetActive(true);

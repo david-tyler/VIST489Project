@@ -130,7 +130,7 @@ public class GameSystemBehavior : MonoBehaviour
     public List<Item> itemsReachedGlyph;
     public List<Item> itemsReachedPit;
     public List<Item> itemsReachedMaze;
-
+    public List<PokeBallTower> towers;
 
     void Start()
     {
@@ -776,7 +776,12 @@ public class GameSystemBehavior : MonoBehaviour
                 inventoryScript.Add(item);
             }
         }
-        
+
+        //set pokeballs as found
+        for(int i = 0; i < towers.Count; i++)
+        {
+            towers[i].foundBall = true;
+        }
 
     }
 

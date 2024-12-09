@@ -22,6 +22,7 @@ TagManager:
   - Enemy
   - Weak Point
   - Destroy Zone
+  - Pit
   layers:
   - Default
   - TransparentFX
@@ -56,6 +57,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: In Front
+    uniqueID: 912537761
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

@@ -65,13 +65,13 @@ public class PokeBallTower : Interactable
 
         if (Input.touchCount > 0)
         {
-            // Debug.Log("TOUCHING SCREEN");
+             Debug.Log("TOUCHING SCREEN");
             Touch touch = Input.GetTouch(0);
 
             if (touch.phase != TouchPhase.Ended)
             {
                 // Debug.Log("TOUCHING Begin");
-
+                Debug.Log("TOUCHING SCREEN 2");
                 // Create a ray from the screen point where the touch occurred.
                 Ray ray = camera.ScreenPointToRay(touch.position);
 
@@ -83,6 +83,7 @@ public class PokeBallTower : Interactable
                 {
                     if (hit.collider.gameObject == this.gameObject)
                     {
+                        Debug.Log("TOUCHING tower");
                         Interact();
                     }
                 }
@@ -95,18 +96,21 @@ public class PokeBallTower : Interactable
         }
         else if (Input.GetMouseButton(0)) // 0 is for left-click
         {
-
+            Debug.Log("TOUCHING SCREEN");
             // Create a ray from the screen point where the touch occurred.
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-
+            Debug.Log("TOUCHING SCREEN 2");
             // Variable to store the hit information.
             RaycastHit hit;
 
             // Perform the raycast.
             if (Physics.Raycast(ray, out hit))
             {
+                Debug.Log("raycast hit " + hit.collider.gameObject.name);
+
                 if (hit.collider.gameObject == this.gameObject)
                 {
+                    Debug.Log("TOUCHING tower");
                     Interact();
                 }
             }
