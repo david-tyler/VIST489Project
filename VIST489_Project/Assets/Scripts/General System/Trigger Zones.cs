@@ -151,70 +151,81 @@ public class TriggerZones : MonoBehaviour
 
                         StartCoroutine(WaitForPressedSkip());
                         break;
+                    
+                }
+                
+            }
+            else if (gameSystem.IsNarrativeEventComplete(GameSystemBehavior.NarrativeEvent.FreedAsh) == true  && gameSystem.IsNarrativeEventComplete(GameSystemBehavior.NarrativeEvent.SolvedGlyph) == true)
+            {
+                switch (colliderTag)
+                {
                     case "Charizard Zone":
                         pokeWorld.SetCanTapCharizard(true);
                         break;
                 }
-                
+                    
             }
-            
+
+
             
             switch (colliderTag)
             {
                 case "Middle Hallway":
-                    inMiddleHallway = true;
-
-                    if (leftMiddleHallway == true) // if you left the area then returned back to it
+                    
+                    foreach (GameObject item in middleHallwayGameObjects)
                     {
-                        foreach (GameObject item in currentMiddleHallwayGameObjects)
-                        {
-                            item.SetActive(true);
-                        }
-
+                        item.SetActive(true);
                     }
 
-
-                    leftMiddleHallway = false;
-                    
                     break;
 
                 case "Classroom":
-                    inClassroom = true;
-
-                    if (leftClassroom == true) // if you left the area then returned back to it
+                    
+                    foreach (GameObject item in classroomGameObejcts)
                     {
-                        foreach (GameObject item in currentClassroomGameObjects)
-                        {
-                            item.SetActive(true);
-                        }
+                        item.SetActive(true);
                     }
-                    leftClassroom = false;
+
 
                     break;
 
                 case "Back Hallway":
                     inBackHallway = true;
-                    if (leftBackHallway == true) // if you left the area then returned back to it
+                    pokeWorld = PokemonWorld.instance;
+                    
+                    foreach (GameObject item in backHallwayGameObjects)
                     {
-                        foreach (GameObject item in currentBackHallwayGameObjects)
+                        if (item.tag == "Pit" || item.tag == "Charizard")
+                        {
+
+                            if (pokeWorld.GetCanTapCharizard() == false)
+                            {
+                                
+                                item.SetActive(false);
+                            }
+                            else
+                            {
+                                item.SetActive(true);
+                            }
+                            continue;
+                        }
+                        else
                         {
                             item.SetActive(true);
                         }
+                        
                     }
-                    leftBackHallway = false;
+                
                     
                     break;
                     
                 case "Bottom Hallway":
-                    inBottomHallway = true;
-                    if (leftBottomHallway == true) // if you left the area then returned back to it
+                   
+                    foreach (GameObject item in bottomHallwayGameObjects)
                     {
-                        foreach (GameObject item in currentBottomHallwayGameObjects)
-                        {
-                            item.SetActive(true);
-                        }
+                        item.SetActive(true);
                     }
-                    leftBottomHallway = false;
+                   
                     break;
             }
         }
@@ -265,156 +276,46 @@ public class TriggerZones : MonoBehaviour
         
         if (gameSystem.AreNarrativeEventsComplete(narrativeEvents))
         {
-            if ( pokeWorld.GetUnlockedDoor() == true )
-            {
-                switch (colliderTag)
-                {
-                    case "Charizard Zone":
-                        pokeWorld.SetCanTapCharizard(false);
-                        break;
-                }
-            }
-            
             switch (colliderTag)
             {
                 case "Middle Hallway":
-                    inMiddleHallway = false;
-                    foreach (GameObject item in currentMiddleHallwayGameObjects)
+                   
+                    foreach (GameObject item in middleHallwayGameObjects)
                     {
                         item.SetActive(false);
                     }
-                    leftMiddleHallway = true;
+                    
                     break;
                 case "Bottom Hallway":
-                    inBottomHallway = false;
-                    foreach (GameObject item in currentBottomHallwayGameObjects)
+                   
+                    foreach (GameObject item in bottomHallwayGameObjects)
                     {
                         item.SetActive(false);
                     }
-                    leftBottomHallway = true;
+                   
                     break;
                 case "Back Hallway":
-                    inBackHallway = false;
-                    foreach (GameObject item in currentBackHallwayGameObjects)
+                    
+                    foreach (GameObject item in backHallwayGameObjects)
                     {
                         item.SetActive(false);
                     }
-                    leftBackHallway = true;
+                    
 
                     break;
                 case "Classroom":
-                    inClassroom = false;
-                    foreach (GameObject item in currentClassroomGameObjects)
+                   
+                    foreach (GameObject item in classroomGameObejcts)
                     {
                         item.SetActive(false);
                     }
-                    leftClassroom = true;
+                    
                     break;
             
             }
         }
     }
 
-    public void ModifyLists(List<GameObject> objectsToRemove = null, bool leftBackhall = false, bool leftMiddlehall = false, bool leftClass = false,bool leftBottomhall = false)
-    {
-        if (objectsToRemove != null)
-        {
-            foreach (GameObject item in objectsToRemove)
-            {
-                if (middleHallwayGameObjects.Contains(item))
-                {
-                    middleHallwayGameObjects.Remove(item);
-                }
-                if (backHallwayGameObjects.Contains(item))
-                {
-                    backHallwayGameObjects.Remove(item);
-                }
-                if (bottomHallwayGameObjects.Contains(item))
-                {
-                    bottomHallwayGameObjects.Remove(item);
-                }
-                if (classroomGameObejcts.Contains(item))
-                {
-                    classroomGameObejcts.Remove(item);
-                }
-            }
-        }
-        
-        foreach (GameObject item in middleHallwayGameObjects)
-        {
-            if (item.activeSelf == true && currentMiddleHallwayGameObjects.Contains(item) == false)
-            {
-                currentMiddleHallwayGameObjects.Add(item);
-            }
-        }
-
-        if (inMiddleHallway == false)
-        {
-            foreach (GameObject item in currentMiddleHallwayGameObjects)
-            {
-                item.SetActive(false);
-                leftMiddleHallway = leftMiddlehall;
-            }
-        }
-
-        
-
-        foreach (GameObject item in backHallwayGameObjects)
-        {
-            if (item.activeSelf == true && currentBackHallwayGameObjects.Contains(item) == false)
-            {
-                currentBackHallwayGameObjects.Add(item);
-            }
-        }
-        if (inBackHallway == false)
-        {
-            foreach (GameObject item in currentBackHallwayGameObjects)
-            {
-                item.SetActive(false);
-                leftBackHallway = leftBackhall;
-            }
-        }
-        
-
-        foreach (GameObject item in bottomHallwayGameObjects)
-        {
-            if (item.activeSelf == true && currentBottomHallwayGameObjects.Contains(item) == false)
-            {
-                currentBottomHallwayGameObjects.Add(item);
-            }
-        }
-        
-        if (inBottomHallway == false)
-        {
-            foreach (GameObject item in currentBottomHallwayGameObjects)
-            {
-                item.SetActive(false);
-                leftBottomHallway = leftBottomhall;
-            }
-        }
-
-        foreach (GameObject item in classroomGameObejcts)
-        {
-            if (item.activeSelf == true && currentClassroomGameObjects.Contains(item) == false)
-            {
-                currentClassroomGameObjects.Add(item);
-            }
-        }
-
-        if (inClassroom == false)
-        {
-            foreach (GameObject item in currentClassroomGameObjects)
-            {
-                item.SetActive(false);
-                leftClassroom = leftClass;
-            }
-        }
-       
-
-
-        
-
-    }
 
     private void DisplayNextLines()
     {

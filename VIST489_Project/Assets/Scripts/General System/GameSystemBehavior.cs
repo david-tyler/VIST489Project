@@ -56,6 +56,7 @@ public class GameSystemBehavior : MonoBehaviour
     TriggerZones triggerZonesScript;
     Inventory inventoryScript;
     MessageBehavior messageBehavior;
+    PokemonWorld pokeWorldScript;
 
     // Narration Audio Sources
     // --------------------------------------
@@ -84,7 +85,7 @@ public class GameSystemBehavior : MonoBehaviour
     // ******* Specific objects related to the Pokemon World
     // --------------------------------------
     // *** GameObjects & Buttons
-    public GameObject PokemonWorld;
+    public GameObject PokemonWorldGameObject;
     public GameObject PokemonWorldButtonGameObject;
     public GameObject LeavePokemonWorldButtonGameObject;
     public GameObject InventoryButtonGameObject; // the title button for the inventory to toggle it on/off.
@@ -122,7 +123,7 @@ public class GameSystemBehavior : MonoBehaviour
     // --------------------------------------
     
 
-    public string backgroundMusicName;
+    public AudioClip backgroundMusic;
 
     public List<GameObject> gameObjectsNotActive = new List<GameObject>();
     public List<GameObject> gameObjectsActiveAtStart = new List<GameObject>();
@@ -599,7 +600,7 @@ public class GameSystemBehavior : MonoBehaviour
         Debug.LogError("AudioManager instance is null! Make sure AudioManager is in the scene and initialized.");
         return;
         }
-        audioManagerScript.PlayEventSound(audioManagerScript.GetBackgroundMusic().name);
+        audioManagerScript.PlayEventSound(backgroundMusic.name);
 
         state = NarrativeEvent.EnteredPokemonWorld;
         SetNarrativeEvent(NarrativeEvent.EnteredPokemonWorld, true);
@@ -612,9 +613,9 @@ public class GameSystemBehavior : MonoBehaviour
         // can add a brief pop up box or text saying welcome to the world of pokemon or soemthing later
 
 
-        paraLensesScript.ActiveGameObjects.Add(PokemonWorld);
+        paraLensesScript.ActiveGameObjects.Add(PokemonWorldGameObject);
 
-        PokemonWorld.SetActive(true);
+        PokemonWorldGameObject.SetActive(true);
         
         PokemonWorldButtonGameObject.SetActive(false);
 
@@ -626,7 +627,6 @@ public class GameSystemBehavior : MonoBehaviour
         messageBehavior.SetMessageText(AshOverThereText);
         messageBehavior.SetHaveMessage(true);
 
-        triggerZonesScript.ModifyLists();
     }
 
     // will have conditoins for this that once we have completed the world we can now leave probably will need to make another button
@@ -709,7 +709,7 @@ public class GameSystemBehavior : MonoBehaviour
     {
         if (currentState.Count != narrativeState.Length)
         {
-            Debug.LogWarning("Incorrect size of booleans for narrative");
+            Debug.LogWarning("Incorrect size of booleans for narrative " + currentState.Count + " " + narrativeState.Length);
 
             return;
         }
@@ -750,7 +750,12 @@ public class GameSystemBehavior : MonoBehaviour
         state = NarrativeEvent.CompletedMazeGotKey;
         inventoryScript = Inventory.instance;
         paraLensesScript = ParaLensesButtonBehavior.instance;
-        List<bool> currentState = new List<bool>();
+        audioManagerScript = AudioManager.instance;
+        pokeWorldScript = PokemonWorld.instance;
+        pokeWorldScript.SetCanTapCharizard(false);
+        pokeWorldScript.SetPickedUpKey(true);
+        pokeWorldScript.SetUnlockedDoor(true);
+        
         narrativeState[0] = paraLensesScript.getIsParaLensesOn();
         narrativeState[1] = false;
         narrativeState[2] = true;
@@ -762,7 +767,6 @@ public class GameSystemBehavior : MonoBehaviour
         narrativeState[8] = false;
         narrativeState[9] = true;
         narrativeState[10] = false;
-        SetOverallNarrativeState(currentState);
 
         inventoryScript.Clear();
         if (itemsReachedGlyph.Any())
@@ -781,7 +785,12 @@ public class GameSystemBehavior : MonoBehaviour
         state = NarrativeEvent.EnteredPokemonWorld;
         inventoryScript = Inventory.instance;
         paraLensesScript = ParaLensesButtonBehavior.instance;
-        List<bool> currentState = new List<bool>();
+        pokeWorldScript = PokemonWorld.instance;
+        pokeWorldScript.SetCanTapCharizard(false);
+        pokeWorldScript.SetPickedUpKey(false);
+        pokeWorldScript.SetUnlockedDoor(false);
+        audioManagerScript.PlayEventSound(backgroundMusic.name);
+
         narrativeState[0] = paraLensesScript.getIsParaLensesOn();
         narrativeState[1] = false;
         narrativeState[2] = true;
@@ -793,7 +802,6 @@ public class GameSystemBehavior : MonoBehaviour
         narrativeState[8] = false;
         narrativeState[9] = false;
         narrativeState[10] = false;
-        SetOverallNarrativeState(currentState);
 
         inventoryScript.Clear();
         if (itemsReachedMaze.Any())
@@ -811,6 +819,11 @@ public class GameSystemBehavior : MonoBehaviour
         state = NarrativeEvent.SolvedGlyph;
         inventoryScript = Inventory.instance;
         paraLensesScript = ParaLensesButtonBehavior.instance;
+        pokeWorldScript = PokemonWorld.instance;
+        pokeWorldScript.SetCanTapCharizard(true);
+        pokeWorldScript.SetPickedUpKey(true);
+        pokeWorldScript.SetUnlockedDoor(true);
+        
         pit.SetActive(true);
         narrativeState[0] = paraLensesScript.getIsParaLensesOn();
         narrativeState[1] = false;

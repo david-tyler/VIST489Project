@@ -66,8 +66,9 @@ public class PokemonWorld : MonoBehaviour
 
     [SerializeField] float charizardMoveSpeed = 2.0f;
 
-    public AudioClip freedAshAudioName;
-    public AudioClip crossPitAudioName;
+    public AudioClip freedAshAudio;
+    public AudioClip crossPitAudio;
+    public AudioClip reuniteAshAudio;
 
     public List<GameObject> removeGameObjects;
 
@@ -103,7 +104,7 @@ public class PokemonWorld : MonoBehaviour
                         if (canTapCharizard)
                         {
                             audioManagerScript = AudioManager.instance;
-                            audioManagerScript.PlayEventSound(crossPitAudioName.name);
+                            audioManagerScript.PlayEventSound(crossPitAudio.name);
                             pit.SetActive(true);
                             StartCoroutine(MoveCharizard(charizardPlatform1, true));
                             
@@ -143,11 +144,10 @@ public class PokemonWorld : MonoBehaviour
 
                 if (hit.collider.gameObject.tag == "Charizard")
                 {
-                    pit.SetActive(true);
                     if (canTapCharizard)
                     {
                         audioManagerScript = AudioManager.instance;
-                        audioManagerScript.PlayEventSound(crossPitAudioName.name);
+                        audioManagerScript.PlayEventSound(crossPitAudio.name);
                         pit.SetActive(true);
                         StartCoroutine(MoveCharizard(charizardPlatform1, true));
                     }
@@ -201,6 +201,7 @@ public class PokemonWorld : MonoBehaviour
     public void SolvedMaze()
     {
         canGetKey = true;
+        enitreMaze.SetActive(false);
 
     }
 
@@ -236,7 +237,6 @@ public class PokemonWorld : MonoBehaviour
             count += 1;
             //PopUpBoxButton.onClick.AddListener(SetCountForPopUpKey);
 
-            triggerZonesScript.ModifyLists(null, false, false, false, true);
         }
         
     }
@@ -253,7 +253,7 @@ public class PokemonWorld : MonoBehaviour
             gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.FreedAsh, true);
             gameSystem.SetNarrativeState(GameSystemBehavior.NarrativeEvent.FreedAsh);
 
-            audioManagerScript.PlayEventSound(freedAshAudioName.name);
+            audioManagerScript.PlayEventSound(freedAshAudio.name);
             triggerZonesScript = TriggerZones.instance;
             
 
@@ -261,8 +261,6 @@ public class PokemonWorld : MonoBehaviour
             {
                 item.SetActive(true);
             }
-
-            triggerZonesScript.ModifyLists(removeGameObjects);
         }
     }
 
@@ -297,7 +295,8 @@ public class PokemonWorld : MonoBehaviour
     {
         gameSystem = GameSystemBehavior.instance;
         gameSystem.SetNarrativeState(GameSystemBehavior.NarrativeEvent.SolvedPit);
-
+        pit.SetActive(true);
+        charizard.SetActive(true);
         gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.SolvedPit, true);
         gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.FreedAsh, true);
         gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.CompletedMazeGotKey, true);
@@ -306,10 +305,9 @@ public class PokemonWorld : MonoBehaviour
         gameSystem.SetNarrativeEvent(GameSystemBehavior.NarrativeEvent.EnteredPokemonWorld, true);
 
         audioManagerScript = AudioManager.instance;
-        audioManagerScript.PlayEventSound(crossPitAudioName.name);
+        audioManagerScript.PlayEventSound(reuniteAshAudio.name);
         
-        pit.SetActive(true);
-        charizard.SetActive(true);
+        
         charizard.transform.position = charizardPlatform1.transform.position;
 
         
