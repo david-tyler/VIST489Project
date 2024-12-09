@@ -45,7 +45,7 @@ public class FollowFinger : MonoBehaviour
             Vector3 worldPosition = camera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, 10f));
 
             // Log the world position to the console (or use it for other actions)
-            Debug.Log("World Position: " + worldPosition);
+            //Debug.Log("World Position: " + worldPosition);
 
             // Example: Move an object to this position
             renderer.transform.position = worldPosition;
