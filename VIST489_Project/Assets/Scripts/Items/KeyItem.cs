@@ -15,10 +15,13 @@ public class KeyItem : Item
 
         doorScript = DoorController.instance;
         pokeWorld = PokemonWorld.instance;
+        if (doorScript.GetPlayerInZone() == true && pokeWorld.GetUnlockedDoor() == false)
+        {
+            doorScript.ToggleDoor();
 
-        doorScript.ToggleDoor();
-
-        pokeWorld.SetUnlockedDoor(true);
+            pokeWorld.SetUnlockedDoor(true);
+        }
+        
 
     }
     public override void CollectedItem()

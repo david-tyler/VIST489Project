@@ -20,6 +20,7 @@ public class ItemPickup : Interactable
     public PokeBallTower tower;
 
     public string TryOpeningDoor = "Great you got the key! You should be able to unlock that door now to free Ash.";
+    bool completedPickUp = false;
 
     public override void Interact()
     {
@@ -38,7 +39,7 @@ public class ItemPickup : Interactable
 
         Debug.Log("Picking Up " + item.name);
 
-        bool completedPickUp = Inventory.instance.Add(item);
+        completedPickUp = Inventory.instance.Add(item);
 
         if (completedPickUp == true)
         {
@@ -75,6 +76,15 @@ public class ItemPickup : Interactable
             tower.foundBall = true;
         }
         
+    }
+    public void SetCompletedPickUp(bool status)
+    {
+        completedPickUp = status;
+    }
+
+    public bool GetCompletedPickUp()
+    {
+        return completedPickUp;
     }
 
 }

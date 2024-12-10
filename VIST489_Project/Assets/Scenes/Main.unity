@@ -2273,14 +2273,13 @@ MonoBehaviour:
   - {fileID: 1872253846}
   - {fileID: 1851315127}
   - {fileID: 2047133614}
-  - {fileID: 1711832076}
+  - {fileID: 1671019361814062291}
   - {fileID: 242698646}
-  - {fileID: 0}
+  - {fileID: 599740268}
   - {fileID: 1887106955}
   bottomHallwayGameObjects:
   - {fileID: 782628375}
   - {fileID: 1044728417}
-  - {fileID: 812531082}
   - {fileID: 1221531631}
   - {fileID: 1770141496}
   - {fileID: 1493574771}
@@ -5032,7 +5031,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8.088034
+      value: 8.088031
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.y
@@ -5040,7 +5039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8.088102
+      value: 8.088104
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6667,6 +6666,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49854c2c24fec4e4b864657a60804cf3, type: 3}
+--- !u!1 &384030167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 384030168}
+  m_Layer: 0
+  m_Name: Pit Original Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &384030168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384030167}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.2188544, z: -0, w: 0.97575754}
+  m_LocalPosition: {x: -9.64, y: -6.56, z: 11.93}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &384846601
 GameObject:
   m_ObjectHideFlags: 0
@@ -8106,6 +8136,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 480195698}
   m_CullTransparentMesh: 1
+--- !u!1 &486038999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 486039000}
+  m_Layer: 0
+  m_Name: Charizard Original Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &486039000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486038999}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.6636691, z: -0, w: 0.74802625}
+  m_LocalPosition: {x: -17.354855, y: -1.6950002, z: 9.073702}
+  m_LocalScale: {x: 0.59945846, y: 0.5994586, z: 0.59945846}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1638373497}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &496504951
 GameObject:
   m_ObjectHideFlags: 0
@@ -8600,7 +8661,7 @@ MonoBehaviour:
   PokemonWorldButtonGameObject: {fileID: 994956754}
   LeavePokemonWorldButtonGameObject: {fileID: 271230571}
   InventoryButtonGameObject: {fileID: 309248378}
-  pit: {fileID: 1711832076}
+  pit: {fileID: 1671019361814062291}
   PokemonWorldButton: {fileID: 994956758}
   LeavePokemonWorldButton: {fileID: 271230573}
   SkipButtonGameObject: {fileID: 384846601}
@@ -8610,6 +8671,7 @@ MonoBehaviour:
   text_LeavePokemonWorldButtonGameObject: {fileID: 247326603}
   text_PokemonWorldButtonGameObject: {fileID: 1489198489}
   backgroundMusic: {fileID: 8300000, guid: f6ae412700c714b9ca35345c889c6066, type: 3}
+  freedAshBackgroundMusic: {fileID: 0}
   gameObjectsNotActive:
   - {fileID: 1638373496}
   - {fileID: 1851315127}
@@ -8619,7 +8681,7 @@ MonoBehaviour:
   - {fileID: 1872253846}
   - {fileID: 1577711597}
   - {fileID: 2047133614}
-  - {fileID: 1711832076}
+  - {fileID: 1671019361814062291}
   - {fileID: 384846601}
   - {fileID: 812531082}
   - {fileID: 1219374057}
@@ -8645,7 +8707,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0cd8f069de43b41878b80d52c635a8b7, type: 2}
   itemsReachedPit:
   - {fileID: 11400000, guid: 0cd8f069de43b41878b80d52c635a8b7, type: 2}
+  - {fileID: 11400000, guid: 1e6490760b73c4ac08bfb3b0bf6ff86b, type: 2}
+  - {fileID: 11400000, guid: 7aab34f4154ce4b88ad0b164ec3bc48d, type: 2}
+  - {fileID: 11400000, guid: 469e27988a290409c99e93b784cadd33, type: 2}
+  - {fileID: 11400000, guid: 8dcc0e0070f0d4c0ead31cde5ca5cebd, type: 2}
   itemsReachedMaze: []
+  destroyItemsReachedGlyph:
+  - {fileID: 1221531631}
+  - {fileID: 1839697904}
+  - {fileID: 1872253846}
+  - {fileID: 1770141496}
+  - {fileID: 282088768}
+  destroyItemsReachedPit:
+  - {fileID: 1221531631}
+  - {fileID: 1839697904}
+  - {fileID: 1872253846}
+  - {fileID: 1770141496}
+  - {fileID: 282088768}
+  destroyItemsReachedMaze: []
   towers:
   - {fileID: 2059599863}
   - {fileID: 870483214}
@@ -8678,6 +8757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enitreMaze: {fileID: 1219374057}
+  canStartPit: 0
   NeedToCompleteMazeText: It seems we can't get the key, but look there! On the ground
     to your left, there seems to be a maze. Maybe you need to complete it to obtain
     the key.
@@ -8689,15 +8769,13 @@ MonoBehaviour:
   - {fileID: 1839697904}
   - {fileID: 1872253846}
   - {fileID: 1770141496}
-  - {fileID: 2047133614}
-  - {fileID: 1711832076}
   charizard: {fileID: 2047133614}
   charizardPlatform1: {fileID: 686874859}
   charizardPlatfrom2: {fileID: 783597523}
   charizardPlatform3: {fileID: 1998899594}
   Ash: {fileID: 1310876799}
   mainCamera: {fileID: 437364109}
-  pit: {fileID: 1711832076}
+  pit: {fileID: 1671019361814062291}
   duration: 2
   CharizardAnim: {fileID: 2047133615}
   charizardMoveSpeed: 2
@@ -12275,6 +12353,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1671019361814062291}
     - target: {fileID: 427075824647043928, guid: bce59d515f0ddba43b678f862abbe41c, type: 3}
+      propertyPath: charizard
+      value: 
+      objectReference: {fileID: 2047133614}
+    - target: {fileID: 427075824647043928, guid: bce59d515f0ddba43b678f862abbe41c, type: 3}
       propertyPath: stepTimer
       value: 1
       objectReference: {fileID: 0}
@@ -12286,6 +12368,14 @@ PrefabInstance:
       propertyPath: fallPosition
       value: 
       objectReference: {fileID: 1773101165}
+    - target: {fileID: 427075824647043928, guid: bce59d515f0ddba43b678f862abbe41c, type: 3}
+      propertyPath: originalPosition
+      value: 
+      objectReference: {fileID: 384030168}
+    - target: {fileID: 427075824647043928, guid: bce59d515f0ddba43b678f862abbe41c, type: 3}
+      propertyPath: charizardOriginalPosition
+      value: 
+      objectReference: {fileID: 486039000}
     - target: {fileID: 2877155454431013388, guid: bce59d515f0ddba43b678f862abbe41c, type: 3}
       propertyPath: m_Name
       value: Falling_Check_1
@@ -18663,6 +18753,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red Pokeball
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b9d1376e90dd0ad4eb0ef4a59edb39df, type: 3}
+      propertyPath: m_TagString
+      value: Pokeball
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6688365970232631406, guid: b9d1376e90dd0ad4eb0ef4a59edb39df, type: 3}
@@ -24298,6 +24392,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 486039000}
   - {fileID: 865142925}
   - {fileID: 1099201909}
   - {fileID: 1305997967}
@@ -26101,11 +26196,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4029440372877117853, guid: 1e619b64f7dba4ccbaa8074417165083, type: 3}
   m_PrefabInstance: {fileID: 1709636662}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1711832076 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1392280935921772108, guid: 2ba1e2e62c2c7de4cbe9f41a8939c82d, type: 3}
-  m_PrefabInstance: {fileID: 510477521}
-  m_PrefabAsset: {fileID: 0}
 --- !u!21 &1722778372
 Material:
   serializedVersion: 8
@@ -26547,6 +26637,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8b330c7b40ed94f0f88908fe72f432b8, type: 3}
+      propertyPath: m_TagString
+      value: Gate
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -26795,6 +26889,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 14ae8fa25404244e897322c87e4f9cd9, type: 3}
       propertyPath: m_Name
       value: Yellow Pokeball
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 14ae8fa25404244e897322c87e4f9cd9, type: 3}
+      propertyPath: m_TagString
+      value: Pokeball
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -27934,6 +28032,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Green Pokeball
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b5e6135ae6284444dabda509a4b335fe, type: 3}
+      propertyPath: m_TagString
+      value: Pokeball
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6688365970232631406, guid: b5e6135ae6284444dabda509a4b335fe, type: 3}
@@ -28674,6 +28776,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e737c0bfe66484ae298446ed8fbb0db7, type: 3}
       propertyPath: m_Name
       value: Blue Pokeball
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e737c0bfe66484ae298446ed8fbb0db7, type: 3}
+      propertyPath: m_TagString
+      value: Pokeball
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -33046,7 +33152,7 @@ GameObject:
   - component: {fileID: 1234412459550102550}
   m_Layer: 0
   m_Name: PitWalls
-  m_TagString: Untagged
+  m_TagString: Pit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33101,8 +33207,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 598363241974186089}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.011880977, z: -0, w: 0.9999294}
-  m_LocalPosition: {x: -10.057839, y: 0.32280886, z: 15.894062}
+  m_LocalRotation: {x: -0, y: -0.23043191, z: -0, w: 0.9730885}
+  m_LocalPosition: {x: -2.0708537, y: 6.8828087, z: 3.4058685}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -33111,7 +33217,7 @@ Transform:
   - {fileID: 1688508892716017363}
   - {fileID: 25437145172622860}
   - {fileID: 7502024824747331401}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 7443309675107269584}
   m_LocalEulerAnglesHint: {x: 0, y: -1.361, z: 0}
 --- !u!1 &1671019361814062291
 GameObject:
@@ -33124,11 +33230,11 @@ GameObject:
   - component: {fileID: 7443309675107269584}
   m_Layer: 0
   m_Name: SurfaceTrackingPit
-  m_TagString: Untagged
+  m_TagString: Pit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1688508892716017363
 Transform:
   m_ObjectHideFlags: 0
@@ -33805,7 +33911,8 @@ Transform:
   m_LocalPosition: {x: -9.64, y: -6.56, z: 11.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1234412459550102550}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 25.284, z: 0}
 --- !u!4 &7502024824747331401
@@ -33942,8 +34049,8 @@ SceneRoots:
   - {fileID: 291951528}
   - {fileID: 2091420810}
   - {fileID: 1773101165}
+  - {fileID: 384030168}
   - {fileID: 7443309675107269584}
-  - {fileID: 1234412459550102550}
   - {fileID: 833325164077180624}
   - {fileID: 1615057724}
   - {fileID: 772335025}

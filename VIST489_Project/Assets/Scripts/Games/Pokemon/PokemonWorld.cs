@@ -30,7 +30,7 @@ public class PokemonWorld : MonoBehaviour
     private bool unlockedDoor = false;
     private bool pickedUpKey = false;
     private bool firstTimeUnlockingDoor = true;
-
+    public bool canStartPit = false;
 
     public string NeedToCompleteMazeText = "It seems we can't get the key, but look there! On the ground to your left, there seems to be a maze. Maybe you need to complete it to obtain the key.";
     public string YouNeedToFindTheKeyText = "This door seems to be locked in the pokemon world. The key should be somewhere on this floor! Perhaps the book has more clues?";
@@ -103,6 +103,8 @@ public class PokemonWorld : MonoBehaviour
 
                         if (canTapCharizard)
                         {
+                            
+                            canStartPit = true;
                             audioManagerScript = AudioManager.instance;
                             audioManagerScript.PlayEventSound(crossPitAudio.name);
                             pit.SetActive(true);
@@ -146,6 +148,7 @@ public class PokemonWorld : MonoBehaviour
                 {
                     if (canTapCharizard)
                     {
+                        canStartPit = true;
                         audioManagerScript = AudioManager.instance;
                         audioManagerScript.PlayEventSound(crossPitAudio.name);
                         pit.SetActive(true);
@@ -312,4 +315,5 @@ public class PokemonWorld : MonoBehaviour
 
         
     }
+
 }

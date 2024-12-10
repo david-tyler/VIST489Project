@@ -104,7 +104,7 @@ public class DoorController : MonoBehaviour
                 if(firstTimeEnteringDoor == true)
                 {
                     firstTimeEnteringDoor = false;
-                    gate.SetActive(true);
+                    
                 }
                     
             }
@@ -240,5 +240,10 @@ public class DoorController : MonoBehaviour
                 doorState = DoorState.Opened;
             }
         }
+    }
+
+    public bool GetPlayerInZone()
+    {
+        return playerInZone;
     }
 }

@@ -124,13 +124,18 @@ public class GameSystemBehavior : MonoBehaviour
     
 
     public AudioClip backgroundMusic;
+    public AudioClip freedAshBackgroundMusic;
 
     public List<GameObject> gameObjectsNotActive = new List<GameObject>();
     public List<GameObject> gameObjectsActiveAtStart = new List<GameObject>();
     public List<Item> itemsReachedGlyph;
     public List<Item> itemsReachedPit;
     public List<Item> itemsReachedMaze;
+    public List<GameObject> destroyItemsReachedGlyph;
+    public List<GameObject> destroyItemsReachedPit;
+    public List<GameObject> destroyItemsReachedMaze;
     public List<PokeBallTower> towers;
+
 
     void Start()
     {
@@ -606,12 +611,6 @@ public class GameSystemBehavior : MonoBehaviour
         SetNarrativeEvent(NarrativeEvent.EnteredPokemonWorld, true);
         SetNarrativeEvent(NarrativeEvent.InIntroductionStage, false);
 
-        triggerZonesScript = TriggerZones.instance;
-
-
-        // turn the enter pokemon world button off as we are now in the world and don't need to see it.
-        // can add a brief pop up box or text saying welcome to the world of pokemon or soemthing later
-
 
         paraLensesScript.ActiveGameObjects.Add(PokemonWorldGameObject);
 
@@ -747,6 +746,10 @@ public class GameSystemBehavior : MonoBehaviour
 
     public void SetUpGlyphNarrativeState()
     {
+        PokemonWorldGameObject.SetActive(true);
+        PokemonWorldButtonGameObject.SetActive(false);
+        text_LeavePokemonWorldButtonGameObject.text = display_LeavePokemonWorld;
+
         state = NarrativeEvent.CompletedMazeGotKey;
         inventoryScript = Inventory.instance;
         paraLensesScript = ParaLensesButtonBehavior.instance;
@@ -755,6 +758,7 @@ public class GameSystemBehavior : MonoBehaviour
         pokeWorldScript.SetCanTapCharizard(false);
         pokeWorldScript.SetPickedUpKey(true);
         pokeWorldScript.SetUnlockedDoor(true);
+        
         
         narrativeState[0] = paraLensesScript.getIsParaLensesOn();
         narrativeState[1] = false;
@@ -782,11 +786,31 @@ public class GameSystemBehavior : MonoBehaviour
         {
             towers[i].foundBall = true;
         }
+        foreach (GameObject item in destroyItemsReachedGlyph)
+        {
+            if (item != null)
+            {
+                // Just set item to false and say you picked it up instead of destroying the gameobject
+                // Destroy(item);
+                ItemPickup itemPickupScript = item.GetComponentInChildren<ItemPickup>();
+                if (itemPickupScript != null)
+                {
+                    itemPickupScript.SetCompletedPickUp(true);
+                    item.SetActive(false);
+                }
+                
+            }
+            
+        }
 
     }
 
     public void SetUpMazeNarrativeState()
     {
+        PokemonWorldGameObject.SetActive(true);
+        PokemonWorldButtonGameObject.SetActive(false);
+        text_LeavePokemonWorldButtonGameObject.text = display_LeavePokemonWorld;
+
         state = NarrativeEvent.EnteredPokemonWorld;
         inventoryScript = Inventory.instance;
         paraLensesScript = ParaLensesButtonBehavior.instance;
@@ -794,7 +818,7 @@ public class GameSystemBehavior : MonoBehaviour
         pokeWorldScript.SetCanTapCharizard(false);
         pokeWorldScript.SetPickedUpKey(false);
         pokeWorldScript.SetUnlockedDoor(false);
-        audioManagerScript.PlayEventSound(backgroundMusic.name);
+        
 
         narrativeState[0] = paraLensesScript.getIsParaLensesOn();
         narrativeState[1] = false;
@@ -817,10 +841,40 @@ public class GameSystemBehavior : MonoBehaviour
             }
         }
         
-
+        foreach (GameObject item in destroyItemsReachedMaze)
+        {
+            if (item != null)
+            {
+                // Just set item to false and say you picked it up instead of destroying the gameobject
+                // Destroy(item);
+                ItemPickup itemPickupScript = item.GetComponentInChildren<ItemPickup>();
+                if (itemPickupScript != null)
+                {
+                    itemPickupScript.SetCompletedPickUp(true);
+                    item.SetActive(false);
+                }
+            }
+            
+        }
+        foreach (GameObject item in destroyItemsReachedGlyph)
+        {
+            if (destroyItemsReachedPit.Contains(item) == false)
+            {
+                ItemPickup itemPickupScript = item.GetComponentInChildren<ItemPickup>();
+                if (itemPickupScript != null)
+                {
+                    itemPickupScript.SetCompletedPickUp(false);
+                }
+            }
+            
+        }
     }
     public void SetUpPitNarrativeState()
     {
+        PokemonWorldGameObject.SetActive(true);
+        PokemonWorldButtonGameObject.SetActive(false);
+        text_LeavePokemonWorldButtonGameObject.text = display_LeavePokemonWorld;
+
         state = NarrativeEvent.SolvedGlyph;
         inventoryScript = Inventory.instance;
         paraLensesScript = ParaLensesButtonBehavior.instance;
@@ -829,7 +883,6 @@ public class GameSystemBehavior : MonoBehaviour
         pokeWorldScript.SetPickedUpKey(true);
         pokeWorldScript.SetUnlockedDoor(true);
         
-        pit.SetActive(true);
         narrativeState[0] = paraLensesScript.getIsParaLensesOn();
         narrativeState[1] = false;
         narrativeState[2] = true;
@@ -851,7 +904,22 @@ public class GameSystemBehavior : MonoBehaviour
                 inventoryScript.Add(item);
             }
         }        
+        foreach (GameObject item in destroyItemsReachedPit)
+        {
+            if (item != null)
+            {
+                // Just set item to false and say you picked it up instead of destroying the gameobject
+                // Destroy(item);
+                ItemPickup itemPickupScript = item.GetComponentInChildren<ItemPickup>();
 
+                if (itemPickupScript != null)
+                {
+                    itemPickupScript.SetCompletedPickUp(true);
+                    item.SetActive(false);
+                }
+            }
+            
+        }
     }
 
     public void SetNarrativeState(NarrativeEvent newState)

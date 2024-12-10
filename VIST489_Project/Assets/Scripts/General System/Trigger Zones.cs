@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.TextCore;
 using UnityEngine.UI;
 
@@ -28,6 +29,7 @@ public class TriggerZones : MonoBehaviour
     ParaLensesButtonBehavior paraLensesScript;
     PokemonWorld pokeWorld;
     MessageBehavior messageBehavior;
+    MazeBehavior mazeBehaviorScript;
 
     public List<string> placeGlyphLines = new List<string>();
 
@@ -52,16 +54,6 @@ public class TriggerZones : MonoBehaviour
     private List<GameObject> currentBottomHallwayGameObjects = new List<GameObject>();
     private List<GameObject> currentClassroomGameObjects = new List<GameObject>();
 
-    private bool inMiddleHallway;
-    private bool inBackHallway;
-    private bool inBottomHallway;
-    private bool inClassroom;
-
-    private bool leftMiddleHallway;
-    private bool leftBackHallway;
-    private bool leftBottomHallway;
-    private bool leftClassroom;
-    
     private bool movedCharizard = false;
 
 
@@ -69,15 +61,6 @@ public class TriggerZones : MonoBehaviour
     {
        
         placeGlyphLinesIndex = 0;
-        inMiddleHallway = false;
-        inBackHallway = false;
-        inBottomHallway = false;
-        inClassroom = true;
-
-        leftMiddleHallway = true;
-        leftBackHallway = true;
-        leftBottomHallway = true;
-        leftClassroom = false;
         
     }
 
@@ -88,6 +71,8 @@ public class TriggerZones : MonoBehaviour
         paraLensesScript = ParaLensesButtonBehavior.instance;
         pokeWorld = PokemonWorld.instance;
         messageBehavior = MessageBehavior.instance;
+        mazeBehaviorScript = MazeBehavior.instance;
+        
 
         string colliderTag = other.gameObject.tag;
 
@@ -140,12 +125,14 @@ public class TriggerZones : MonoBehaviour
                         messageBehavior.SetMessageText(doTheGlyphLine);
                         break;
                     case "Glyph Trigger Zone":
+                    
                         messageBehavior.SetHaveMessage(true);
                         messageBehavior.SetMessageText(lookForGlyphPokeballs);
-
+                        placeGlyphLinesIndex = 0;
                         currentDialogue = placeGlyphLines;
                         PopUpBoxButton.onClick.AddListener(DisplayNextLines);
                         popUp.PopUp(placeGlyphLines[placeGlyphLinesIndex]);
+                        gameSystem.ToggleSkipButton(true);
                         placeGlyphLinesIndex += 1;
                         currentDialogueIndex = placeGlyphLinesIndex;
 
@@ -174,7 +161,38 @@ public class TriggerZones : MonoBehaviour
                     
                     foreach (GameObject item in middleHallwayGameObjects)
                     {
-                        item.SetActive(true);
+                        if (item != null)
+                        {
+                            if(pokeWorld.objectsToSetActiveAfterDoor.Contains(item) == true)
+                            {
+                                if (pokeWorld.GetUnlockedDoor() == false)
+                                {
+                                    continue;
+                                }
+                                ItemPickup itemPickupScript = item.GetComponentInChildren<ItemPickup>();
+                                if (itemPickupScript != null)
+                                {
+                                    // if you already picked up the item set it to false. Need to add this cause of debug buttons 
+                                    // moving you in the narrative and collecting items
+                                    if (itemPickupScript.GetCompletedPickUp() == true)
+                                    {
+                                        item.SetActive(false);
+                                    }
+                                    else
+                                    {
+                                        item.SetActive(true);
+                                    }
+                                    continue;
+                                }
+                                item.SetActive(true);
+                            }
+                            else
+                            {
+                                item.SetActive(true);
+                            }
+                            
+                        }
+                        
                     }
 
                     break;
@@ -183,36 +201,103 @@ public class TriggerZones : MonoBehaviour
                     
                     foreach (GameObject item in classroomGameObejcts)
                     {
-                        item.SetActive(true);
+                        if (item != null)
+                        {
+                            if(pokeWorld.objectsToSetActiveAfterDoor.Contains(item) == true)
+                            {
+                                if (pokeWorld.GetUnlockedDoor() == false)
+                                {
+                                    continue;
+                                }
+                                ItemPickup itemPickupScript = item.GetComponentInChildren<ItemPickup>();
+                                if (itemPickupScript != null)
+                                {
+                                    // if you already picked up the item set it to false. Need to add this cause of debug buttons 
+                                    // moving you in the narrative and collecting items
+                                    if (itemPickupScript.GetCompletedPickUp() == true)
+                                    {
+                                        item.SetActive(false);
+                                    }
+                                    else
+                                    {
+                                        item.SetActive(true);
+                                    }
+                                    continue;
+                                }
+                                item.SetActive(true);
+                            }
+                            else
+                            {
+                                item.SetActive(true);
+                            }
+                            
+                        }
+                        
                     }
 
 
                     break;
 
                 case "Back Hallway":
-                    inBackHallway = true;
                     pokeWorld = PokemonWorld.instance;
                     
                     foreach (GameObject item in backHallwayGameObjects)
                     {
-                        if (item.tag == "Pit" || item.tag == "Charizard")
+                        if (item != null)
                         {
-
-                            if (pokeWorld.GetCanTapCharizard() == false)
+                            if (item.tag == "Gate")
                             {
+                                if (pokeWorld.GetCanTapCharizard() == true)
+                                {
+                                    item.SetActive(false);
+                                    continue;
+                                }
+                                item.SetActive(true);
+                            }
+                            else if (item.tag == "Pit" || item.tag == "Charizard")
+                            {
+
+                                if (pokeWorld.GetCanTapCharizard() == false)
+                                {
+                                    
+                                    item.SetActive(false);
+                                }
+                                else
+                                {
+                                    item.SetActive(true);
+                                }
+                                continue;
+                            }
+                            else if(pokeWorld.objectsToSetActiveAfterDoor.Contains(item) == true)
+                            {
+                                if (pokeWorld.GetUnlockedDoor() == false)
+                                {
+                                    continue;
+                                }
+                                ItemPickup itemPickupScript = item.GetComponentInChildren<ItemPickup>();
+                                if (itemPickupScript != null)
+                                {
+                                    // if you already picked up the item set it to false. Need to add this cause of debug buttons 
+                                    // moving you in the narrative and collecting items
+                                    if (itemPickupScript.GetCompletedPickUp() == true)
+                                    {
+                                        item.SetActive(false);
+                                    }
+                                    else
+                                    {
+                                        item.SetActive(true);
+                                    }
+                                    continue;
+                                }
                                 
-                                item.SetActive(false);
+                                item.SetActive(true);
                             }
                             else
                             {
                                 item.SetActive(true);
                             }
-                            continue;
                         }
-                        else
-                        {
-                            item.SetActive(true);
-                        }
+                        
                         
                     }
                 
@@ -223,7 +308,49 @@ public class TriggerZones : MonoBehaviour
                    
                     foreach (GameObject item in bottomHallwayGameObjects)
                     {
-                        item.SetActive(true);
+                        if (item != null)
+                        {
+                            if (item.tag == "Left Klefki" || item.tag == "Right Klefki")
+                            {
+                                if (mazeBehaviorScript.getMazeStartedBool() == false)
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    item.SetActive(true);
+                                }
+                            }
+                            else if(pokeWorld.objectsToSetActiveAfterDoor.Contains(item) == true)
+                            {
+                                if (pokeWorld.GetUnlockedDoor() == false)
+                                {
+                                    continue;
+                                }
+                                ItemPickup itemPickupScript = item.GetComponentInChildren<ItemPickup>();
+                                if (itemPickupScript != null)
+                                {
+                                    // if you already picked up the item set it to false. Need to add this cause of debug buttons 
+                                    // moving you in the narrative and collecting items
+                                    if (itemPickupScript.GetCompletedPickUp() == true)
+                                    {
+                                        item.SetActive(false);
+                                    }
+                                    else
+                                    {
+                                        item.SetActive(true);
+                                    }
+                                    continue;
+                                }
+                                item.SetActive(true);
+                            }
+                            else
+                            {
+                                item.SetActive(true);
+                            }
+                        }
+                        
+                        
                     }
                    
                     break;
@@ -282,7 +409,11 @@ public class TriggerZones : MonoBehaviour
                    
                     foreach (GameObject item in middleHallwayGameObjects)
                     {
-                        item.SetActive(false);
+                        if (item != null)
+                        {
+                            item.SetActive(false);
+                        }
+                        
                     }
                     
                     break;
@@ -290,7 +421,11 @@ public class TriggerZones : MonoBehaviour
                    
                     foreach (GameObject item in bottomHallwayGameObjects)
                     {
-                        item.SetActive(false);
+                        if (item != null)
+                        {
+                            item.SetActive(false);
+                        }
+                        
                     }
                    
                     break;
@@ -298,7 +433,11 @@ public class TriggerZones : MonoBehaviour
                     
                     foreach (GameObject item in backHallwayGameObjects)
                     {
-                        item.SetActive(false);
+                        if (item != null)
+                        {
+                            item.SetActive(false);
+                        }
+                        
                     }
                     
 
@@ -307,7 +446,11 @@ public class TriggerZones : MonoBehaviour
                    
                     foreach (GameObject item in classroomGameObejcts)
                     {
-                        item.SetActive(false);
+                        if (item != null)
+                        {
+                            item.SetActive(false);
+                        }
+                        
                     }
                     
                     break;

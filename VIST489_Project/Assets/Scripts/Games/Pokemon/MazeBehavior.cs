@@ -87,6 +87,9 @@ public class MazeBehavior : MonoBehaviour
     public AudioClip ZoroarkEncounterAudioName;
     public AudioClip backgroundMusicName;
 
+    private bool startedMazeBool = false;
+
+
     void Start()
     {
         landGoodSquaresBeforeGoal = 0;
@@ -287,6 +290,7 @@ public class MazeBehavior : MonoBehaviour
 
     public void MazeStarted()
     {
+        startedMazeBool = true;
         gameSystem = GameSystemBehavior.instance;
         gameSystem.SetNarrativeState(GameSystemBehavior.NarrativeEvent.SolveMaze);
         if (failed == true)
@@ -482,5 +486,8 @@ public class MazeBehavior : MonoBehaviour
 
         return children;
     }
-
+    public bool getMazeStartedBool()
+    {
+        return startedMazeBool;
+    }
 }

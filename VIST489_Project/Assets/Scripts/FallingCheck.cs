@@ -6,16 +6,25 @@ public class FallingCheck : MonoBehaviour
 {
     public bool stepHit = false;
     public GameObject pit;
+    public GameObject charizard;
+    public Transform originalPosition;
+    public Transform charizardOriginalPosition;
     public Transform fallPosition;
     public float duration = 2.0f;
     public bool onStep = false;
     public float stepTimer = 2.0f;
     public float resetValue = 2.0f;
     public bool touchingPit = false;
+    
 
+    PokemonWorld pokeWorldScript;
+
+    
     public void Update()
     {
-        if(touchingPit)
+        pokeWorldScript = PokemonWorld.instance;
+        
+        if(touchingPit && pokeWorldScript.canStartPit == true)
         {
             stepTimer -= Time.deltaTime;
 
@@ -59,6 +68,8 @@ public class FallingCheck : MonoBehaviour
     public IEnumerator FallIntoPit()
     {
         float elapsedTime = 0f;
+        pokeWorldScript = PokemonWorld.instance;
+        pokeWorldScript.canStartPit = false;
 
         Vector3 startPosition = pit.transform.position;
 
@@ -78,6 +89,18 @@ public class FallingCheck : MonoBehaviour
 
         // Ensure the object is exactly at the target position at the end
         transform.position = fallPosition.position;
+
+
+        yield return new WaitForSeconds(1.5f);
+        RetryPit();
+    }
+
+    public void RetryPit()
+    {
+        stepTimer = resetValue;
+        pit.transform.position = originalPosition.position;
+        charizard.transform.position = charizardOriginalPosition.position;
+
 
     }
 
