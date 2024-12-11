@@ -155,15 +155,40 @@ public class TriggerZones : MonoBehaviour
 
 
             
+            
+        }
+        
+
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        popUp = PopUpSystem.instance;
+        gameSystem = GameSystemBehavior.instance;
+        paraLensesScript = ParaLensesButtonBehavior.instance;
+        pokeWorld = PokemonWorld.instance;
+        messageBehavior = MessageBehavior.instance;
+        mazeBehaviorScript = MazeBehavior.instance;
+        
+
+        string colliderTag = other.gameObject.tag;
+
+        List<GameSystemBehavior.NarrativeEvent> narrativeEvents = new List<GameSystemBehavior.NarrativeEvent>
+        {
+            GameSystemBehavior.NarrativeEvent.EnteredPokemonWorld,
+            GameSystemBehavior.NarrativeEvent.ParalensesOn
+        };
+        if (gameSystem.AreNarrativeEventsComplete(narrativeEvents))
+        {
             switch (colliderTag)
             {
                 case "Middle Hallway":
-                    
+
                     foreach (GameObject item in middleHallwayGameObjects)
                     {
                         if (item != null)
                         {
-                            if(pokeWorld.objectsToSetActiveAfterDoor.Contains(item) == true)
+                            if (pokeWorld.objectsToSetActiveAfterDoor.Contains(item) == true)
                             {
                                 if (pokeWorld.GetUnlockedDoor() == false)
                                 {
@@ -190,20 +215,20 @@ public class TriggerZones : MonoBehaviour
                             {
                                 item.SetActive(true);
                             }
-                            
+
                         }
-                        
+
                     }
 
                     break;
 
                 case "Classroom":
-                    
+
                     foreach (GameObject item in classroomGameObejcts)
                     {
                         if (item != null)
                         {
-                            if(pokeWorld.objectsToSetActiveAfterDoor.Contains(item) == true)
+                            if (pokeWorld.objectsToSetActiveAfterDoor.Contains(item) == true)
                             {
                                 if (pokeWorld.GetUnlockedDoor() == false)
                                 {
@@ -230,9 +255,9 @@ public class TriggerZones : MonoBehaviour
                             {
                                 item.SetActive(true);
                             }
-                            
+
                         }
-                        
+
                     }
 
 
@@ -240,7 +265,7 @@ public class TriggerZones : MonoBehaviour
 
                 case "Back Hallway":
                     pokeWorld = PokemonWorld.instance;
-                    
+
                     foreach (GameObject item in backHallwayGameObjects)
                     {
                         if (item != null)
@@ -259,7 +284,7 @@ public class TriggerZones : MonoBehaviour
 
                                 if (pokeWorld.GetCanTapCharizard() == false)
                                 {
-                                    
+
                                     item.SetActive(false);
                                 }
                                 else
@@ -268,7 +293,7 @@ public class TriggerZones : MonoBehaviour
                                 }
                                 continue;
                             }
-                            else if(pokeWorld.objectsToSetActiveAfterDoor.Contains(item) == true)
+                            else if (pokeWorld.objectsToSetActiveAfterDoor.Contains(item) == true)
                             {
                                 if (pokeWorld.GetUnlockedDoor() == false)
                                 {
@@ -289,7 +314,7 @@ public class TriggerZones : MonoBehaviour
                                     }
                                     continue;
                                 }
-                                
+
                                 item.SetActive(true);
                             }
                             else
@@ -297,15 +322,15 @@ public class TriggerZones : MonoBehaviour
                                 item.SetActive(true);
                             }
                         }
-                        
-                        
+
+
                     }
-                
-                    
+
+
                     break;
-                    
+
                 case "Bottom Hallway":
-                   
+
                     foreach (GameObject item in bottomHallwayGameObjects)
                     {
                         if (item != null)
@@ -314,6 +339,7 @@ public class TriggerZones : MonoBehaviour
                             {
                                 if (mazeBehaviorScript.getMazeStartedBool() == false)
                                 {
+                                    Debug.Log("Here " + mazeBehaviorScript.getMazeStartedBool());
                                     continue;
                                 }
                                 else
@@ -321,7 +347,7 @@ public class TriggerZones : MonoBehaviour
                                     item.SetActive(true);
                                 }
                             }
-                            else if(pokeWorld.objectsToSetActiveAfterDoor.Contains(item) == true)
+                            else if (pokeWorld.objectsToSetActiveAfterDoor.Contains(item) == true)
                             {
                                 if (pokeWorld.GetUnlockedDoor() == false)
                                 {
@@ -349,15 +375,13 @@ public class TriggerZones : MonoBehaviour
                                 item.SetActive(true);
                             }
                         }
-                        
-                        
+
+
                     }
-                   
+
                     break;
             }
         }
-        
-
     }
 
     IEnumerator WaitForPressedSkip()

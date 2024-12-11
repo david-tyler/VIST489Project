@@ -2277,7 +2277,7 @@ MonoBehaviour:
   middleHallwayGameObjects:
   - {fileID: 1839697904}
   - {fileID: 242698646}
-  - {fileID: 0}
+  - {fileID: 1005468276}
   - {fileID: 2059188325}
   - {fileID: 1887106955}
   backHallwayGameObjects:
@@ -4595,7 +4595,7 @@ GameObject:
   - component: {fileID: 247250261}
   - component: {fileID: 247250260}
   - component: {fileID: 247250259}
-  - component: {fileID: 247250258}
+  - component: {fileID: 247250262}
   m_Layer: 0
   m_Name: Ground Plane Stage (1)
   m_TagString: Untagged
@@ -4603,23 +4603,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &247250258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 247250257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1308684972, guid: 8a9a760f95896c34689febc965510927, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mObserverBehaviour: {fileID: 247250260}
-  mHiddenRoot: {fileID: 0}
-  mTargetName: 
-  mDatasetName: 
-  mCastedBehaviour: {fileID: 247250260}
 --- !u!114 &247250259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4684,7 +4667,7 @@ MonoBehaviour:
   mSelectedStageType: 1
   mPlaneReference: {fileID: 0}
   mMidAirReference: {fileID: 0}
-  mPreview: {fileID: 247250258}
+  mPreview: {fileID: 247250262}
 --- !u!4 &247250261
 Transform:
   m_ObjectHideFlags: 0
@@ -4701,6 +4684,23 @@ Transform:
   - {fileID: 1281191577}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 244.897, z: 0}
+--- !u!114 &247250262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247250257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1308684972, guid: 8a9a760f95896c34689febc965510927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mObserverBehaviour: {fileID: 247250260}
+  mHiddenRoot: {fileID: 0}
+  mTargetName: 
+  mDatasetName: 
+  mCastedBehaviour: {fileID: 247250260}
 --- !u!1 &247326602
 GameObject:
   m_ObjectHideFlags: 0
@@ -5264,15 +5264,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8.088031
+      value: 8.088029
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.y
-      value: 8.08809
+      value: 8.088094
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8.088104
+      value: 8.08811
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f00692016d8942a685b3320316c9178, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15230,6 +15230,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 763c9023c61cb1942bc9fab1773d09cb, type: 3}
+      propertyPath: m_TagString
+      value: Right Klefki
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18868,7 +18872,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1217257000}
-  - component: {fileID: 1217256999}
   m_Layer: 0
   m_Name: --DEBUG BELOW--
   m_TagString: Untagged
@@ -18876,41 +18879,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1217256999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1217256998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da745d3d4946745aebdd6dae36d0e909, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enitreMaze: {fileID: 0}
-  canStartPit: 1
-  NeedToCompleteMazeText: It seems we can't get the key, but look there! On the ground
-    to your left, there seems to be a maze. Maybe you need to complete it to obtain
-    the key.
-  YouNeedToFindTheKeyText: This door seems to be locked in the pokemon world. The
-    key should be somewhere on this floor! Perhaps the book has more clues?
-  MoveLikeCharizardLine: We can't fly like Charizard, better jump to those platforms
-  objectsToSetActiveAfterDoor: []
-  charizard: {fileID: 0}
-  charizardPlatform1: {fileID: 0}
-  charizardPlatfrom2: {fileID: 0}
-  charizardPlatform3: {fileID: 0}
-  Ash: {fileID: 0}
-  mainCamera: {fileID: 0}
-  pit: {fileID: 0}
-  duration: 5
-  CharizardAnim: {fileID: 0}
-  charizardMoveSpeed: 2
-  freedAshAudio: {fileID: 0}
-  crossPitAudio: {fileID: 0}
-  reuniteAshAudio: {fileID: 0}
-  removeGameObjects: []
 --- !u!4 &1217257000
 Transform:
   m_ObjectHideFlags: 0
@@ -24129,6 +24097,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 763c9023c61cb1942bc9fab1773d09cb, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 763c9023c61cb1942bc9fab1773d09cb, type: 3}
+      propertyPath: m_TagString
+      value: Left Klefki
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
