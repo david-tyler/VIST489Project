@@ -348,13 +348,118 @@ Transform:
   m_GameObject: {fileID: 95881324}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.5368956, z: -0, w: 0.8436488}
-  m_LocalPosition: {x: -16.4, y: -0.747, z: 2.15}
+  m_LocalPosition: {x: -16.53, y: -0.747, z: 1.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1149417710}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 64.945, z: 0}
+--- !u!1 &379967066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 379967070}
+  - component: {fileID: 379967069}
+  - component: {fileID: 379967068}
+  - component: {fileID: 379967067}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &379967067
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379967066}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &379967068
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379967066}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &379967069
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379967066}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &379967070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379967066}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.3529325, y: -11.027695, z: -0.2772987}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &457399478
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +590,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1671019361814062291}
     - target: {fileID: 427075824647043928, guid: bce59d515f0ddba43b678f862abbe41c, type: 3}
+      propertyPath: charizard
+      value: 
+      objectReference: {fileID: 379967066}
+    - target: {fileID: 427075824647043928, guid: bce59d515f0ddba43b678f862abbe41c, type: 3}
       propertyPath: stepTimer
       value: 1
       objectReference: {fileID: 0}
@@ -496,6 +605,14 @@ PrefabInstance:
       propertyPath: fallPosition
       value: 
       objectReference: {fileID: 1773101165}
+    - target: {fileID: 427075824647043928, guid: bce59d515f0ddba43b678f862abbe41c, type: 3}
+      propertyPath: originalPosition
+      value: 
+      objectReference: {fileID: 833325164077180624}
+    - target: {fileID: 427075824647043928, guid: bce59d515f0ddba43b678f862abbe41c, type: 3}
+      propertyPath: charizardOriginalPosition
+      value: 
+      objectReference: {fileID: 1456034634}
     - target: {fileID: 2877155454431013388, guid: bce59d515f0ddba43b678f862abbe41c, type: 3}
       propertyPath: m_Name
       value: Falling_Check_1
@@ -705,19 +822,31 @@ MonoBehaviour:
   goodSquare: {fileID: 2100000, guid: 961c5dc7664084853b5ab31cf02e1a39, type: 2}
   badSquare: {fileID: 2100000, guid: 0833bdcf98cc842db93f80aac3168021, type: 2}
   PlatformOriginalMat: {fileID: 2100000, guid: 68b0a9b8e07a945649feaf1195c246c9, type: 2}
-  entireMaze: {fileID: 0}
+  falsePlatformMaterial: {fileID: 0}
+  firstMaze: {fileID: 0}
+  secondMaze: {fileID: 0}
   goalReachedAudio: {fileID: 0}
   timerText: {fileID: 0}
+  PopUpBoxButton: {fileID: 0}
   Timer: {fileID: 0}
   remainingTime: 20
-  landGoodSquaresBeforeGoal: 5
+  zoroarkStanding: {fileID: 0}
+  leftKlefkiAnimation: {fileID: 0}
+  rightKlefkiAnimation: {fileID: 0}
+  zoroark: {fileID: 0}
+  leftKlefki: {fileID: 0}
+  rightKlefki: {fileID: 0}
   WrongSquareMessage: Oh no! Looks like you stepped on the wrong platform. You have
     to scan the key and start over again.
   RanOutOfTimeMessage: You ran out of time. Try scanning the key again to start over
   YouWonMessage: Congrats! Looks like you solved the maze. Try scanning the key again,
     we should be able to pick it up now.
+  zoroarkAppearsLines: []
+  enemyScript: {fileID: 0}
   goodSquareSound: {fileID: 0}
   badSquareSound: {fileID: 0}
+  ZoroarkEncounterAudioName: {fileID: 0}
+  backgroundMusicName: {fileID: 0}
 --- !u!135 &1149417712
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -834,7 +963,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1188137708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,6 +1059,73 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1456034633
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1456034634}
+  - component: {fileID: 1456034635}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1456034634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456034633}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.85, y: -11.027695, z: -0.47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1456034635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456034633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da745d3d4946745aebdd6dae36d0e909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enitreMaze: {fileID: 0}
+  canStartPit: 1
+  NeedToCompleteMazeText: It seems we can't get the key, but look there! On the ground
+    to your left, there seems to be a maze. Maybe you need to complete it to obtain
+    the key.
+  YouNeedToFindTheKeyText: This door seems to be locked in the pokemon world. The
+    key should be somewhere on this floor! Perhaps the book has more clues?
+  MoveLikeCharizardLine: We can't fly like Charizard, better jump to those platforms
+  objectsToSetActiveAfterDoor: []
+  charizard: {fileID: 0}
+  charizardPlatform1: {fileID: 0}
+  charizardPlatfrom2: {fileID: 0}
+  charizardPlatform3: {fileID: 0}
+  Ash: {fileID: 0}
+  mainCamera: {fileID: 0}
+  pit: {fileID: 0}
+  duration: 5
+  CharizardAnim: {fileID: 0}
+  charizardMoveSpeed: 2
+  freedAshAudio: {fileID: 0}
+  crossPitAudio: {fileID: 0}
+  reuniteAshAudio: {fileID: 0}
+  removeGameObjects: []
 --- !u!1 &1615057723
 GameObject:
   m_ObjectHideFlags: 0
@@ -2051,3 +2247,5 @@ SceneRoots:
   - {fileID: 457399482}
   - {fileID: 1915002496}
   - {fileID: 1188137711}
+  - {fileID: 379967070}
+  - {fileID: 1456034634}

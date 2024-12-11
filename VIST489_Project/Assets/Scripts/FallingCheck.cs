@@ -44,8 +44,9 @@ public class FallingCheck : MonoBehaviour
         {
             touchingPit = true;
             
-            /*
+           
             Debug.Log("Player Detected");
+            /*
             if (stepHit == false)
             {
                 //fall

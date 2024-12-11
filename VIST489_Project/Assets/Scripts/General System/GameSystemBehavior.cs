@@ -882,6 +882,7 @@ public class GameSystemBehavior : MonoBehaviour
         pokeWorldScript.SetCanTapCharizard(true);
         pokeWorldScript.SetPickedUpKey(true);
         pokeWorldScript.SetUnlockedDoor(true);
+        pokeWorldScript.canStartPit = true;
         
         narrativeState[0] = paraLensesScript.getIsParaLensesOn();
         narrativeState[1] = false;
