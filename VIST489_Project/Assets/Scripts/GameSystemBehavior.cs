@@ -13,11 +13,7 @@ public class GameSystemBehavior : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-        
-    }
+    // Removed empty Update method for performance optimization
+    // Update methods are called every frame, so empty ones waste CPU cycles
     
 }

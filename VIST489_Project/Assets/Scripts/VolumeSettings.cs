@@ -22,10 +22,15 @@ public class VolumeSettings : MonoBehaviour
     [SerializeField]
     private float VolumeIncrement = 1.0f;
     
+    // Optimization: Cache the last rotation to avoid unnecessary calculations
+    private float lastCheckedRotation;
+    private const float rotationChangeThreshold = 0.1f; // Only check if rotation changed significantly
+    
     // Start is called before the first frame update
     void Start()
     {
         prevRotation_Y = image.eulerAngles.y;
+        lastCheckedRotation = prevRotation_Y;
         mixer.GetFloat(Mixer_SFX, out volume);
     }
 
@@ -34,6 +39,11 @@ public class VolumeSettings : MonoBehaviour
     {
         currRotation_Y = image.eulerAngles.y;
 
+        // Only proceed if rotation has changed significantly
+        if (Mathf.Abs(currRotation_Y - lastCheckedRotation) < rotationChangeThreshold)
+            return;
+            
+        lastCheckedRotation = currRotation_Y;
         
         if (currRotation_Y >= prevRotation_Y + AngleIncrement)
         {
